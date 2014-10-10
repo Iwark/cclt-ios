@@ -7,12 +7,27 @@
 //
 
 import UIKit
+import Alamofire
+import SwiftyJSON
 
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        Alamofire.request(CcltRoute.Summaries()).response {
+            (request, response, data, error) in
+            
+            if let json = data as? NSData {
+                let summaries = JSON(data: json)
+                println(summaries[0]["title"])
+            }
+            println(request)
+            println(response)
+            println(error)
+        }
+        
     }
 
     override func didReceiveMemoryWarning() {
