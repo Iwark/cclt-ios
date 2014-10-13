@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		973B0A1619EB847200B744AE /* CcltRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE3F35EF19E66ACA005A2166 /* CcltRoute.swift */; };
 		FE08671919E79127004AB167 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE08670B19E7910E004AB167 /* Alamofire.framework */; };
 		FE08671A19E79132004AB167 /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = FE08670B19E7910E004AB167 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FE08671B19E79166004AB167 /* SwiftyJSON.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = FE08671419E7911B004AB167 /* SwiftyJSON.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -21,6 +22,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		973B0A1B19EB847200B744AE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FE3F35BE19E661FD005A2166 /* Nimble.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1F925EAD195C0D6300ED456B;
+			remoteInfo = "Nimble-OSX";
+		};
+		973B0A1D19EB847200B744AE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FE3F35BE19E661FD005A2166 /* Nimble.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1F925EB7195C0D6300ED456B;
+			remoteInfo = "Nimble-OSXTests";
+		};
 		FE08670A19E7910E004AB167 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = FE08670519E7910E004AB167 /* Alamofire.xcodeproj */;
@@ -267,6 +282,8 @@
 			children = (
 				FE3F35C619E661FD005A2166 /* Nimble.framework */,
 				FE3F35C819E661FD005A2166 /* NimbleTests.xctest */,
+				973B0A1C19EB847200B744AE /* Nimble.framework */,
+				973B0A1E19EB847200B744AE /* Nimble-OSXTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -403,6 +420,20 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		973B0A1C19EB847200B744AE /* Nimble.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Nimble.framework;
+			remoteRef = 973B0A1B19EB847200B744AE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		973B0A1E19EB847200B744AE /* Nimble-OSXTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Nimble-OSXTests.xctest";
+			remoteRef = 973B0A1D19EB847200B744AE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		FE08670B19E7910E004AB167 /* Alamofire.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -512,6 +543,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FE3F359319E616CD005A2166 /* ccltTests.swift in Sources */,
+				973B0A1619EB847200B744AE /* CcltRoute.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
