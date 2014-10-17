@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" horizontalHuggingPriority="100" verticalHuggingPriority="100" horizontalCompressionResistancePriority="150" verticalCompressionResistancePriority="150" reuseIdentifier="SummaryCell" id="gTV-IL-0wX" customClass="SummaryCollectionViewCell" customModule="cclt" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="300" height="180"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="300" height="180"/>
+                <subviews>
+                    <view contentMode="scaleToFill" horizontalHuggingPriority="100" verticalHuggingPriority="100" horizontalCompressionResistancePriority="150" verticalCompressionResistancePriority="150" translatesAutoresizingMaskIntoConstraints="NO" id="enV-YU-OX8" customClass="UIImageView">
+                        <rect key="frame" x="0.0" y="0.0" width="300" height="180"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="100" verticalHuggingPriority="100" horizontalCompressionResistancePriority="150" verticalCompressionResistancePriority="150" text="りんごごりららっぱぱいなっぷるりんごごりららっぱぱいなっぷる" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bRZ-I1-0C5">
+                                <rect key="frame" x="10" y="129" width="280" height="41"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="bRZ-I1-0C5" secondAttribute="bottom" constant="10" id="EjH-lm-Bk1"/>
+                            <constraint firstItem="bRZ-I1-0C5" firstAttribute="leading" secondItem="enV-YU-OX8" secondAttribute="leading" constant="10" id="NGw-G1-5ui"/>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" priority="750" constant="150" id="htg-zC-CvV"/>
+                            <constraint firstAttribute="trailing" secondItem="bRZ-I1-0C5" secondAttribute="trailing" constant="10" id="o6o-uR-KvY"/>
+                            <constraint firstAttribute="width" secondItem="enV-YU-OX8" secondAttribute="height" multiplier="5:3" id="qVU-fe-NAU"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            </view>
+            <color key="backgroundColor" red="0.98293073252806507" green="1" blue="0.95477864696733861" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="enV-YU-OX8" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="2Y4-II-DAd"/>
+                <constraint firstAttribute="trailing" secondItem="enV-YU-OX8" secondAttribute="trailing" id="jX7-Oz-8nq"/>
+                <constraint firstItem="enV-YU-OX8" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="lbY-GV-Zxf"/>
+                <constraint firstAttribute="bottom" secondItem="enV-YU-OX8" secondAttribute="bottom" id="o3t-GP-6RF"/>
+            </constraints>
+            <size key="customSize" width="300" height="180"/>
+            <connections>
+                <outlet property="imageView" destination="enV-YU-OX8" id="1Kw-jO-CQb"/>
+                <outlet property="titleLabel" destination="bRZ-I1-0C5" id="Vfb-eu-50s"/>
+            </connections>
+            <point key="canvasLocation" x="492" y="269"/>
+        </collectionViewCell>
+    </objects>
+</document>

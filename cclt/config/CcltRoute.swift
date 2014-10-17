@@ -13,16 +13,39 @@ import SwiftyJSON
 enum CcltRoute: URLRequestConvertible {
     static let baseURLString = "http://cclt.jp/api/v1/"
     static var OAuthToken: String?
-
-    case Summaries()
-
+    
+    // カテゴリ
+    case GetCategories()
+    
+    // 特集
+    case GetFeature(Int)
+    case GetFeatures()
+    
+    // まとめ
+    case GetSummary(Int)
+    case GetSummaries()
+    
     var path: (Alamofire.Method, String) {
         switch self {
-            case .Summaries:
-                return (.GET, "summaries")
-        }
-    }
-    
+        case .GetCategories:
+            return (.GET, "categories")
+            
+            
+        case .GetFeature:
+            return (.GET, "feature")
+            
+        case .GetFeatures:
+            return (.GET, "features")
+            
+            
+        case .GetSummary(let id):
+            return(.GET, "summaries/\(id)")
+        case .GetSummaries:
+            return (.GET, "summaries")
+            }
+
+}
+
     var URLRequest: NSURLRequest {
         let URL = NSURL(string: CcltRoute.baseURLString)
         let mutableURLRequest = NSMutableURLRequest(URL: URL.URLByAppendingPathComponent(path.1))
