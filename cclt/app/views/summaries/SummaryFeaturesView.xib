@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2rj-Fc-UvW">
+                    <rect key="frame" x="50" y="300" width="500" height="300"/>
+                    <constraints>
+                        <constraint firstAttribute="width" priority="750" constant="2000" id="0fc-kR-lSX"/>
+                        <constraint firstAttribute="width" secondItem="2rj-Fc-UvW" secondAttribute="height" multiplier="640:384" id="qCh-Md-pzi"/>
+                    </constraints>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="81f-Pb-HlI">
+                    <rect key="frame" x="50" y="0.0" width="500" height="300"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="81f-Pb-HlI" secondAttribute="height" multiplier="640:384" id="2PX-EY-fV2"/>
+                        <constraint firstAttribute="width" priority="750" constant="2000" id="7a4-Xl-NKD"/>
+                    </constraints>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="centerX" secondItem="2rj-Fc-UvW" secondAttribute="centerX" id="Etl-t2-pUB"/>
+                <constraint firstAttribute="bottom" secondItem="2rj-Fc-UvW" secondAttribute="bottom" id="Fda-YJ-f3Z"/>
+                <constraint firstItem="81f-Pb-HlI" firstAttribute="width" secondItem="2rj-Fc-UvW" secondAttribute="width" id="GdG-gX-yYi"/>
+                <constraint firstItem="81f-Pb-HlI" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" priority="750" id="M73-jv-Vh8"/>
+                <constraint firstItem="2rj-Fc-UvW" firstAttribute="top" relation="greaterThanOrEqual" secondItem="81f-Pb-HlI" secondAttribute="bottom" id="Xdp-8f-kFM"/>
+                <constraint firstItem="2rj-Fc-UvW" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" priority="750" id="cOf-z1-20j"/>
+                <constraint firstAttribute="centerX" secondItem="81f-Pb-HlI" secondAttribute="centerX" id="jAw-Rd-m3T"/>
+                <constraint firstItem="81f-Pb-HlI" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="usB-Ia-op1"/>
+            </constraints>
+        </view>
+    </objects>
+</document>

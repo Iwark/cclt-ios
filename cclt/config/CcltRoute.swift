@@ -24,6 +24,7 @@ enum CcltRoute: URLRequestConvertible {
     // まとめ
     case GetSummary(Int)
     case GetSummaries()
+    case GetPickupSummaries()
     
     var path: (Alamofire.Method, String) {
         switch self {
@@ -41,15 +42,17 @@ enum CcltRoute: URLRequestConvertible {
         case .GetSummary(let id):
             return(.GET, "summaries/\(id)")
         case .GetSummaries:
-            return (.GET, "summaries")
+            return(.GET, "summaries")
+        case .GetPickupSummaries():
+            return(.GET, "pickup_summaries")
             }
 
 }
 
     var URLRequest: NSURLRequest {
         let URL = NSURL(string: CcltRoute.baseURLString)
-        let mutableURLRequest = NSMutableURLRequest(URL: URL.URLByAppendingPathComponent(path.1))
-        mutableURLRequest.HTTPMethod = path.0.toRaw()
+        let mutableURLRequest = NSMutableURLRequest(URL: URL!.URLByAppendingPathComponent(path.1))
+        mutableURLRequest.HTTPMethod = path.0.rawValue
             
 //            if let token = Router.OAuthToken {
 //                mutableURLRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")

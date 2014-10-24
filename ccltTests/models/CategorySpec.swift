@@ -15,17 +15,17 @@ class CategorySpec: QuickSpec {
         
         describe(".fetchAll") {
             
-            it("カテゴリ一覧を取得できること"){
-                
-                var categories:[Category] = []
-                
-                Category.fetchAll { (status, results) -> Void in
-                    expect(status).to(equal(200))
-                    categories = results
-                }
-                
-                expect(categories.count).toEventuallyNot(equal(0), timeout: 3)
-            }
+//            it("カテゴリ一覧を取得できること"){
+//                
+//                var categories:[Category] = []
+//                
+//                Category.fetchAll { (error) -> Void in
+//                    expect(error).to(equal(nil))
+//                    categories = Category.categories
+//                }
+//                
+//                expect(categories.count).toEventuallyNot(equal(0), timeout: 3)
+//            }
             
         }
     }

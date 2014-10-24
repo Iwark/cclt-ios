@@ -10,3 +10,6 @@
 [submodule "Vendor/HanakeSwift"]
 	path = Vendor/HanakeSwift
 	url = git@github.com:Haneke/HanekeSwift.git
+[submodule "Vendor/swift-async"]
+	path = Vendor/swift-async
+	url = git@github.com:OliverLetterer/swift-async.git
