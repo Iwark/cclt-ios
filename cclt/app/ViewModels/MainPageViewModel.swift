@@ -46,7 +46,14 @@ class MainPageViewModel {
                 else if partial.hasError(.PORTION_UNMATCH) || partial.hasError(.AREA_LARGE) {
                     
                     println("frame:\(partial.view.frame)")
-                    if partial.hasError(.PORTION_UNMATCH){ println("PORTION") }
+                    if partial.hasError(.PORTION_UNMATCH){
+                        
+                        if view.frame.size.width * view.frame.size.height * 2 < 40000 {
+                            continue
+                        }
+                        
+                        println("PORTION")
+                    }
                     if partial.hasError(.AREA_LARGE){ println("AREA_LARGE") }
                     
                     let summaryViews = partial.divide()

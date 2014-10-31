@@ -29,13 +29,10 @@ class SummaryPartialViewModel{
     
     init(view:SummaryPartialView){
         self.view = view
-        self.validate()
     }
     
     /// Errorの有無をチェックしてerrorsに格納
     func validate(){
-        errors = []
-        
         let width = view.frame.size.width
         let height = view.frame.size.height
         
@@ -106,35 +103,20 @@ class SummaryPartialViewModel{
         let partial1 = SummaryPartialView(frame: view.frame)
         let partial2 = SummaryPartialView(frame: view.frame)
         
-        while(true){
-            
-            if dir == .VERTICAL {
-                // 幅を垂直に分割
-                let minWidth = height * kMinWidth < kMinArea ? (kMinArea / height) : kMinWidth
-                let pos = minWidth + CGFloat(arc4random_uniform(UInt32(width - minWidth*2 + 1)))
-                partial1.frame.size.width =  pos
-                partial2.frame.origin.x   += pos
-                partial2.frame.size.width -= pos
-            } else {
-                // 高さを水平に分割
-                let minHeight = width * kMinHeight < kMinArea ? (kMinArea / width) : kMinHeight
-                let pos = minHeight + CGFloat(arc4random_uniform(UInt32(height - minHeight*2 + 1)))
-                partial1.frame.size.height =  pos
-                partial2.frame.origin.y    += pos
-                partial2.frame.size.height -= pos
-            }
-            
-            let model1 = SummaryPartialViewModel(view: partial1)
-            let model2 = SummaryPartialViewModel(view: partial2)
-            
-            if model1.hasError(.PORTION_UNMATCH) && partial1.frame.size.width * partial1.frame.size.height < kMinArea * 2 {
-                println(partial1.frame)
-            } else if model2.hasError(.PORTION_UNMATCH) && partial2.frame.size.width * partial2.frame.size.height < kMinArea * 2 {
-                println(partial2.frame)
-            } else {
-                break
-            }
-            
+        if dir == .VERTICAL {
+            // 幅を垂直に分割
+            let minWidth = height * kMinWidth < kMinArea ? (kMinArea / height) : kMinWidth
+            let pos = minWidth + CGFloat(arc4random_uniform(UInt32(width - minWidth*2 + 1)))
+            partial1.frame.size.width =  pos
+            partial2.frame.origin.x   += pos
+            partial2.frame.size.width -= pos
+        } else {
+            // 高さを水平に分割
+            let minHeight = width * kMinHeight < kMinArea ? (kMinArea / width) : kMinHeight
+            let pos = minHeight + CGFloat(arc4random_uniform(UInt32(height - minHeight*2 + 1)))
+            partial1.frame.size.height =  pos
+            partial2.frame.origin.y    += pos
+            partial2.frame.size.height -= pos
         }
         
         return [partial1, partial2]
