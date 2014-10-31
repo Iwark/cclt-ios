@@ -17,6 +17,10 @@ enum CcltRoute: URLRequestConvertible {
     // カテゴリ
     case GetCategories()
     
+    // キュレーター
+    case GetCurator(Int)
+    case GetCurators()
+    
     // 特集
     case GetFeature(Int)
     case GetFeatures()
@@ -30,6 +34,13 @@ enum CcltRoute: URLRequestConvertible {
         switch self {
         case .GetCategories:
             return (.GET, "categories")
+            
+            
+        case .GetCurator(let id):
+            return (.GET, "curators/\(id)")
+            
+        case GetCurators:
+            return (.GET, "curators")
             
             
         case .GetFeature:

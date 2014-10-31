@@ -1,8 +1,8 @@
 //
-//  CategoryViewmodel.swift
+//  FeatureViewModel.swift
 //  cclt
 //
-//  Created by Kohei Iwasaki on 10/23/14.
+//  Created by Kohei Iwasaki on 10/27/14.
 //  Copyright (c) 2014 Donuts. All rights reserved.
 //
 
@@ -10,22 +10,22 @@ import Foundation
 import SwiftyJSON
 import Alamofire
 
-class CategoryViewModel {
-
+class FeatureViewModel {
+    
 }
 
 // MARK: - Communicate with the API
 
-extension CategoryViewModel {
-
+extension FeatureViewModel {
+    
     /**
-    Fetch categories from API Server.
+    Fetch features from API Server.
     
     :param: completionHandler The completion handler.
     
     */
-    class func fetchAll(completionHandler: (NSError?) -> Void) {
-        Alamofire.request(CcltRoute.GetCategories()).response {
+    class func fetchAll(completionHandler: (NSError?) -> ()) {
+        Alamofire.request(CcltRoute.GetFeatures()).response {
             (request, response, data, error) in
             
             if response == nil || response!.statusCode != 200 || error != nil {
@@ -35,31 +35,30 @@ extension CategoryViewModel {
             
             if let json = data as? NSData {
                 let results = JSON(data: json)
-                var temp:[Category] = []
+                var temp:[Feature] = []
                 for result:JSON in results.array! {
-                    temp.append(Category(json:result))
+                    temp.append(Feature(json:result))
                 }
-                Category.all = temp
+                Feature.all = temp
                 completionHandler(nil)
             }
         }
     }
     
     /**
-    Fetch category from Local
+    Fetch feature from Local.
     
-    :param: id The ID of summary.
+    :param: id The ID of feature.
     :param: completionHandler The completion handler.
     
     */
-    class func find(id: Int) -> Category? {
-        for category in Category.all {
-            if category.id == id {
-                return category
+    class func find(id: Int) -> Feature? {
+        for feature in Feature.all {
+            if feature.id == id {
+                return feature
             }
         }
-        println("category not found on local.")
+        println("feature not found on local.")
         return nil
     }
-    
 }

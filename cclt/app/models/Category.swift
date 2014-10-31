@@ -14,12 +14,12 @@ class Category {
     let name: String
     
     private struct Static {
-        static var categories:[Category] = []
+        static var all:[Category] = []
     }
     
-    class var categories:[Category] {
-        get { return Static.categories }
-        set { Static.categories = newValue }
+    class var all:[Category] {
+        get { return Static.all }
+        set { Static.all = newValue }
     }
     
     required internal init(json:JSON){

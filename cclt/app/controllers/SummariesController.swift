@@ -46,22 +46,42 @@ UICollectionViewDataSource, UICollectionViewDelegate {
         
     }
     
+    var waa = false
+    
     override func viewDidLayoutSubviews() {
+        if waa { /*return*/ }
+        else{  waa = true }
         let frame = summariesCollectionView.frame
-        let partialView = SummaryPartialView(0, 0, Int(frame.size.width), Int(frame.size.height))
         
-        let partialViews = partialView.divide()
+        println("sc:\(frame)")
+        println(self.view.frame)
         
-        for pv in partialViews {
+    
+        let partialView = SummaryPartialView(frame: CGRectMake(0, 0, frame.size.width, frame.size.height))
+        
+        let mainPage = MainPageViewModel(num: 0, view: partialView)
+        
+        for pv in mainPage.views {
             
-            let view = UIView(frame: CGRectMake(CGFloat(pv.x), CGFloat(pv.y), CGFloat(pv.width), CGFloat(pv.height)))
-            view.layer.borderColor = UIColor.redColor().CGColor
-            view.layer.borderWidth = 1.0
-            view.backgroundColor = UIColor.greenColor()
+            println(pv.frame)
             
-            summariesCollectionView.addSubview(view)
+            pv.layer.borderColor = UIColor.redColor().CGColor
+            pv.layer.borderWidth = 1.0
+            pv.backgroundColor = UIColor.greenColor()
             
-            println("x:\(pv.x), y:\(pv.y), w:\(pv.width), h:\(pv.height)")
+            let area = pv.frame.size.width * pv.frame.size.height
+            
+            let areaLabel = UILabel(frame: CGRectMake(0, 0, pv.frame.size.width, pv.frame.size.height))
+            areaLabel.text = "\(area)"
+            println(area)
+            
+            pv.addSubview(areaLabel)
+            
+            if let navController = self.navigationController {
+                pv.frame.origin.y -= navController.navigationBar.frame.size.height
+            }
+            
+            summariesCollectionView.addSubview(pv)
             
         }
 

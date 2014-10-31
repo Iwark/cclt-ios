@@ -13,60 +13,6 @@ import Alamofire
 let kSummaryPartialViewMinSize = 120
 let kSummaryPartialViewMinArea = 160 * 160
 
-public struct SummaryPartialView {
-    
-    var x:Int
-    var y:Int
-    var width:Int
-    var height:Int
-    
-    var area:Int { return width * height }
-    
-    init(_ x:Int, _ y:Int, _ width:Int, _ height:Int){
-        self.x = x
-        self.y = y
-        self.width = width
-        self.height = height
-    }
-    
-    func divide() -> [SummaryPartialView] {
-        
-        var partialViews:[SummaryPartialView] = []
-        while(partialViews.count == 0) {
-            let partial = self
-            if let pvs = SummaryViewModel.dividePartial(partial) {
-                partialViews = pvs
-            }
-        }
-        
-        for _ in 0..<10 {
-            var areaSum:UInt32 = 0
-            for pv in partialViews {
-                areaSum += pv.area
-            }
-            var next = Int(arc4random_uniform(areaSum))
-            var nextIndex:Int = 0
-            for (i, pv) in enumerate(partialViews) {
-                if next > pv.area {
-                    nextIndex = i
-                } else {
-                    next -= pv.area
-                }
-            }
-            let dividedViews = SummaryViewModel.dividePartial(partialViews[nextIndex])
-            
-            if let dividedViews = dividedViews {
-                partialViews.removeAtIndex(nextIndex)
-                partialViews.extend(dividedViews)
-            }
-        }
-        
-        return partialViews
-        
-    }
-    
-}
-
 class SummaryViewModel {
     
     /**
@@ -77,48 +23,48 @@ class SummaryViewModel {
     :returns: Array of SummaryPartialView divided
     
     */
-    class func dividePartial(partial:SummaryPartialView) -> [SummaryPartialView]? {
-        
-        var widthPortion = 1, heightPortion = 1
-        
-        // Minimum Size for Partial View
-        if partial.width  < kSummaryPartialViewMinSize * 2 { widthPortion  = 0 }
-        if partial.height < kSummaryPartialViewMinSize * 2 { heightPortion = 0 }
-        if widthPortion == 0 && heightPortion == 0 { return nil }
-        
-        var partial1 = partial
-        var partial2 = partial
-        
-        let seed = UInt32(partial.width * widthPortion + partial.height * heightPortion)
-        let pos = Int(arc4random_uniform(seed))
-        if pos < partial.width {
-            //幅を分割
-            
-            let wSeed = UInt32(partial.width - kSummaryPartialViewMinSize * 2)
-            let wPos = Int(arc4random_uniform(wSeed)) + kSummaryPartialViewMinSize
-            
-            partial1.width  = wPos
-            partial2.x     += wPos
-            partial2.width -= wPos
-            
-        } else {
-            //高さを分割
-            
-            let hSeed = UInt32(partial.height - kSummaryPartialViewMinSize * 2)
-            let hPos = Int(arc4random_uniform(hSeed)) + kSummaryPartialViewMinSize
-            
-            partial1.height  = hPos
-            partial2.y      += hPos
-            partial2.height  -= hPos
-            
-        }
-        
-        if partial1.area < kSummaryPartialViewMinArea || partial2.area < kSummaryPartialViewMinArea { return nil }
-        if partial1.height > partial1.width * 3 || partial2.height > partial2.width * 3 { return nil }
-        
-        return([partial1, partial2])
-        
-    }
+//    class func dividePartial(partial:SummaryPartialView) -> [SummaryPartialView]? {
+//        
+//        var widthPortion = 1, heightPortion = 1
+//        
+//        // Minimum Size for Partial View
+//        if partial.width  < kSummaryPartialViewMinSize * 2 { widthPortion  = 0 }
+//        if partial.height < kSummaryPartialViewMinSize * 2 { heightPortion = 0 }
+//        if widthPortion == 0 && heightPortion == 0 { return nil }
+//        
+//        var partial1 = partial
+//        var partial2 = partial
+//        
+//        let seed = UInt32(partial.width * widthPortion + partial.height * heightPortion)
+//        let pos = Int(arc4random_uniform(seed))
+//        if pos < partial.width {
+//            //幅を分割
+//            
+//            let wSeed = UInt32(partial.width - kSummaryPartialViewMinSize * 2)
+//            let wPos = Int(arc4random_uniform(wSeed)) + kSummaryPartialViewMinSize
+//            
+//            partial1.width  = wPos
+//            partial2.x     += wPos
+//            partial2.width -= wPos
+//            
+//        } else {
+//            //高さを分割
+//            
+//            let hSeed = UInt32(partial.height - kSummaryPartialViewMinSize * 2)
+//            let hPos = Int(arc4random_uniform(hSeed)) + kSummaryPartialViewMinSize
+//            
+//            partial1.height  = hPos
+//            partial2.y      += hPos
+//            partial2.height  -= hPos
+//            
+//        }
+//        
+//        if partial1.area < kSummaryPartialViewMinArea || partial2.area < kSummaryPartialViewMinArea { return nil }
+//        if partial1.height > partial1.width * 3 || partial2.height > partial2.width * 3 { return nil }
+//        
+//        return([partial1, partial2])
+//        
+//    }
 
     
 }

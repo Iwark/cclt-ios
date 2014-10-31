@@ -32,6 +32,6 @@ class Summary {
         self.choco = json["choco"].intValue
         self.approved_at = json["approved_at"].stringValue
         self.image_url = json["image_url"].stringValue
-//        self.category = CategoryViewModel.find(json["category_id"].intValue)
+        self.category = CategoryViewModel.find(json["category_id"].intValue)
     }
 }
