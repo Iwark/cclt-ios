@@ -56,7 +56,9 @@ UICollectionViewDataSource, UICollectionViewDelegate {
         println("sc:\(frame)")
         println(self.view.frame)
         
-    
+        for v in summariesCollectionView.subviews{
+            (v as UIView).removeFromSuperview()
+        }
         let partialView = SummaryPartialView(frame: CGRectMake(0, 0, frame.size.width, frame.size.height))
         
         let mainPage = MainPageViewModel(num: 0, view: partialView)
@@ -118,20 +120,6 @@ UICollectionViewDataSource, UICollectionViewDelegate {
         return _sizingCell.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize)
         
     }
-    
-    /**
-    Divide a view to two views.
-    
-    :param: view The view which should be divided
-    
-    :returns: The two views.
-    
-    */
-//    func divideView(view:UIView) -> [UIView] {
-//        
-//        
-//        
-//    }
     
     
     override func didReceiveMemoryWarning() {

@@ -33,9 +33,11 @@ class MainPageViewModel {
         println("validateViews: \(a)")
         a++
         for view in views {
+            println("v")
             var partial = SummaryPartialViewModel(view: view)
             
             if partial.errors.count > 0 {
+                println("e")
                 // WIDTH_SHORT, HEIGHT_SHORT, AREA_SMALLの場合はfalseを返す
                 if partial.hasError(.WIDTH_SHORT) || partial.hasError(.HEIGHT_SHORT) || partial.hasError(.AREA_SMALL) {
                     if partial.hasError(.AREA_SMALL){ println("AREA_SMALL") }
@@ -46,14 +48,7 @@ class MainPageViewModel {
                 else if partial.hasError(.PORTION_UNMATCH) || partial.hasError(.AREA_LARGE) {
                     
                     println("frame:\(partial.view.frame)")
-                    if partial.hasError(.PORTION_UNMATCH){
-                        
-                        if view.frame.size.width * view.frame.size.height * 2 < 40000 {
-                            continue
-                        }
-                        
-                        println("PORTION")
-                    }
+                    if partial.hasError(.PORTION_UNMATCH){ println("PORTION") }
                     if partial.hasError(.AREA_LARGE){ println("AREA_LARGE") }
                     
                     let summaryViews = partial.divide()
@@ -75,7 +70,8 @@ class MainPageViewModel {
                     }
                     else {
                         println("divide failed")
-                        return false
+                        self.views.append(view)
+                        println("added: \(view.frame)")
                     }
                 }
             }

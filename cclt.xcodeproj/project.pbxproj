@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		973DCB1E1A07335E002B15E7 /* CategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973DCB1D1A07335E002B15E7 /* CategoriesViewController.swift */; };
 		FE08671919E79127004AB167 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE08670B19E7910E004AB167 /* Alamofire.framework */; };
 		FE08671A19E79132004AB167 /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = FE08670B19E7910E004AB167 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FE08671B19E79166004AB167 /* SwiftyJSON.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = FE08671419E7911B004AB167 /* SwiftyJSON.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -231,6 +232,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		973DCB1D1A07335E002B15E7 /* CategoriesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CategoriesViewController.swift; path = cclt/app/controllers/CategoriesViewController.swift; sourceTree = SOURCE_ROOT; };
 		FE08670519E7910E004AB167 /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = Vendor/Alamofire/Alamofire.xcodeproj; sourceTree = SOURCE_ROOT; };
 		FE08670E19E7911B004AB167 /* SwiftyJSON.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SwiftyJSON.xcodeproj; path = Vendor/SwiftyJSON/SwiftyJSON.xcodeproj; sourceTree = SOURCE_ROOT; };
 		FE17A8FE19FDD1B7007BFC62 /* FeatureViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeatureViewModel.swift; sourceTree = "<group>"; };
@@ -365,6 +367,7 @@
 		FE3835E819F67B7E001EFB6B /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				973DCB1D1A07335E002B15E7 /* CategoriesViewController.swift */,
 				FE3835E919F67B7E001EFB6B /* SummariesController.swift */,
 			);
 			path = Controllers;
@@ -783,6 +786,7 @@
 				FEE87E331A009555004EBAE2 /* SummaryPartialView.swift in Sources */,
 				FE9C876E19F4C24B002C50BE /* Async.series.swift in Sources */,
 				FEE87E391A03380E004EBAE2 /* MainPageViewModel.swift in Sources */,
+				973DCB1E1A07335E002B15E7 /* CategoriesViewController.swift in Sources */,
 				FE9C876F19F4C24B002C50BE /* Async.swift in Sources */,
 				FE38361C19F8F74D001EFB6B /* Pickup.swift in Sources */,
 				FE38360619F8E31E001EFB6B /* SummaryViewModel.swift in Sources */,

@@ -14,57 +14,6 @@ let kSummaryPartialViewMinSize = 120
 let kSummaryPartialViewMinArea = 160 * 160
 
 class SummaryViewModel {
-    
-    /**
-    Divide A View Structure to Two Views
-    
-    :param: SummaryPartialView to be devided
-    
-    :returns: Array of SummaryPartialView divided
-    
-    */
-//    class func dividePartial(partial:SummaryPartialView) -> [SummaryPartialView]? {
-//        
-//        var widthPortion = 1, heightPortion = 1
-//        
-//        // Minimum Size for Partial View
-//        if partial.width  < kSummaryPartialViewMinSize * 2 { widthPortion  = 0 }
-//        if partial.height < kSummaryPartialViewMinSize * 2 { heightPortion = 0 }
-//        if widthPortion == 0 && heightPortion == 0 { return nil }
-//        
-//        var partial1 = partial
-//        var partial2 = partial
-//        
-//        let seed = UInt32(partial.width * widthPortion + partial.height * heightPortion)
-//        let pos = Int(arc4random_uniform(seed))
-//        if pos < partial.width {
-//            //幅を分割
-//            
-//            let wSeed = UInt32(partial.width - kSummaryPartialViewMinSize * 2)
-//            let wPos = Int(arc4random_uniform(wSeed)) + kSummaryPartialViewMinSize
-//            
-//            partial1.width  = wPos
-//            partial2.x     += wPos
-//            partial2.width -= wPos
-//            
-//        } else {
-//            //高さを分割
-//            
-//            let hSeed = UInt32(partial.height - kSummaryPartialViewMinSize * 2)
-//            let hPos = Int(arc4random_uniform(hSeed)) + kSummaryPartialViewMinSize
-//            
-//            partial1.height  = hPos
-//            partial2.y      += hPos
-//            partial2.height  -= hPos
-//            
-//        }
-//        
-//        if partial1.area < kSummaryPartialViewMinArea || partial2.area < kSummaryPartialViewMinArea { return nil }
-//        if partial1.height > partial1.width * 3 || partial2.height > partial2.width * 3 { return nil }
-//        
-//        return([partial1, partial2])
-//        
-//    }
 
     
 }

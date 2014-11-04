@@ -10,11 +10,12 @@ import UIKit
 
 class SummaryPartialViewModel{
     
-    let kMinWidth:CGFloat   = 100
-    let kMinHeight:CGFloat  = 100
-    let kMinArea:CGFloat    = 20000
-    let kMaxPortion:CGFloat = 2.0
-    let kMaxArea:CGFloat    = 60000
+    let kMinWidth:CGFloat      = 120
+    let kMinHeight:CGFloat     = 100
+    let kMinArea:CGFloat       = 20000
+    let kMaxPortion:CGFloat    = 2.0
+    let kMaxDivPortion:CGFloat = 1.5
+    let kMaxArea:CGFloat       = 56000
     
     enum Error:Int {
         case WIDTH_SHORT
@@ -29,6 +30,7 @@ class SummaryPartialViewModel{
     
     init(view:SummaryPartialView){
         self.view = view
+        self.validate()
     }
     
     /// Errorの有無をチェックしてerrorsに格納
@@ -82,12 +84,16 @@ class SummaryPartialViewModel{
         
         let width = view.frame.size.width
         let height = view.frame.size.height
+        let area = width * height
         
         // 分割できない場合
         if((width < kMinWidth * 2 && height < kMinHeight * 2) || width * height < kMinArea * 2) {
             return nil
         }
         // 水平に分割
+        else if area < kMaxArea * 2.0 && width * kMaxDivPortion < height {
+            dir = .HORIZONTAL
+        }
         else if width < kMinWidth * 2 && height >= kMinHeight * 2 {
             dir = .HORIZONTAL
         }
@@ -107,14 +113,14 @@ class SummaryPartialViewModel{
             // 幅を垂直に分割
             let minWidth = height * kMinWidth < kMinArea ? (kMinArea / height) : kMinWidth
             let pos = minWidth + CGFloat(arc4random_uniform(UInt32(width - minWidth*2 + 1)))
-            partial1.frame.size.width =  pos
+            partial1.frame.size.width  = pos
             partial2.frame.origin.x   += pos
             partial2.frame.size.width -= pos
         } else {
             // 高さを水平に分割
             let minHeight = width * kMinHeight < kMinArea ? (kMinArea / width) : kMinHeight
             let pos = minHeight + CGFloat(arc4random_uniform(UInt32(height - minHeight*2 + 1)))
-            partial1.frame.size.height =  pos
+            partial1.frame.size.height  = pos
             partial2.frame.origin.y    += pos
             partial2.frame.size.height -= pos
         }
