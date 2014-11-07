@@ -15,6 +15,7 @@ class Summary {
     let choco: Int
     let approved_at: String
     let image_url: String
+    let icon_url: String
     let category: Category?
     
     private struct Static {
@@ -32,6 +33,7 @@ class Summary {
         self.choco = json["choco"].intValue
         self.approved_at = json["approved_at"].stringValue
         self.image_url = json["image_url"].stringValue
+        self.icon_url = json["icon_url"].stringValue
         self.category = CategoryViewModel.find(json["category_id"].intValue)
     }
 }

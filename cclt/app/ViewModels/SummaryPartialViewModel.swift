@@ -13,9 +13,16 @@ class SummaryPartialViewModel{
     let kMinWidth:CGFloat      = 120
     let kMinHeight:CGFloat     = 100
     let kMinArea:CGFloat       = 20000
-    let kMaxPortion:CGFloat    = 2.0
+    let kMaxPortion:CGFloat    = 1.7
     let kMaxDivPortion:CGFloat = 1.5
     let kMaxArea:CGFloat       = 56000
+    
+    let kHorizontalBannerPortion:CGFloat = 0.4    // 横（バナー+テキスト）
+    let kHorizontalIconPortion:CGFloat   = 0.5    // 横（アイコン+テキスト）
+    let kTextOnlyPortion:CGFloat         = 1.0    // テキストのみ
+    let kVerticalBannerPortion:CGFloat   = 1.4    // 縦（バナー+テキスト）
+    let kSmallImageArea:CGFloat          = 30000  // 小画像
+    let kSmallHorizontalPortion:CGFloat  = 0.75   // 横（小アイコン+テキスト）
     
     enum Error:Int {
         case WIDTH_SHORT
@@ -25,8 +32,23 @@ class SummaryPartialViewModel{
         case AREA_LARGE
     }
     
+    enum PositionType:Int {
+        case SMALL_IMAGE_TOP_TEXT_BOTTOM
+        case IMAGE_TOP_TEXT_BOTTOM
+        case ICON_TOP_TEXT_BOTTOM
+        case IMAGE_LEFT_TEXT_RIGHT
+        case IMAGE_RIGHT_TEXT_LEFT
+        case ICON_LEFT_TEXT_RIGHT
+        case ICON_RIGHT_TEXT_LEFT
+        case SMALL_ICON_LEFT_TEXT_RIGHT
+        case SMALL_ICON_RIGHT_TEXT_LEFT
+        case TEXT_ONLY
+    }
+    
     var errors:[Error] = []
     let view:SummaryPartialView
+    var summary:Summary?
+    var positionType:PositionType = .TEXT_ONLY
     
     init(view:SummaryPartialView){
         self.view = view
@@ -62,6 +84,46 @@ class SummaryPartialViewModel{
         if(width * height > kMaxArea){
             errors.append(.AREA_LARGE)
         }
+    }
+    
+    func setPositionType() {
+        let width = view.frame.size.width
+        let height = view.frame.size.height
+        
+        var type:PositionType = .TEXT_ONLY
+        
+        // 横（バナー+タイトル）
+        if height < width * kHorizontalBannerPortion {
+            type = arc4random_uniform(2) < 1 ? .IMAGE_LEFT_TEXT_RIGHT : .IMAGE_RIGHT_TEXT_LEFT
+        }
+        // 横（アイコン+タイトル）
+        else if height < width * kHorizontalIconPortion {
+            type = arc4random_uniform(2) < 1 ? .ICON_LEFT_TEXT_RIGHT : .ICON_RIGHT_TEXT_LEFT
+        }
+        else if height < width * kTextOnlyPortion {
+            if width * height > kSmallImageArea{
+                if height < width * kSmallHorizontalPortion {
+                    // 横（小アイコン+タイトル)
+                    type = arc4random_uniform(2) < 1 ? .SMALL_ICON_LEFT_TEXT_RIGHT : .SMALL_ICON_RIGHT_TEXT_LEFT
+                } else {
+                    // 縦（小バナー+タイトル）
+                    type = .SMALL_IMAGE_TOP_TEXT_BOTTOM
+                }
+            }else{
+                // テキストのみ
+                type = .TEXT_ONLY
+            }
+        }
+        // 縦（バナー+タイトル）
+        else if height < width * kVerticalBannerPortion {
+            type = .IMAGE_TOP_TEXT_BOTTOM
+        }
+        // 縦（アイコン+タイトル）
+        else {
+            type = .ICON_TOP_TEXT_BOTTOM
+        }
+        
+        self.positionType = type
     }
     
     /// 特定のErrorを持っているかどうか
