@@ -12,6 +12,7 @@ import SwiftyJSON
 class Category {
     let id: Int
     let name: String
+    let iconURL: String
     
     private struct Static {
         static var all:[Category] = []
@@ -25,6 +26,7 @@ class Category {
     required internal init(json:JSON){
         self.id = json["id"].intValue
         self.name = json["name"].stringValue
+        self.iconURL = json["icon_url"].stringValue
     }
 
 }

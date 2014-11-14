@@ -55,21 +55,21 @@ class SummaryViewModelSpec: QuickSpec {
 
         }
 
-        describe(".fetchAll") {
-            
-            it("まとめ一覧を取得できること"){
-                
-                var summaries:[Summary] = []
-                
-                SummaryViewModel.fetchAll { (error) in
-                    expect(error).to(beNil())
-                    summaries = Summary.all
-                }
-                
-                expect(summaries.count).toEventuallyNot(equal(0), timeout: 3)
-            }
-        
-        }
+//        describe(".fetchAll") {
+//            
+//            it("まとめ一覧を取得できること"){
+//                
+//                var summaries:[Summary] = []
+//                
+//                SummaryViewModel.fetchAll { (error) in
+//                    expect(error).to(beNil())
+//                    summaries = Summary.all
+//                }
+//                
+//                expect(summaries.count).toEventuallyNot(equal(0), timeout: 3)
+//            }
+//        
+//        }
         
         describe(".fetchOne") {
             

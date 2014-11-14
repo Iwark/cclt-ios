@@ -51,7 +51,7 @@ class SummaryPartialView: UIView {
         case .IMAGE_LEFT_TEXT_RIGHT:
             imgFrame.size.width    = self.frame.size.height / kBannerPortion
             imgFrame.size.height   = imgFrame.size.width * kBannerPortion
-            url = NSURL(string: summary.image_url)
+            url = NSURL(string: summary.banner_url)
             
             titleFrame.origin.x    = imgFrame.size.width - kPadding
             titleFrame.size.width  = self.frame.size.width - titleFrame.origin.x
@@ -60,14 +60,14 @@ class SummaryPartialView: UIView {
             imgFrame.size.width    = self.frame.size.height / kBannerPortion
             imgFrame.size.height   = imgFrame.size.width * kBannerPortion
             imgFrame.origin.x = self.frame.size.width - imgFrame.size.width
-            url = NSURL(string: summary.image_url)
+            url = NSURL(string: summary.banner_url)
             
             titleFrame.size.width = imgFrame.origin.x + kPadding
             titleFrame.size.height = self.frame.size.height
         case .IMAGE_TOP_TEXT_BOTTOM:
             imgFrame.size.width = self.frame.size.width
             imgFrame.size.height = imgFrame.size.width * kBannerPortion
-            url = NSURL(string: summary.image_url)
+            url = NSURL(string: summary.banner_url)
             
             titleFrame.origin.y    = imgFrame.size.height - kPadding
             titleFrame.size.width  = self.frame.size.width
@@ -96,7 +96,7 @@ class SummaryPartialView: UIView {
             imgFrame.size.width  = self.frame.size.width * 0.8
             imgFrame.origin.x    = (self.frame.size.width - imgFrame.size.width)/2
             imgFrame.size.height = imgFrame.size.width * kBannerPortion
-            url = NSURL(string: summary.image_url)
+            url = NSURL(string: summary.banner_url)
             
             titleFrame.origin.y    = imgFrame.size.height - kPadding
             titleFrame.size.width  = self.frame.size.width
@@ -125,14 +125,16 @@ class SummaryPartialView: UIView {
         let titleLabel = UILabel(frame: titleFrame)
         titleLabel.font = UIFont.systemFontOfSize(15.0)
         titleLabel.numberOfLines = 0
-        if partial.positionType != .TEXT_ONLY {
+        if partial.positionType != .TEXT_ONLY && countElements(summary.title) > 24 {
             let startIndex = advance(summary.title.startIndex, 0)
-            let endIndex = advance(startIndex, 22)
-            titleLabel.text = summary.title[Range(start: startIndex, end: endIndex)]
+            let endIndex = advance(startIndex, 24)
+            titleLabel.text = summary.title[Range(start: startIndex, end: endIndex)] + "…"
         } else {
             titleLabel.text = summary.title
         }
         self.addSubview(titleLabel)
+        
+        self.tag = summary.id
     }
     
 }

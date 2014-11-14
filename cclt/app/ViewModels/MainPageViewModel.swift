@@ -9,11 +9,9 @@
 import UIKit
 
 class MainPageViewModel {
-    let num:Int
     var partials:[SummaryPartialViewModel] = []
     
-    init(num:Int, view:SummaryPartialView){
-        self.num = num
+    init(view:SummaryPartialView){
         
         let partialViewModel = SummaryPartialViewModel(view: view)
         if let partialViews = partialViewModel.divide() {
@@ -37,6 +35,27 @@ class MainPageViewModel {
         }
     }
     
+    func setSummaries(lastSummaryID:Int, callback:()->()) {
+        SummaryViewModel.fetchSummaries(lastSummaryID, num: self.partials.count,
+            { [unowned self] (summaries, error) -> () in
+                if let summaries = summaries {
+                    for (idx, partial) in enumerate(self.partials) {
+                        if(summaries.count > idx){
+                            partial.summary = summaries[idx]
+                            partial.setPositionType()
+                            partial.view.render(partial)
+                        }else{
+                            println("summaries.count must not be less or equal than idx")
+                        }
+                    }
+                    println("added new page.")
+                    callback()
+                }else{
+                    println("get summaries failed...:\(error)")
+                }
+        })
+    }
+    
     func validateViews(views:[SummaryPartialView]) -> Bool {
         for view in views {
             var partial = SummaryPartialViewModel(view: view)
@@ -44,8 +63,6 @@ class MainPageViewModel {
             if partial.errors.count > 0 {
                 // WIDTH_SHORT, HEIGHT_SHORT, AREA_SMALLの場合はfalseを返す
                 if partial.hasError(.WIDTH_SHORT) || partial.hasError(.HEIGHT_SHORT) || partial.hasError(.AREA_SMALL) {
-                    if partial.hasError(.AREA_SMALL){ println("AREA_SMALL") }
-                    else { println("SHORT_ERROR") }
                     return false
                 }
                 // PORTION_UNMATCH, AREA_LARGEの場合はさらに分割を試みる

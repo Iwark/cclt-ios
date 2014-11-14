@@ -10,11 +10,9 @@ import Foundation
 import SwiftyJSON
 import Alamofire
 
-let kSummaryPartialViewMinSize = 120
-let kSummaryPartialViewMinArea = 160 * 160
-
 class SummaryViewModel {
 
+    
     
 }
 
@@ -28,23 +26,36 @@ extension SummaryViewModel {
     :param: completionHandler The completion handler.
     
     */
-    class func fetchAll(completionHandler: (NSError?) -> ()) {
-        Alamofire.request(CcltRoute.GetSummaries()).response {
+    class func fetchSummaries(lastSummaryID:Int, num:Int, completionHandler: ([Summary]?, NSError?) -> ()) {
+        
+        Alamofire.request(CcltRoute.GetSummaries(lastSummaryID, num)).response {
             (request, response, data, error) in
             
             if response == nil || response!.statusCode != 200 || error != nil {
-                completionHandler(error)
+                completionHandler(nil, error)
                 return
             }
             
             if let json = data as? NSData {
                 let results = JSON(data: json)
-                var temp:[Summary] = []
+                var summaries:[Summary] = []
                 for result:JSON in results.array! {
-                    temp.append(Summary(json:result))
+                    summaries.append(Summary(json:result))
                 }
-                Summary.all = temp
-                completionHandler(nil)
+                var allSummaries = Summary.all
+                for s in summaries {
+                    var found = false
+                    for summary in Summary.all {
+                        if s.id == summary.id {
+                            found = true
+                        }
+                    }
+                    if !found {
+                        allSummaries.append(s)
+                    }
+                }
+                Summary.all = allSummaries
+                completionHandler(summaries, nil)
             }
         }
     }
@@ -56,15 +67,16 @@ extension SummaryViewModel {
     :param: completionHandler The completion handler.
     
     */
-    class func find(id: Int, completionHandler: (Summary?, NSError?) -> Void) {
+    class func find(id: Int, completionHandler: (Summary?, NSError?) -> Void) -> Summary? {
         for summary in Summary.all {
             if summary.id == id {
                 completionHandler(summary, nil)
-                return
+                return summary
             }
         }
-        println("summary not found on local... trying to fetch.")
+        println("summary not found on local...\(id) trying to fetch.")
         self.fetchOne(id, completionHandler)
+        return nil
     }
     
     /**
@@ -82,7 +94,7 @@ extension SummaryViewModel {
                 completionHandler(nil, error)
                 return
             }
-            
+
             if let json = data as? NSData {
                 let result = JSON(data: json)
                 let summary:Summary = Summary(json: result)

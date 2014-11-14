@@ -12,19 +12,23 @@ class AppViewController: UIViewController {
     
     let kNavTitleFontSizePad:CGFloat    = 22.0 // NavigationBarのタイトルのフォントサイズ（iPad）
     let kNavTitleVerticalPosPad:CGFloat = 1.0 // NavigationBarのタイトルの位置(iPad)
-    let kNavBarColor = UIColor("#92e1c4", 0.9)    
+    let kNavBarColor = UIColor("#92e1c4", 0.9)
     
     var navTitle:String? {
-        get { return self.tabBarController?.navigationItem.title }
-        set { self.tabBarController?.navigationItem.title = newValue }
+        get { return self.navigationItem.title }
+        set { self.navigationItem.title = newValue }
+    }
+    
+    var navController:UINavigationController? {
+        get { return self.navigationController }
     }
     
     var navBarColor:UIColor? {
         get { return kNavBarColor }
         set {
-            self.tabBarController?.navigationController?.navigationBar.barStyle = .BlackTranslucent
+            self.navController?.navigationBar.barStyle = .BlackTranslucent
             let backImg = UIImage.imageWithColor(kNavBarColor)
-            self.tabBarController?.navigationController?.navigationBar.setBackgroundImage(backImg, forBarMetrics: .Default)
+            self.navController?.navigationBar.setBackgroundImage(backImg, forBarMetrics: .Default)
             UINavigationBar.appearance().barTintColor = kNavBarColor
         }
     }

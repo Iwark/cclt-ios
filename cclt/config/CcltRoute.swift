@@ -27,7 +27,7 @@ enum CcltRoute: URLRequestConvertible {
     
     // まとめ
     case GetSummary(Int)
-    case GetSummaries()
+    case GetSummaries(Int, Int)
     case GetPickupSummaries()
     
     var path: (Alamofire.Method, String) {
@@ -52,7 +52,7 @@ enum CcltRoute: URLRequestConvertible {
             
         case .GetSummary(let id):
             return(.GET, "summaries/\(id)")
-        case .GetSummaries:
+        case .GetSummaries(let lastSummaryID, let num):
             return(.GET, "summaries")
         case .GetPickupSummaries():
             return(.GET, "pickup_summaries")
@@ -70,12 +70,15 @@ enum CcltRoute: URLRequestConvertible {
 //            }
             
         switch self {
+        case .GetSummaries(let lastSummaryID, let num):
+            let params = ["last_summary_id": lastSummaryID, "num":num]
+            return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: params).0
 //            case .CreateUser(let parameters):
 //                return Alamofire.ParameterEncoding.JSON.encode(mutableURLRequest, parameters: parameters).0
 //            case .UpdateUser(_, let parameters):
 //                return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: parameters).0
-            default:
-                return mutableURLRequest
+        default:
+            return mutableURLRequest
         }
     }
 }
