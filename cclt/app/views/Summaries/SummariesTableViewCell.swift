@@ -1,21 +1,22 @@
 //
-//  CategoriesTableViewCell.swift
+//  SummariesTableViewCell.swift
 //  cclt
 //
-//  Created by Kohei Iwasaki on 11/14/14.
+//  Created by Kohei Iwasaki on 11/17/14.
 //  Copyright (c) 2014 Donuts. All rights reserved.
 //
 
 import UIKit
 
-class CategoriesTableViewCell: UITableViewCell {
-    
+class SummariesTableViewCell: UITableViewCell {
+
     @IBOutlet weak var imgView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var writerLabel: UILabel!
+    @IBOutlet weak var chocoLabel: UILabel!
     
-    var categoryID: Int?
-    var featureID: Int?
-
+    var summaryID:Int?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

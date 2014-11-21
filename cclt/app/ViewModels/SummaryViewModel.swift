@@ -10,9 +10,9 @@ import Foundation
 import SwiftyJSON
 import Alamofire
 
-class SummaryViewModel {
+let kDefaultFetchSummariesNum = 10
 
-    
+class SummaryViewModel {
     
 }
 
@@ -26,9 +26,9 @@ extension SummaryViewModel {
     :param: completionHandler The completion handler.
     
     */
-    class func fetchSummaries(lastSummaryID:Int, num:Int, completionHandler: ([Summary]?, NSError?) -> ()) {
+    class func fetchSummaries(categoryID:Int=0, featureID:Int=0, lastSummaryID:Int=0, num:Int=kDefaultFetchSummariesNum, completionHandler: ([Summary]?, NSError?) -> ()) {
         
-        Alamofire.request(CcltRoute.GetSummaries(lastSummaryID, num)).response {
+        Alamofire.request(CcltRoute.GetSummaries(categoryID, featureID, lastSummaryID, num)).response {
             (request, response, data, error) in
             
             if response == nil || response!.statusCode != 200 || error != nil {
@@ -42,19 +42,35 @@ extension SummaryViewModel {
                 for result:JSON in results.array! {
                     summaries.append(Summary(json:result))
                 }
-                var allSummaries = Summary.all
-                for s in summaries {
-                    var found = false
-                    for summary in Summary.all {
-                        if s.id == summary.id {
-                            found = true
-                        }
-                    }
-                    if !found {
-                        allSummaries.append(s)
-                    }
+                Summary.merge(summaries)
+                completionHandler(summaries, nil)
+            }
+        }
+    }
+    
+    /**
+    Search summaries from API Server.
+    
+    :param: completionHandler The completion handler.
+    
+    */
+    class func searchSummaries(q:String, page:Int, completionHandler: ([Summary]?, NSError?) -> ()) {
+        
+        Alamofire.request(CcltRoute.SearchSummaries(q, page)).response {
+            (request, response, data, error) in
+            
+            if response == nil || response!.statusCode != 200 || error != nil {
+                completionHandler(nil, error)
+                return
+            }
+            
+            if let json = data as? NSData {
+                let results = JSON(data: json)
+                var summaries:[Summary] = []
+                for result:JSON in results.array! {
+                    summaries.append(Summary(json:result))
                 }
-                Summary.all = allSummaries
+                Summary.merge(summaries)
                 completionHandler(summaries, nil)
             }
         }

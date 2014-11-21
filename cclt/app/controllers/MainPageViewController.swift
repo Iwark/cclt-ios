@@ -135,7 +135,7 @@ UICollectionViewDataSource, UICollectionViewDelegate, MainPageCollectionViewDele
         let summary = SummaryViewModel.find(summaryID, completionHandler: { (_, _) in })
         
         if let summary = summary {
-            let svc = SummariesViewController(summary: summary)
+            let svc = SummaryDescriptionViewController(summary: summary)
             self.navController?.pushViewController(svc, animated: true)
         }
     }

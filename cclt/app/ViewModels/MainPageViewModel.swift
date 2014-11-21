@@ -36,7 +36,7 @@ class MainPageViewModel {
     }
     
     func setSummaries(lastSummaryID:Int, callback:()->()) {
-        SummaryViewModel.fetchSummaries(lastSummaryID, num: self.partials.count,
+        SummaryViewModel.fetchSummaries(lastSummaryID:lastSummaryID, num: self.partials.count,
             { [unowned self] (summaries, error) -> () in
                 if let summaries = summaries {
                     for (idx, partial) in enumerate(self.partials) {
@@ -48,7 +48,7 @@ class MainPageViewModel {
                             println("summaries.count must not be less or equal than idx")
                         }
                     }
-                    println("added new page.")
+                    println("added new page. summaries:\(summaries)")
                     callback()
                 }else{
                     println("get summaries failed...:\(error)")

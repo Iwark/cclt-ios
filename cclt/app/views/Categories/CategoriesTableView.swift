@@ -8,13 +8,20 @@
 
 import UIKit
 
+protocol CategoriesTableViewDelegate:class {
+    func categoryTapped(categoryID:Int)
+    func featureTapped(featureID:Int)
+}
+
 class CategoriesTableView: UITableView,
 UITableViewDataSource, UITableViewDelegate {
 
+    weak var categoriesTableViewDelegate:CategoriesTableViewDelegate?
+    
     let kCellID = "CategoriesTableViewCell"
     let kCellNib = UINib(nibName: "CategoriesTableViewCell", bundle: nil)
     
-    let kRowHeight:CGFloat = 44
+    let kRowHeight:CGFloat = 52
     
     required init(coder aDecoder: NSCoder) {
         
@@ -40,12 +47,16 @@ UITableViewDataSource, UITableViewDelegate {
         
         if Feature.all.count > indexPath.row {
             let feature = Feature.all[indexPath.row]
+            cell.categoryID = nil
+            cell.featureID = feature.id
             cell.titleLabel.text = feature.title
             SwiftImageLoader.sharedLoader.imageForUrl(feature.icon_url, completionHandler: { (image, url) -> () in
                 cell.imgView.image = image
             })
         }else if Category.all.count > indexPath.row - Feature.all.count {
             let category = Category.all[indexPath.row - Feature.all.count]
+            cell.categoryID = category.id
+            cell.featureID = nil
             cell.titleLabel.text = category.name
             SwiftImageLoader.sharedLoader.imageForUrl(category.iconURL, completionHandler: { (image, url) -> () in
                 cell.imgView.image = image
@@ -57,6 +68,22 @@ UITableViewDataSource, UITableViewDelegate {
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return kRowHeight
+    }
+
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        if let cell = tableView.cellForRowAtIndexPath(indexPath) as? CategoriesTableViewCell {
+            
+            if let categoryID = cell.categoryID {
+                
+                self.categoriesTableViewDelegate?.categoryTapped(categoryID)
+                
+            }else if let featureID = cell.featureID {
+                
+                self.categoriesTableViewDelegate?.featureTapped(featureID)
+                
+            }
+        }
     }
 
 }

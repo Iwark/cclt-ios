@@ -49,6 +49,11 @@ class SummaryDescriptionView: UIScrollView {
             self.addSubview(mainImgView)
             contentHeight += mainImgView.frame.size.height
             
+            // 画像の上に乗っけるタイトルやカテゴリー等
+            let infoView = SummaryInfoView(summary: summary, width: width)
+            infoView.frame.origin.y = mainImgView.frame.size.height - infoView.frame.size.height
+            self.addSubview(infoView)
+            
             // 冒頭文
             let descLabel = UILabel(frame: CGRectMake(kDescPaddingH, contentHeight+kDescPaddingV, width - kDescPaddingH * 2, 0))
             descLabel.numberOfLines = 0

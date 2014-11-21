@@ -1,20 +1,16 @@
 //
-//  CategoriesTableViewCell.swift
+//  SettingsTableViewCell.swift
 //  cclt
 //
-//  Created by Kohei Iwasaki on 11/14/14.
+//  Created by Kohei Iwasaki on 11/19/14.
 //  Copyright (c) 2014 Donuts. All rights reserved.
 //
 
 import UIKit
 
-class CategoriesTableViewCell: UITableViewCell {
+class SettingsTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var imgView: UIImageView!
-    @IBOutlet weak var titleLabel: UILabel!
-    
-    var categoryID: Int?
-    var featureID: Int?
+    @IBOutlet weak var label: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()

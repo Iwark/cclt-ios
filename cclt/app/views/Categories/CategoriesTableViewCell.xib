@@ -15,14 +15,14 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fUU-SE-ro1">
-                        <rect key="frame" x="8" y="42" width="23" height="28"/>
+                        <rect key="frame" x="16" y="42" width="23" height="28"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="28" id="3Di-Cl-MpH"/>
                             <constraint firstAttribute="width" constant="23" id="Die-iW-LQq"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pmL-yD-th8">
-                        <rect key="frame" x="51" y="34" width="235" height="44"/>
+                        <rect key="frame" x="59" y="34" width="227" height="44"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="44" id="KYh-ZS-drp"/>
                         </constraints>
@@ -36,7 +36,7 @@
                     <constraint firstAttribute="centerY" secondItem="pmL-yD-th8" secondAttribute="centerY" id="Dcb-AZ-3mS"/>
                     <constraint firstAttribute="centerY" secondItem="fUU-SE-ro1" secondAttribute="centerY" id="WMB-yY-VVn"/>
                     <constraint firstAttribute="trailingMargin" secondItem="pmL-yD-th8" secondAttribute="trailing" constant="20" id="gq2-4S-0Mx"/>
-                    <constraint firstItem="fUU-SE-ro1" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="wqg-Bh-9da"/>
+                    <constraint firstItem="fUU-SE-ro1" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="wqg-Bh-9da"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

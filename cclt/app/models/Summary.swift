@@ -18,6 +18,7 @@ class Summary {
     let banner_url: String
     let icon_url: String
     let category: Category?
+    let curator: Curator
     let description: String
     let source: String
     let contents: [JSON]
@@ -40,8 +41,26 @@ class Summary {
         self.banner_url = json["banner_url"].stringValue
         self.icon_url = json["icon_url"].stringValue
         self.category = CategoryViewModel.find(json["category_id"].intValue)
+        self.curator = Curator(json: json["curator"])
         self.description = json["description"].stringValue
         self.source = json["source"].stringValue
         self.contents = json["summary_contents"].arrayValue
+    }
+    
+    class func merge(summaries:[Summary]){
+        var allSummaries = Summary.all
+        for s in summaries {
+            var found = false
+            for summary in Summary.all {
+                if s.id == summary.id {
+                    found = true
+                    break
+                }
+            }
+            if !found {
+                allSummaries.append(s)
+            }
+        }
+        Summary.all = allSummaries
     }
 }

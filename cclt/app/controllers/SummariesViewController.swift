@@ -2,52 +2,40 @@
 //  SummariesViewController.swift
 //  cclt
 //
-//  Created by Kohei Iwasaki on 11/11/14.
+//  Created by Kohei Iwasaki on 11/17/14.
 //  Copyright (c) 2014 Donuts. All rights reserved.
 //
 
 import UIKit
 
+class SummariesViewController: AppViewController,
+SummariesTableViewDelegate {
 
-/// 記事ページの制御を行うコントローラ
-class SummariesViewController: AppViewController, BackBarButtonItemDelegate {
-    
-    var summary: Summary?
-    var summaryDescriptionView: SummaryDescriptionView?
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        self.navTitle = ""
-    }
-    
-    init(summary:Summary) {
-        super.init()
-        self.summary = summary
-        self.summaryDescriptionView = SummaryDescriptionView(summary: summary)
-    }
-    
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-    }
+    @IBOutlet weak var summariesTableView: SummariesTableView!
+
+    var summaries:[Summary] = []
     
     override func viewDidLoad() {
-        if let sdv = self.summaryDescriptionView {
-            sdv.frame = self.view.frame
-            sdv.render()
-            self.view.addSubview(sdv)
-        }
+        super.viewDidLoad()
         
-        // 戻るボタン
-        self.navigationItem.leftBarButtonItem = BackBarButtonItem(delegate: self)
+        summariesTableView.summariesTableViewDelegate = self
+        summariesTableView.summaries = summaries
+        summariesTableView.reloadData()
         
-        // 戻るジェスチャー
-        let swipeRightGesture = UISwipeGestureRecognizer(target:self, action:Selector("pop"))
-        swipeRightGesture.direction = .Right
-        self.view.addGestureRecognizer(swipeRightGesture)
     }
-    
-    func pop() {
-        self.navigationController?.popViewControllerAnimated(true)
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+
+    func tapped(summaryID: Int) {
+        let summary = SummaryViewModel.find(summaryID, completionHandler: { (_, _) in })
+        
+        if let summary = summary {
+            let svc = SummaryDescriptionViewController(summary: summary)
+            self.navController?.pushViewController(svc, animated: true)
+        }
     }
     
 }

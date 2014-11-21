@@ -13,7 +13,6 @@ class Curator {
     let id: Int
     let name: String
     let choco: Int
-    let created_at: String
     let image_url: String
     let introduction: String
     
@@ -28,9 +27,8 @@ class Curator {
     
     required internal init(json:JSON){
         self.id = json["id"].intValue
-        self.name = json["title"].stringValue
+        self.name = json["name"].stringValue
         self.choco = json["choco"].intValue
-        self.created_at = json["approved_at"].stringValue
         self.image_url = json["image_url"].stringValue
         self.introduction = json["introduction"].stringValue
     }
