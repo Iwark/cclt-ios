@@ -12,8 +12,6 @@ class MyPageViewController: AppViewController {
    
     @IBOutlet weak var myPageScrollView: MyPageScrollView!
     
-    let kSegueToLoginWindow = "MyPageToLoginModal"
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -24,14 +22,11 @@ class MyPageViewController: AppViewController {
         
         } else {
             
-            // なければLoginModalViewControllerへ遷移
-            
-            self.performSegueWithIdentifier(kSegueToLoginWindow, sender: self)
+            // なければLoginModalViewの表示
+            let loginView = LoginView(frame: self.view.frame)
+            self.view.addSubview(loginView)
 
         }
-        
-        
-        
         
         
     }

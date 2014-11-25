@@ -88,8 +88,6 @@
 		FE497CC71A11CD2500CB3588 /* btn_back_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FE497CC31A11CD2500CB3588 /* btn_back_on@2x.png */; };
 		FE497CC91A11CF3200CB3588 /* SwiftDispatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE497CC81A11CF3200CB3588 /* SwiftDispatch.swift */; };
 		FE497CCA1A11CF3200CB3588 /* SwiftDispatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE497CC81A11CF3200CB3588 /* SwiftDispatch.swift */; };
-		FE61212E1A1C76B0002EC14B /* LoginModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE61212D1A1C76B0002EC14B /* LoginModalViewController.swift */; };
-		FE61212F1A1C76B0002EC14B /* LoginModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE61212D1A1C76B0002EC14B /* LoginModalViewController.swift */; };
 		FE7C50201A15D72400591002 /* CategoriesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7C501E1A15D72400591002 /* CategoriesTableViewCell.swift */; };
 		FE7C50211A15D72400591002 /* CategoriesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7C501E1A15D72400591002 /* CategoriesTableViewCell.swift */; };
 		FE7C50221A15D72400591002 /* CategoriesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE7C501F1A15D72400591002 /* CategoriesTableViewCell.xib */; };
@@ -108,6 +106,7 @@
 		FE7C503E1A1AE08800591002 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7C503C1A1AE08800591002 /* SearchViewController.swift */; };
 		FE7C50411A1AE2A200591002 /* SearchScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7C50401A1AE2A200591002 /* SearchScrollView.swift */; };
 		FE7C50421A1AE2A200591002 /* SearchScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7C50401A1AE2A200591002 /* SearchScrollView.swift */; };
+		FE8087901A2412A400B49531 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE80878F1A2412A400B49531 /* LoginView.swift */; };
 		FE9C870119ECFE22002C50BE /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE3F35C619E661FD005A2166 /* Nimble.framework */; };
 		FE9C870919ED0064002C50BE /* Nimble.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = FE3F35C619E661FD005A2166 /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FE9C876D19F4C24B002C50BE /* Async.parallel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9C876A19F4C24B002C50BE /* Async.parallel.swift */; };
@@ -375,7 +374,6 @@
 		FE497CC21A11CD2500CB3588 /* btn_back_off@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_back_off@2x.png"; sourceTree = "<group>"; };
 		FE497CC31A11CD2500CB3588 /* btn_back_on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_back_on@2x.png"; sourceTree = "<group>"; };
 		FE497CC81A11CF3200CB3588 /* SwiftDispatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftDispatch.swift; sourceTree = "<group>"; };
-		FE61212D1A1C76B0002EC14B /* LoginModalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginModalViewController.swift; sourceTree = "<group>"; };
 		FE7C501E1A15D72400591002 /* CategoriesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CategoriesTableViewCell.swift; path = cclt/App/Views/Categories/CategoriesTableViewCell.swift; sourceTree = SOURCE_ROOT; };
 		FE7C501F1A15D72400591002 /* CategoriesTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CategoriesTableViewCell.xib; path = cclt/App/Views/Categories/CategoriesTableViewCell.xib; sourceTree = SOURCE_ROOT; };
 		FE7C502D1A198E0200591002 /* SummariesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummariesViewController.swift; sourceTree = "<group>"; };
@@ -385,6 +383,7 @@
 		FE7C50391A19F0A700591002 /* SummaryInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SummaryInfoView.swift; path = cclt/App/Views/Summaries/SummaryInfoView.swift; sourceTree = SOURCE_ROOT; };
 		FE7C503C1A1AE08800591002 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		FE7C50401A1AE2A200591002 /* SearchScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchScrollView.swift; path = cclt/App/Views/Search/SearchScrollView.swift; sourceTree = SOURCE_ROOT; };
+		FE80878F1A2412A400B49531 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginView.swift; path = cclt/App/Views/MyPage/LoginView.swift; sourceTree = SOURCE_ROOT; };
 		FE9C876919F4C24B002C50BE /* Async.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Async.h; path = "Vendor/swift-async/async/Async.h"; sourceTree = SOURCE_ROOT; };
 		FE9C876A19F4C24B002C50BE /* Async.parallel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Async.parallel.swift; path = "Vendor/swift-async/async/Async.parallel.swift"; sourceTree = SOURCE_ROOT; };
 		FE9C876B19F4C24B002C50BE /* Async.series.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Async.series.swift; path = "Vendor/swift-async/async/Async.series.swift"; sourceTree = SOURCE_ROOT; };
@@ -498,6 +497,7 @@
 			isa = PBXGroup;
 			children = (
 				FE31BCA81A1C3D6400A4C0D1 /* MyPageScrollView.swift */,
+				FE80878F1A2412A400B49531 /* LoginView.swift */,
 			);
 			name = MyPage;
 			path = cclt/app/views/MyPage;
@@ -532,7 +532,6 @@
 			children = (
 				FEF09B5C1A0B0C6200FE9CFE /* AppViewController.swift */,
 				973DCB1D1A07335E002B15E7 /* CategoriesViewController.swift */,
-				FE61212D1A1C76B0002EC14B /* LoginModalViewController.swift */,
 				FE3835E919F67B7E001EFB6B /* MainPageViewController.swift */,
 				FE31BC9D1A1C3C5400A4C0D1 /* MyPageViewController.swift */,
 				FE7C503C1A1AE08800591002 /* SearchViewController.swift */,
@@ -1173,6 +1172,7 @@
 				FE497CB71A119B5C00CB3588 /* SummaryDescriptionViewController.swift in Sources */,
 				FE31BC9E1A1C3C5400A4C0D1 /* MyPageViewController.swift in Sources */,
 				FE497CAD1A10C0FB00CB3588 /* SwiftColorWithHex.swift in Sources */,
+				FE8087901A2412A400B49531 /* LoginView.swift in Sources */,
 				FECE9EA01A14811800CAC7B6 /* ApplicationLayout.swift in Sources */,
 				FE17A8FF19FDD1B7007BFC62 /* FeatureViewModel.swift in Sources */,
 				FE31BCA11A1C3C7700A4C0D1 /* SettingsViewController.swift in Sources */,
@@ -1183,7 +1183,6 @@
 				FEE87E391A03380E004EBAE2 /* MainPageViewModel.swift in Sources */,
 				973DCB1E1A07335E002B15E7 /* CategoriesViewController.swift in Sources */,
 				FECE9E811A11EF6E00CAC7B6 /* ContentHeadlineView.swift in Sources */,
-				FE61212E1A1C76B0002EC14B /* LoginModalViewController.swift in Sources */,
 				FE9C876F19F4C24B002C50BE /* Async.swift in Sources */,
 				FE38361C19F8F74D001EFB6B /* Pickup.swift in Sources */,
 				FE497CAF1A10C0FB00CB3588 /* SwiftImageLoader.swift in Sources */,
@@ -1252,7 +1251,6 @@
 				FEE87E231A0093CD004EBAE2 /* SummaryPartialViewModel.swift in Sources */,
 				FEF09B5E1A0B0C6200FE9CFE /* AppViewController.swift in Sources */,
 				FE497CB01A10C0FB00CB3588 /* SwiftImageLoader.swift in Sources */,
-				FE61212F1A1C76B0002EC14B /* LoginModalViewController.swift in Sources */,
 				FE38361D19F8F74D001EFB6B /* Pickup.swift in Sources */,
 				FE17A90C19FDD76D007BFC62 /* CategoryViewModelSpec.swift in Sources */,
 				FE497CA51A0CA75700CB3588 /* SummaryPartialView.swift in Sources */,
