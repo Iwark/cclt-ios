@@ -29,7 +29,7 @@ class ContentLinkView: UIView {
         if content.image_url != "" {
             self.imgView = UIImageView(frame: CGRectMake(kImgMarginLeft, 0, width * kImgWidthPortion, width * kImgWidthPortion))
             self.imgView!.layer.borderWidth = kImgBorderWidth
-            self.imgView!.layer.borderColor = kDefaultLinkColor.CGColor
+            self.imgView!.layer.borderColor = Settings.Colors.linkColor.CGColor
             self.imgView!.contentMode = UIViewContentMode.ScaleAspectFill
             imgHeight = imgView!.frame.size.height
             
@@ -58,7 +58,7 @@ class ContentLinkView: UIView {
         self.titleLabel = UILabel(frame: CGRectMake(kTitleMarginH, imgHeight + kTitleMarginTop, width - kTitleMarginH * 2, 0))
         self.titleLabel!.text = content.title
         self.titleLabel!.numberOfLines = 0
-        self.titleLabel!.textColor = kDefaultLinkColor
+        self.titleLabel!.textColor = Settings.Colors.linkColor
         self.titleLabel!.sizeToFit()
         
         self.descriptionView!.frame.origin.y += self.titleLabel!.frame.origin.y + self.titleLabel!.frame.size.height

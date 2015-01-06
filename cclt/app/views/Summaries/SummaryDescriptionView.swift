@@ -14,7 +14,6 @@ class SummaryDescriptionView: UIScrollView {
     
     let kDescPaddingH:CGFloat    = 10.0
     let kDescPaddingV:CGFloat    = 5.0
-    let kDescFontSize:CGFloat    = 13.0
     let kContentsMarginV:CGFloat = 10.0
     
     var contentViews:[UIView] = []
@@ -23,7 +22,7 @@ class SummaryDescriptionView: UIScrollView {
     init(summary: Summary) {
         super.init()
         self.summary = summary
-        self.backgroundColor = UIColor("#ecfbff", 1.0)
+        self.backgroundColor = Settings.Colors.backgroundColor
     }
     
     required init(coder aDecoder: NSCoder) {
@@ -58,7 +57,7 @@ class SummaryDescriptionView: UIScrollView {
             let descLabel = UILabel(frame: CGRectMake(kDescPaddingH, contentHeight+kDescPaddingV, width - kDescPaddingH * 2, 0))
             descLabel.numberOfLines = 0
             descLabel.text = summary.description
-            descLabel.font = UIFont.systemFontOfSize(kDescFontSize)
+            descLabel.font = Settings.Fonts.smallFont
             descLabel.sizeToFit()
             self.addSubview(descLabel)
             contentHeight += descLabel.frame.size.height + kDescPaddingV * 2

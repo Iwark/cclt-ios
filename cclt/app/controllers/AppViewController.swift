@@ -10,9 +10,10 @@ import UIKit
 
 class AppViewController: UIViewController {
     
-    let kNavTitleFontSizePad:CGFloat    = 22.0 // NavigationBarのタイトルのフォントサイズ（iPad）
     let kNavTitleVerticalPosPad:CGFloat = 1.0 // NavigationBarのタイトルの位置(iPad)
-    let kNavBarColor = UIColor("#92e1c4", 0.9)
+    let kNavBarColor = Settings.Colors.mainColor
+    
+    var _appLoading = false
     
     var navTitle:String? {
         get { return self.navigationItem.title }
@@ -38,7 +39,7 @@ class AppViewController: UIViewController {
         
         // iPadの場合のナビゲーションバー
         if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
-            let font = UIFont.boldSystemFontOfSize(kNavTitleFontSizePad)
+            let font = Settings.Fonts.IPad.navTitleFont
             UINavigationBar.appearance().titleTextAttributes = ["UITextAttributeFont": font]
             UINavigationBar.appearance().setTitleVerticalPositionAdjustment(kNavTitleVerticalPosPad, forBarMetrics: .Default)
         }
@@ -50,6 +51,18 @@ class AppViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         println("appearing!")
         self.navBarColor = kNavBarColor
+    }
+    
+    func startLoading(header:String="　", footer:String="読み込み中...") {
+        _appLoading = true
+        if let window = UIApplication.sharedApplication().keyWindow {
+            JHProgressHUD.sharedHUD.showInWindow(window, withHeader: header, andFooter: footer)
+        }
+    }
+    
+    func stopLoading() {
+        _appLoading = false
+        JHProgressHUD.sharedHUD.hide()
     }
     
 }

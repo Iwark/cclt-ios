@@ -19,6 +19,7 @@ class CategoriesViewController: AppViewController, CategoriesTableViewDelegate {
         super.viewDidLoad()
         
         // カテゴリと特集ページを取得する
+        startLoading()
         Async.parallel([CategoryViewModel.fetchAll, FeatureViewModel.fetchAll], completionHandler: {
             [unowned self] (error) in
             
@@ -27,6 +28,7 @@ class CategoriesViewController: AppViewController, CategoriesTableViewDelegate {
             } else {
                 self.categoriesTableView.reloadData()
             }
+            self.stopLoading()
         })
         
         categoriesTableView.categoriesTableViewDelegate = self
@@ -39,6 +41,8 @@ class CategoriesViewController: AppViewController, CategoriesTableViewDelegate {
     }
     
     func categoryTapped(categoryID: Int) {
+        
+        startLoading()
         SummaryViewModel.fetchSummaries(categoryID: categoryID, completionHandler:{
             [unowned self](summaries, error) -> () in
             
@@ -48,11 +52,13 @@ class CategoriesViewController: AppViewController, CategoriesTableViewDelegate {
                 self.performSegueWithIdentifier(self.kSegueID, sender: self)
                 
             }
-            
+            self.stopLoading()
         })
     }
     
     func featureTapped(featureID: Int) {
+        
+        startLoading()
         SummaryViewModel.fetchSummaries(featureID: featureID, completionHandler:{
             [unowned self](summaries, error) -> () in
             
@@ -62,6 +68,7 @@ class CategoriesViewController: AppViewController, CategoriesTableViewDelegate {
                 self.performSegueWithIdentifier(self.kSegueID, sender: self)
                 
             }
+            self.stopLoading()
             
         })
     }

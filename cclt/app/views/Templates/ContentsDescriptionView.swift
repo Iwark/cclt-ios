@@ -17,9 +17,6 @@ class ContentsDescriptionView: UIView {
     let kLineWidth:CGFloat = 2.0
     let kMarginBottom:CGFloat = 10.0
     
-    let kLineColor = UIColor("#41b796", 1.0)
-    let kTwitterLineColor = UIColor("#55acee", 1.0)
-    
     init(width: CGFloat, description: String, type:String="text"){
         super.init()
         
@@ -28,20 +25,20 @@ class ContentsDescriptionView: UIView {
         let textLabel = UILabel(frame: CGRectMake(kTextMarginLeft, 0, width - kTextMarginLeft - kTextMarginRight, 0))
         textLabel.numberOfLines = 0
         textLabel.text = description
-        textLabel.font = UIFont.systemFontOfSize(kDefaultFontSize)
+        textLabel.font = Settings.Fonts.mediumFont
         textLabel.sizeToFit()
         self.addSubview(textLabel)
         
         let lineView = UIView(frame: CGRectMake(kLineMarginLeft, 0, kLineWidth, textLabel.frame.size.height))
-        lineView.backgroundColor = kLineColor
+        lineView.backgroundColor = Settings.Colors.chocoColor
         self.addSubview(lineView)
         
         if type == "twitter" {
             
-            lineView.backgroundColor = kTwitterLineColor
+            lineView.backgroundColor = Settings.Colors.twitterColor
             
             let twlineView = UIView(frame: CGRectMake(kLineMarginLeft, textLabel.frame.size.height - kLineWidth, width - kTextMarginLeft - kTextMarginRight, kLineWidth))
-            twlineView.backgroundColor = kTwitterLineColor
+            twlineView.backgroundColor = Settings.Colors.twitterColor
             self.addSubview(twlineView)
             
         }

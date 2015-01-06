@@ -17,7 +17,6 @@ class MainPageCollectionView: UICollectionView {
     weak var mainPageCollectionViewDelegate:MainPageCollectionViewDelegate?
     var tappedView:UIView?
     
-    let kTappedColor = UIColor("#dde", 0.8)
     let kTapEffectSeconds = 1.0
     
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
@@ -25,7 +24,7 @@ class MainPageCollectionView: UICollectionView {
             tappedView = touch.view
             if touch.view.tag > 0 {
                 // タップ時のエフェクト
-                touch.view.backgroundColor = kTappedColor
+                touch.view.backgroundColor = Settings.Colors.tappedColor
                 SwiftDispatch.after(kTapEffectSeconds, block: {
                     [unowned self] in
                     self.tappedView!.backgroundColor = UIColor.clearColor()

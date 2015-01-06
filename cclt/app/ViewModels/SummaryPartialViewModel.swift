@@ -10,15 +10,15 @@ import UIKit
 
 class SummaryPartialViewModel{
     
-    let kMinWidth:CGFloat      = 120
-    let kMinHeight:CGFloat     = 100
-    let kMinArea:CGFloat       = 20000
-    let kMaxPortion:CGFloat    = 1.7
+    var kMinWidth:CGFloat   = 120
+    var kMinHeight:CGFloat  = 100
+    var kMinArea:CGFloat    = 20000
+    let kMaxPortion:CGFloat = 1.7
+    var kMaxArea:CGFloat    = 56000
     let kMaxDivPortion:CGFloat = 1.5
-    let kMaxArea:CGFloat       = 56000
     
-    let kHorizontalBannerPortion:CGFloat = 0.4    // 横（バナー+テキスト）
-    let kHorizontalIconPortion:CGFloat   = 0.5    // 横（アイコン+テキスト）
+    let kHorizontalBannerPortion:CGFloat = 0.45   // 横（バナー+テキスト）
+    let kHorizontalIconPortion:CGFloat   = 0.55   // 横（アイコン+テキスト）
     let kTextOnlyPortion:CGFloat         = 1.0    // テキストのみ
     let kVerticalBannerPortion:CGFloat   = 1.4    // 縦（バナー+テキスト）
     let kSmallImageArea:CGFloat          = 30000  // 小画像
@@ -51,10 +51,18 @@ class SummaryPartialViewModel{
     var positionType:PositionType = .TEXT_ONLY
     
     init(view:SummaryPartialView){
+        
+        var r = UIScreen.mainScreen().applicationFrame.size.width / 320
+        if r > 2 { r *= 0.8 }  // iPad用に最適化
+        kMinWidth  *= r
+        kMinHeight *= r
+        kMinArea   *= r
+        kMaxArea   *= r
+        
         self.view = view
         self.validate()
     }
-    
+
     /// Errorの有無をチェックしてerrorsに格納
     func validate(){
         let width = view.frame.size.width

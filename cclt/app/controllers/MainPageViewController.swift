@@ -16,11 +16,13 @@ UICollectionViewDataSource, UICollectionViewDelegate, MainPageCollectionViewDele
     let kCellID = "SummaryPartialViewCell"
     let kCellNib = UINib(nibName: "SummaryPartialViewCell", bundle: nil)
     
-    let kInitialLoadNum = 2  // 最初に読み込むページの数
+    let kInitialLoadNum = 3  // 最初に読み込むページの数
     
     var _page = 0
     var _pages:[MainPageViewModel] = []
-//    var _tappedView:UIView?
+
+    var _isAddingPage = false  // 次のページを読み込み中かどうか
+    var _isToAddPage  = false  // 次のページの読み込み予約
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +34,7 @@ UICollectionViewDataSource, UICollectionViewDelegate, MainPageCollectionViewDele
         mainPageCollectionView.registerNib(kCellNib, forCellWithReuseIdentifier: kCellID)
         
         // カテゴリ取得後、ページを読み込む
+        startLoading()
         CategoryViewModel.fetchAll { (error) -> Void in
             if let error = error {
                 println("category fetch error:\(error)")
@@ -40,12 +43,15 @@ UICollectionViewDataSource, UICollectionViewDelegate, MainPageCollectionViewDele
                 for i in 0..<self.kInitialLoadNum {
                     tasks.append(self.addPage)
                 }
-                Async.series(tasks, completionHandler: { (error) -> () in
+                Async.series(tasks, completionHandler: {
+                    [unowned self] (error) -> () in
+                    
                     if let error = error {
                         println("error:\(error)")
                     }else{
                         self.mainPageCollectionView.reloadData()
                     }
+                    self.stopLoading()
                 })
             }
         }
@@ -54,10 +60,24 @@ UICollectionViewDataSource, UICollectionViewDelegate, MainPageCollectionViewDele
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.navTitle = "トピックス"
+        
+//        let imgView = UIImageView(frame: CGRectMake(0, 0, 240, 160))
+//        imgView.center = self.view.center
+//        imgView.backgroundColor = UIColor.whiteColor()
+//        let tutorialView = TutorialView(imgView: imgView, frame: self.view.frame)
+//        self.view.addSubview(tutorialView)
     }
     
+    // 1度に2ページ分Fetchするようにすれば高速化の余地あり
     func addPage(callback:(NSError?) ->()){
-        println("adding page")
+        
+        if _isAddingPage {
+            _isToAddPage = true
+            return
+        }
+
+        _isAddingPage = true
+        
         let frame = CGRectMake(0, 0, self.mainPageCollectionView.frame.size.width, self.mainPageCollectionView.frame.size.height - 64)
         let partialView = SummaryPartialView(frame: CGRectMake(0, 0, frame.size.width, frame.size.height))
         let mainPage = MainPageViewModel(view: partialView)
@@ -70,9 +90,21 @@ UICollectionViewDataSource, UICollectionViewDelegate, MainPageCollectionViewDele
                 println("lastSummaryID:\(lastSummaryID)")
             }
         }
-        mainPage.setSummaries(lastSummaryID, callback: { () -> () in
-            self._pages.append(mainPage)
-            callback(nil)
+        
+        mainPage.setSummaries(lastSummaryID, callback: {
+            [unowned self] (error:NSError?) -> () in
+            self._isAddingPage = false
+            // エラーがあったら再度取得を試みる
+            if let error = error {
+                self.addPage(callback)
+            }else{
+                self._pages.append(mainPage)
+                if self._isToAddPage {
+                    self._isToAddPage = false
+                    self.addPage(callback)
+                }
+                callback(nil)
+            }
         })
     }
     
@@ -123,7 +155,8 @@ UICollectionViewDataSource, UICollectionViewDelegate, MainPageCollectionViewDele
             println("page changed to \(page)")
             _page = page
             if _pages.count < page + kInitialLoadNum {
-                self.addPage({ (error) -> () in
+                self.addPage({
+                    [unowned self] (error) -> () in
                     self.mainPageCollectionView.reloadData()
                 })
             }

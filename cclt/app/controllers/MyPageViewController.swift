@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwifteriOS
 
 class MyPageViewController: AppViewController {
    
@@ -25,6 +26,23 @@ class MyPageViewController: AppViewController {
             // なければLoginModalViewの表示
             let loginView = LoginView(frame: self.view.frame)
             self.view.addSubview(loginView)
+            
+            let swifter = Swifter(consumerKey: "vo8yTUNiHAaNzniQ1tjWEzkkD", consumerSecret: "bsukuoOqZPMJ3XwqcUVRvtOdDdBsaslz3GlEnNg1AG270KqMdY")
+            
+            let callbackURL = NSURL(string: "cclt://auth/twitter")
+            
+            swifter.authorizeWithCallbackURL(callbackURL!, success: {
+                (accessToken: SwifterCredential.OAuthAccessToken?, response: NSURLResponse) in
+                
+                println(accessToken)
+                
+                },
+                failure: {
+                    (error: NSError) in
+                    
+                    println(error)
+                    
+            })
 
         }
         

@@ -13,6 +13,9 @@ class SummaryPartialView: UIView {
     let kPadding:CGFloat      = 6.0
     let kBannerPortion:CGFloat = 0.6
     
+    let kFooterHeight:CGFloat = 16.0
+    let kFooterMarginBottom:CGFloat = 4.0
+    
     func render(partial:SummaryPartialViewModel) {
         
         var imgFrame:CGRect   = CGRectZero
@@ -20,7 +23,7 @@ class SummaryPartialView: UIView {
         var url:NSURL?
         let summary = partial.summary!
         
-        self.layer.borderColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1.0).CGColor
+        self.layer.borderColor = Settings.Colors.borderLightColor
         self.layer.borderWidth = 0.5
         
         switch partial.positionType {
@@ -118,21 +121,46 @@ class SummaryPartialView: UIView {
             self.addSubview(imgView)
         }
         
-        titleFrame.origin.x += kPadding
-        titleFrame.origin.y += kPadding
-        titleFrame.size.width -= kPadding * 2
-        titleFrame.size.height -= kPadding * 2
-        let titleLabel = UILabel(frame: titleFrame)
-        titleLabel.font = UIFont.systemFontOfSize(15.0)
-        titleLabel.numberOfLines = 0
-        if partial.positionType != .TEXT_ONLY && countElements(summary.title) > 24 {
-            let startIndex = advance(summary.title.startIndex, 0)
-            let endIndex = advance(startIndex, 24)
-            titleLabel.text = summary.title[Range(start: startIndex, end: endIndex)] + "…"
-        } else {
-            titleLabel.text = summary.title
+        titleFrame = titleFrame.rectByInsetting(dx: kPadding, dy: kPadding)
+        titleFrame.size.height -= kFooterHeight + kFooterMarginBottom
+        
+        let footerView = UIView(frame: titleFrame)
+        footerView.frame.origin.y = self.frame.size.height - kFooterHeight - kFooterMarginBottom
+        footerView.frame.size.height = kFooterHeight
+        
+        let curatorLabel = UILabel(frame: CGRectZero)
+        curatorLabel.text = summary.curator.name
+        curatorLabel.textColor = Settings.Colors.curatorColor
+        curatorLabel.font = Settings.Fonts.minimumFont
+        curatorLabel.sizeToFit()
+        
+        let chocoLabel = UILabel(frame: CGRectZero)
+        chocoLabel.text = "\(summary.choco) choco"
+        chocoLabel.textColor = Settings.Colors.chocoColor
+        chocoLabel.font = Settings.Fonts.minimumFont
+        chocoLabel.sizeToFit()
+        chocoLabel.frame.origin.x = titleFrame.size.width - chocoLabel.frame.size.width
+        
+        if curatorLabel.frame.rectByOffsetting(dx: 4, dy: 0).intersects(chocoLabel.frame) {
+            titleFrame.size.height -= kFooterHeight
+            footerView.frame.origin.y -= kFooterHeight
+            footerView.frame.size.height += kFooterHeight
+            curatorLabel.frame.origin.x = titleFrame.size.width - curatorLabel.frame.size.width
+            chocoLabel.frame.origin.y += kFooterHeight
         }
+        
+        let titleLabel = UILabel(frame: titleFrame)
+        titleLabel.text = summary.title
+        titleLabel.textColor = Settings.Colors.textColor
+        titleLabel.font = Settings.Fonts.titleFont
+        titleLabel.numberOfLines = 0
+        titleLabel.fitToSize()
+        
+        footerView.addSubview(curatorLabel)
+        footerView.addSubview(chocoLabel)
+        
         self.addSubview(titleLabel)
+        self.addSubview(footerView)
         
         self.tag = summary.id
     }
