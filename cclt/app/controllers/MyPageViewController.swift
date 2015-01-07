@@ -17,7 +17,7 @@ class MyPageViewController: AppViewController {
         super.viewDidLoad()
         
         // アカウント情報があればログインして表示
-        if let curatorID = NSUserDefaults.standardUserDefaults().objectForKey("curator-uid"){
+        if let curatorID: AnyObject = NSUserDefaults.standardUserDefaults().objectForKey("curator-uid"){
         
             println(curatorID)
         

@@ -17,7 +17,9 @@ enum Settings {
         static let mediumFont  = UIFont.systemFontOfSize(14.0)
         static let largeFont   = UIFont.systemFontOfSize(15.0)
         
-        static let titleFont   = UIFont.boldSystemFontOfSize(14.0)
+        static let titleMinimumFont = UIFont.boldSystemFontOfSize(12.0)
+        static let titleSmallFont   = UIFont.boldSystemFontOfSize(13.0)
+        static let titleFont        = UIFont.boldSystemFontOfSize(14.0)
         
         static let headlineSmallFont  = UIFont.boldSystemFontOfSize(17.0)
         static let headlineMediumFont = UIFont.boldSystemFontOfSize(19.0)
@@ -42,7 +44,7 @@ enum Settings {
         static let linkColor = UIColor("#41b796", 1.0)  // リンク（chocoと一緒）
         static let quotationColor = UIColor("#464646", 1.0)  // 引用文
         
-        static let infoBackgroundColor = UIColor("#effbff", 0.7)  // 導入背景
+        static let infoBackgroundColor = UIColor("#effbff", 0.75)  // 導入背景
         
         static let headlineRedColor = UIColor("#ff0000", 1.0)
         static let headlineGreenColor = UIColor("#00ff00", 1.0)

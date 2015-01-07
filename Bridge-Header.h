@@ -9,6 +9,9 @@
 #ifndef cclt_Bridge_Header_h
 #define cclt_Bridge_Header_h
 
-#import <FacebookSDK/FacebookSDK.h>
+// #import <FacebookSDK/FacebookSDK.h>
+#import "GAI.h"
+#import "GAIDictionaryBuilder.h"
+#import "GAIFields.h"
 
 #endif

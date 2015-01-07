@@ -105,7 +105,7 @@ class ContentHeadline {
     
     let id: Int
     let text: String
-    let color: Color
+    let color: Color?
     let fontSize: FontSize
     
     required internal init(_ json:JSON){
@@ -114,8 +114,6 @@ class ContentHeadline {
         
         if let color = Color(rawValue: json["color"].stringValue){
             self.color = color
-        } else {
-            self.color = .Red
         }
         
         if let fontSize = FontSize(rawValue: json["fontSize"].stringValue){

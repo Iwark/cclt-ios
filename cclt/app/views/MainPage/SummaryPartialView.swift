@@ -154,7 +154,7 @@ class SummaryPartialView: UIView {
         titleLabel.textColor = Settings.Colors.textColor
         titleLabel.font = Settings.Fonts.titleFont
         titleLabel.numberOfLines = 0
-        titleLabel.fitToSize()
+        titleLabel.fitToSizeByReduction(minimumSize: Settings.Fonts.titleMinimumFont.pointSize)
         
         footerView.addSubview(curatorLabel)
         footerView.addSubview(chocoLabel)

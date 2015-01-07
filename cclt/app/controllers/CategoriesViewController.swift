@@ -14,6 +14,7 @@ class CategoriesViewController: AppViewController, CategoriesTableViewDelegate {
     
     let kSegueID = "CategoriesToSummaries"
     var paramSummaries:[Summary] = []
+    var _tappedName = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +29,8 @@ class CategoriesViewController: AppViewController, CategoriesTableViewDelegate {
             } else {
                 self.categoriesTableView.reloadData()
             }
-            self.stopLoading()
+            let interval = self.stopLoading()
+            self.trackTiming(loadTime: interval, name: "Categories fetch")
         })
         
         categoriesTableView.categoriesTableViewDelegate = self
@@ -40,8 +42,8 @@ class CategoriesViewController: AppViewController, CategoriesTableViewDelegate {
         self.navTitle = "カテゴリー"
     }
     
-    func categoryTapped(categoryID: Int) {
-        
+    func categoryTapped(categoryID: Int, _ categoryName: String) {
+        _tappedName = categoryName
         startLoading()
         SummaryViewModel.fetchSummaries(categoryID: categoryID, completionHandler:{
             [unowned self](summaries, error) -> () in
@@ -56,8 +58,8 @@ class CategoriesViewController: AppViewController, CategoriesTableViewDelegate {
         })
     }
     
-    func featureTapped(featureID: Int) {
-        
+    func featureTapped(featureID: Int, _ featureName: String) {
+        _tappedName = featureName
         startLoading()
         SummaryViewModel.fetchSummaries(featureID: featureID, completionHandler:{
             [unowned self](summaries, error) -> () in
@@ -77,6 +79,8 @@ class CategoriesViewController: AppViewController, CategoriesTableViewDelegate {
         
         let vc = segue.destinationViewController as SummariesViewController
         vc.summaries = self.paramSummaries
+        vc.navTitle = _tappedName
+        vc.screenName = "Category_\(_tappedName)"
         
     }
 

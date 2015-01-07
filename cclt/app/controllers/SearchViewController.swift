@@ -82,6 +82,7 @@ UISearchBarDelegate {
         let vc = segue.destinationViewController as SummariesViewController
         vc.summaries = _paramSummaries
         vc.navTitle = _paramSearchText
+        vc.screenName = "SearchResult_\(_paramSearchText)"
         
     }
 

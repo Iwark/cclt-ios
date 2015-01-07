@@ -32,13 +32,15 @@ class ContentHeadlineView: UIView {
         
         var lineColor = UIColor.clearColor()
         
-        switch content.color {
-        case .Red:
-            lineColor = Settings.Colors.headlineRedColor
-        case .Green:
-            lineColor = Settings.Colors.headlineGreenColor
-        case .Blue:
-            lineColor = Settings.Colors.headlineBlueColor
+        if let color = content.color {
+            switch color {
+            case .Red:
+                lineColor = Settings.Colors.headlineRedColor
+            case .Green:
+                lineColor = Settings.Colors.headlineGreenColor
+            case .Blue:
+                lineColor = Settings.Colors.headlineBlueColor
+            }
         }
         
         let titleLabel = UILabel(frame: CGRectMake(kMarginH, 0, width - kMarginH * 2, 0))

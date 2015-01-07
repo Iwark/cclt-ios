@@ -19,6 +19,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         JHProgressHUD.sharedHUD.backGroundColor = Settings.Colors.mainColor
         
+        GAI.sharedInstance().trackUncaughtExceptions = true
+        GAI.sharedInstance().dispatchInterval = 20
+        GAI.sharedInstance().logger.logLevel = .Verbose
+        GAI.sharedInstance().trackerWithTrackingId("UA-54309504-1")
+        
         return true
     }
 

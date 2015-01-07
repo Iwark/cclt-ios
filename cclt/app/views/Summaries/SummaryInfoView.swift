@@ -78,6 +78,7 @@ class SummaryInfoView: UIView {
         label.font = Settings.Fonts.titleFont
         label.text = text
         label.numberOfLines = 0
+        label.fitToSizeByReduction()
         
         return label
     }
