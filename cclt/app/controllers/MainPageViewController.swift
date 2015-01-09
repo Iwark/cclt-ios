@@ -62,7 +62,7 @@ UICollectionViewDataSource, UICollectionViewDelegate, MainPageCollectionViewDele
                     }
                     
                     let interval = self.stopLoading()
-                    self.trackTiming(loadTime: interval, name: "MainPage First Loading")
+//                    self.trackTiming(loadTime: interval, name: "MainPage First Loading")
                     
                 })
             }
@@ -103,6 +103,7 @@ UICollectionViewDataSource, UICollectionViewDelegate, MainPageCollectionViewDele
             [unowned self] (error:NSError?) -> () in
             self._isAddingPage = false
             // エラーがあったら再度取得を試みる
+            // TODO: 1秒ぐらい待つべき
             if let error = error {
                 self.addPage(callback)
             }else{

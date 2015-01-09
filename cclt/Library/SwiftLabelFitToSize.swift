@@ -62,7 +62,7 @@ extension UILabel {
         let fontName = self.font.fontName
         var fontSize = self.font.pointSize
         
-        while(fitArea > selfArea && fontSize > minimumSize) {
+        while((fitArea > selfArea || self.frame.size.height < fitSize.height) && fontSize > minimumSize) {
             
             fontSize -= step
             if fontSize < minimumSize {

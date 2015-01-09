@@ -42,11 +42,20 @@ class SummaryDescriptionView: UIScrollView {
             
             
             // メイン画像
-            let mainImgView = UIImageView(frame: CGRectMake(0, 0, width, width))
-            SwiftImageLoader.sharedLoader.imageForUrl(summary.image_url, completionHandler:{(image: UIImage?, url: String) in
-                mainImgView.image = image
-            })
+            let mainImgView = DefaultImageView(frame: CGRectMake(0, 0, width, width))
+            
+            if let imageUrl = NSURL(string: summary.image_url) {
+                mainImgView.startLoading()
+                mainImgView.load(imageUrl, placeholder: nil){
+                    [unowned mainImgView] (url, image, error) in
+                    if let image = image {
+                        mainImgView.image = image
+                        mainImgView.stopLoading()
+                    }
+                }
+            }
             self.addSubview(mainImgView)
+            
             infoHeight += mainImgView.frame.size.height
             
             // 画像の上に乗っけるタイトルやカテゴリー等

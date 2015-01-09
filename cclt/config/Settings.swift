@@ -10,6 +10,10 @@ import UIKit
 
 enum Settings {
     
+    static let maxHistorySearchWords = 30
+    
+    static let loadingGif = UIImage(named: "loading")
+    
     // フォント
     enum Fonts {
         static let minimumFont = UIFont.systemFontOfSize(11.0)

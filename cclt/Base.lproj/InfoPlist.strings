@@ -1,0 +1,9 @@
+/* 
+  InfoPlist.strings
+  cclt
+
+  Created by Kohei Iwasaki on 1/8/15.
+  Copyright (c) 2015 Donuts. All rights reserved.
+*/
+
+"CFBundleDisplayName" = "Chocolat";

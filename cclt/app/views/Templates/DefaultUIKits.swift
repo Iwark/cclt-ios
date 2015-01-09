@@ -24,3 +24,29 @@ class DefaultTextLabel: UILabel {
     }
     
 }
+
+class DefaultImageView: UIImageView {
+    
+    let indicator = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        self.contentMode = UIViewContentMode.ScaleAspectFill
+    }
+    
+    func startLoading() {
+        indicator.startAnimating()
+        indicator.center = self.center
+        self.addSubview(indicator)
+    }
+    
+    func stopLoading() {
+        indicator.removeFromSuperview()
+    }
+    
+    required init(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+}

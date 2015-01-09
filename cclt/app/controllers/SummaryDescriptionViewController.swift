@@ -39,14 +39,6 @@ class SummaryDescriptionViewController: AppViewController {
             sdv.render()
             self.view.addSubview(sdv)
         }
-        
-//        // 戻るボタン
-//        self.navigationItem.leftBarButtonItem = BackBarButtonItem(delegate: self)
-//        
-//        // 戻るジェスチャー
-//        let swipeRightGesture = UISwipeGestureRecognizer(target:self, action:Selector("pop"))
-//        swipeRightGesture.direction = .Right
-//        self.view.addGestureRecognizer(swipeRightGesture)
     }
     
 }

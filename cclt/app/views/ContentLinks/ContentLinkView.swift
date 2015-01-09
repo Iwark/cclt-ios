@@ -10,7 +10,7 @@ import UIKit
 
 class ContentLinkView: UIView {
 
-    let imgView:UIImageView?
+    let imgView:DefaultImageView?
     let titleLabel:UILabel?
     let descriptionView:ContentsDescriptionView?
 
@@ -27,30 +27,36 @@ class ContentLinkView: UIView {
         var imgHeight:CGFloat = 0
         
         if content.image_url != "" {
-            self.imgView = UIImageView(frame: CGRectMake(kImgMarginLeft, 0, width * kImgWidthPortion, width * kImgWidthPortion))
+            self.imgView = DefaultImageView(frame: CGRectMake(kImgMarginLeft, 0, width * kImgWidthPortion, width * kImgWidthPortion))
             self.imgView!.layer.borderWidth = kImgBorderWidth
             self.imgView!.layer.borderColor = Settings.Colors.linkColor.CGColor
             self.imgView!.contentMode = UIViewContentMode.ScaleAspectFill
             imgHeight = imgView!.frame.size.height
             
-            SwiftImageLoader.sharedLoader.imageForUrl(content.image_url, completionHandler:{
-                [unowned self] (image: UIImage?, url: String) in
-                if let image = image {
-                    self.imgView!.image = image
-                    let oldHeight = self.imgView!.frame.size.height
-                    let newHeight = (self.imgView!.frame.size.width / image.size.width) * image.size.height
-                    self.imgView!.frame.size.height = newHeight
-                    self.frame.size.height += (newHeight - oldHeight)
-                    self.titleLabel!.frame.origin.y += (newHeight - oldHeight)
-                    self.descriptionView!.frame.origin.y += (newHeight - oldHeight)
-                } else {
-                    // TODO: 画像が見つからなかった時のデフォルト画像があればここで表示する。
+            if let imageUrl = NSURL(string: content.image_url) {
+                
+                self.imgView!.startLoading()
+                self.imgView!.load(imageUrl, placeholder: nil){
+                    [unowned self] (url, image, error) in
+                    
+                    if let image = image {
+                        self.imgView!.image = image
+                        let oldHeight = self.imgView!.frame.size.height
+                        let newHeight = (self.imgView!.frame.size.width / image.size.width) * image.size.height
+                        self.imgView!.frame.size.height = newHeight
+                        self.frame.size.height += (newHeight - oldHeight)
+                        self.titleLabel!.frame.origin.y += (newHeight - oldHeight)
+                        self.descriptionView!.frame.origin.y += (newHeight - oldHeight)
+                        
+                        self.imgView!.stopLoading()
+                        
+                    }
+                    completion()
+                    
                 }
-                completion()
-            })
+            }
             self.addSubview(imgView!)
 
-            
         }
         
         self.descriptionView = ContentsDescriptionView(width: width, description: content.text)

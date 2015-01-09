@@ -17,11 +17,15 @@ SummariesTableViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         summariesTableView.summariesTableViewDelegate = self
         summariesTableView.summaries = summaries
         summariesTableView.reloadData()
         
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
     }
 
     override func didReceiveMemoryWarning() {
