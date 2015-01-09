@@ -13,3 +13,18 @@
 [submodule "Vendor/swift-async"]
 	path = Vendor/swift-async
 	url = git@github.com:OliverLetterer/swift-async.git
+[submodule "Swifter"]
+	path = Swifter
+	url = https://github.com/mattdonnelly/Swifter.git
+[submodule "Vendor/Swifter"]
+	path = Vendor/Swifter
+	url = https://github.com/mattdonnelly/Swifter.git
+[submodule "Vendor/JHProgressHUD"]
+	path = Vendor/JHProgressHUD
+	url = git@github.com:harikrishnant1991/JHProgressHUD.git
+[submodule "Vendor/GoogleAnalytics"]
+	path = Vendor/GoogleAnalytics
+	url = git@github.com:danielctull-forks/GoogleAnalytics-SDK-iOS.git
+[submodule "Vendor/ImageLoaderSwift"]
+	path = Vendor/ImageLoaderSwift
+	url = git@github.com:hirohisa/ImageLoaderSwift.git

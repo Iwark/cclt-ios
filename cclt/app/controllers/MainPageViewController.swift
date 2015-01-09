@@ -16,11 +16,22 @@ UICollectionViewDataSource, UICollectionViewDelegate, MainPageCollectionViewDele
     let kCellID = "SummaryPartialViewCell"
     let kCellNib = UINib(nibName: "SummaryPartialViewCell", bundle: nil)
     
-    let kInitialLoadNum = 2  // 最初に読み込むページの数
+    let kInitialLoadNum = 3  // 最初に読み込むページの数
     
     var _page = 0
+    var page:Int {
+        get { return _page }
+        set {
+            _page = newValue
+            self.screenName = "Topix_page_\(newValue + 1)"
+            self.trackScreen()
+        }
+    }
+    
     var _pages:[MainPageViewModel] = []
-//    var _tappedView:UIView?
+
+    var _isAddingPage = false  // 次のページを読み込み中かどうか
+    var _isToAddPage  = false  // 次のページの読み込み予約
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +43,7 @@ UICollectionViewDataSource, UICollectionViewDelegate, MainPageCollectionViewDele
         mainPageCollectionView.registerNib(kCellNib, forCellWithReuseIdentifier: kCellID)
         
         // カテゴリ取得後、ページを読み込む
+        startLoading()
         CategoryViewModel.fetchAll { (error) -> Void in
             if let error = error {
                 println("category fetch error:\(error)")
@@ -40,12 +52,18 @@ UICollectionViewDataSource, UICollectionViewDelegate, MainPageCollectionViewDele
                 for i in 0..<self.kInitialLoadNum {
                     tasks.append(self.addPage)
                 }
-                Async.series(tasks, completionHandler: { (error) -> () in
+                Async.series(tasks, completionHandler: {
+                    [unowned self] (error) -> () in
+                    
                     if let error = error {
                         println("error:\(error)")
                     }else{
                         self.mainPageCollectionView.reloadData()
                     }
+                    
+                    let interval = self.stopLoading()
+//                    self.trackTiming(loadTime: interval, name: "MainPage First Loading")
+                    
                 })
             }
         }
@@ -54,10 +72,20 @@ UICollectionViewDataSource, UICollectionViewDelegate, MainPageCollectionViewDele
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.navTitle = "トピックス"
+        self.screenName = "Topix_page_\(self.page + 1)"
     }
     
+    // 1度に2ページ分Fetchするようにすれば高速化の余地あり
     func addPage(callback:(NSError?) ->()){
-        println("adding page")
+        
+        if _isAddingPage {
+            _isToAddPage = true
+            return
+        }
+
+        _isAddingPage = true
+        startLoading(onlyTiming: true)
+        
         let frame = CGRectMake(0, 0, self.mainPageCollectionView.frame.size.width, self.mainPageCollectionView.frame.size.height - 64)
         let partialView = SummaryPartialView(frame: CGRectMake(0, 0, frame.size.width, frame.size.height))
         let mainPage = MainPageViewModel(view: partialView)
@@ -70,9 +98,24 @@ UICollectionViewDataSource, UICollectionViewDelegate, MainPageCollectionViewDele
                 println("lastSummaryID:\(lastSummaryID)")
             }
         }
-        mainPage.setSummaries(lastSummaryID, callback: { () -> () in
-            self._pages.append(mainPage)
-            callback(nil)
+        
+        mainPage.setSummaries(lastSummaryID, callback: {
+            [unowned self] (error:NSError?) -> () in
+            self._isAddingPage = false
+            // エラーがあったら再度取得を試みる
+            // TODO: 1秒ぐらい待つべき
+            if let error = error {
+                self.addPage(callback)
+            }else{
+                self._pages.append(mainPage)
+                if self._isToAddPage {
+                    self._isToAddPage = false
+                    self.addPage(callback)
+                }
+                callback(nil)
+                let interval = self.stopLoading()
+                self.trackTiming(loadTime: interval, name: "AddingPage")
+            }
         })
     }
     
@@ -119,11 +162,12 @@ UICollectionViewDataSource, UICollectionViewDelegate, MainPageCollectionViewDele
         let pageWidth = scrollView.frame.size.width
         let fractionalPage = Float(scrollView.contentOffset.x / pageWidth)
         let page = lroundf(fractionalPage)
-        if _page != page {
-            println("page changed to \(page)")
-            _page = page
+        if self.page != page {
+            
+            self.page = page
             if _pages.count < page + kInitialLoadNum {
-                self.addPage({ (error) -> () in
+                self.addPage({
+                    [unowned self] (error) -> () in
                     self.mainPageCollectionView.reloadData()
                 })
             }
@@ -150,6 +194,7 @@ UICollectionViewDataSource, UICollectionViewDelegate, MainPageCollectionViewDele
     }
     
     override func didReceiveMemoryWarning() {
+        println("received memory warning.")
         super.didReceiveMemoryWarning()
     }
 

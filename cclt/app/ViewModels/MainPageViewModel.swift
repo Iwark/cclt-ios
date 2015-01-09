@@ -24,8 +24,9 @@ class MainPageViewModel {
                 }
             }
             
+            // TODO: errorの場合の処理
             if !validateViews(partialViews) {
-                println("error!")
+                println("views validation error.")
             }
             else {
                 println("validation finished.")
@@ -35,7 +36,7 @@ class MainPageViewModel {
         }
     }
     
-    func setSummaries(lastSummaryID:Int, callback:()->()) {
+    func setSummaries(lastSummaryID:Int, callback:(NSError?)->()) {
         SummaryViewModel.fetchSummaries(lastSummaryID:lastSummaryID, num: self.partials.count,
             { [unowned self] (summaries, error) -> () in
                 if let summaries = summaries {
@@ -49,9 +50,10 @@ class MainPageViewModel {
                         }
                     }
                     println("added new page. summaries:\(summaries)")
-                    callback()
+                    callback(nil)
                 }else{
                     println("get summaries failed...:\(error)")
+                    callback(error)
                 }
         })
     }

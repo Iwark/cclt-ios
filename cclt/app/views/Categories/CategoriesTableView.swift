@@ -9,8 +9,8 @@
 import UIKit
 
 protocol CategoriesTableViewDelegate:class {
-    func categoryTapped(categoryID:Int)
-    func featureTapped(featureID:Int)
+    func categoryTapped(categoryID:Int, _ categoryName:String)
+    func featureTapped(featureID:Int, _ featureName:String)
 }
 
 class CategoriesTableView: UITableView,
@@ -76,11 +76,11 @@ UITableViewDataSource, UITableViewDelegate {
             
             if let categoryID = cell.categoryID {
                 
-                self.categoriesTableViewDelegate?.categoryTapped(categoryID)
+                self.categoriesTableViewDelegate?.categoryTapped(categoryID, cell.titleLabel.text!)
                 
             }else if let featureID = cell.featureID {
                 
-                self.categoriesTableViewDelegate?.featureTapped(featureID)
+                self.categoriesTableViewDelegate?.featureTapped(featureID, cell.titleLabel.text!)
                 
             }
         }

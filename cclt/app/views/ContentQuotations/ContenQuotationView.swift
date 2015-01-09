@@ -14,8 +14,6 @@ class ContentQuotationView: UIView {
     let kQuotationIconMarginLeft:CGFloat = 10
     let kQuotationIconWidth:CGFloat = 12
     let kTextMarginH:CGFloat = 10
-    
-    let kTextFontColor = UIColor("#464646", 1.0)
 
     init(width: CGFloat, content: ContentQuotation){
         super.init()
@@ -30,9 +28,9 @@ class ContentQuotationView: UIView {
         let textView = UILabel(frame: CGRectMake(textX, 0, width - textX - kTextMarginH, 0))
         textView.text = content.text
         textView.numberOfLines = 0
-        textView.font = UIFont.systemFontOfSize(kDefaultFontSize)
+        textView.font = Settings.Fonts.mediumFont
         textView.sizeToFit()
-        textView.textColor = kTextFontColor
+        textView.textColor = Settings.Colors.quotationColor
         self.addSubview(textView)
         
         self.frame = CGRectMake(0, 0, width, textView.frame.size.height)

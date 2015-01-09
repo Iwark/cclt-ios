@@ -49,34 +49,6 @@ extension SummaryViewModel {
     }
     
     /**
-    Search summaries from API Server.
-    
-    :param: completionHandler The completion handler.
-    
-    */
-    class func searchSummaries(q:String, page:Int, completionHandler: ([Summary]?, NSError?) -> ()) {
-        
-        Alamofire.request(CcltRoute.SearchSummaries(q, page)).response {
-            (request, response, data, error) in
-            
-            if response == nil || response!.statusCode != 200 || error != nil {
-                completionHandler(nil, error)
-                return
-            }
-            
-            if let json = data as? NSData {
-                let results = JSON(data: json)
-                var summaries:[Summary] = []
-                for result:JSON in results.array! {
-                    summaries.append(Summary(json:result))
-                }
-                Summary.merge(summaries)
-                completionHandler(summaries, nil)
-            }
-        }
-    }
-    
-    /**
     Fetch summary from Local || API Server.
     
     :param: id The ID of summary.

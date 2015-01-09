@@ -14,16 +14,16 @@ class SummaryDescriptionView: UIScrollView {
     
     let kDescPaddingH:CGFloat    = 10.0
     let kDescPaddingV:CGFloat    = 5.0
-    let kDescFontSize:CGFloat    = 13.0
     let kContentsMarginV:CGFloat = 10.0
     
     var contentViews:[UIView] = []
-    var contentHeight:CGFloat = 0
+    var infoHeight:CGFloat = 0
+    var contentsHeight:CGFloat = 0
     
     init(summary: Summary) {
         super.init()
         self.summary = summary
-        self.backgroundColor = UIColor("#ecfbff", 1.0)
+        self.backgroundColor = Settings.Colors.backgroundColor
     }
     
     required init(coder aDecoder: NSCoder) {
@@ -42,12 +42,21 @@ class SummaryDescriptionView: UIScrollView {
             
             
             // メイン画像
-            let mainImgView = UIImageView(frame: CGRectMake(0, 0, width, width))
-            SwiftImageLoader.sharedLoader.imageForUrl(summary.image_url, completionHandler:{(image: UIImage?, url: String) in
-                mainImgView.image = image
-            })
+            let mainImgView = DefaultImageView(frame: CGRectMake(0, 0, width, width))
+            
+            if let imageUrl = NSURL(string: summary.image_url) {
+                mainImgView.startLoading()
+                mainImgView.load(imageUrl, placeholder: nil){
+                    [unowned mainImgView] (url, image, error) in
+                    if let image = image {
+                        mainImgView.image = image
+                        mainImgView.stopLoading()
+                    }
+                }
+            }
             self.addSubview(mainImgView)
-            contentHeight += mainImgView.frame.size.height
+            
+            infoHeight += mainImgView.frame.size.height
             
             // 画像の上に乗っけるタイトルやカテゴリー等
             let infoView = SummaryInfoView(summary: summary, width: width)
@@ -55,24 +64,19 @@ class SummaryDescriptionView: UIScrollView {
             self.addSubview(infoView)
             
             // 冒頭文
-            let descLabel = UILabel(frame: CGRectMake(kDescPaddingH, contentHeight+kDescPaddingV, width - kDescPaddingH * 2, 0))
+            let descLabel = UILabel(frame: CGRectMake(kDescPaddingH, infoHeight+kDescPaddingV, width - kDescPaddingH * 2, 0))
             descLabel.numberOfLines = 0
             descLabel.text = summary.description
-            descLabel.font = UIFont.systemFontOfSize(kDescFontSize)
+            descLabel.font = Settings.Fonts.smallFont
             descLabel.sizeToFit()
             self.addSubview(descLabel)
-            contentHeight += descLabel.frame.size.height + kDescPaddingV * 2
+            infoHeight += descLabel.frame.size.height + kDescPaddingV * 2
             
             let contentsNum = summary.contents.count
             var doneContentsNum = 0
             
             func completionHandler(){
-                doneContentsNum += 1
-                
-                if contentsNum == doneContentsNum {
-                    renderingCompleted()
-                }
-                
+                layout()
             }
             
             // コンテンツ
@@ -108,31 +112,34 @@ class SummaryDescriptionView: UIScrollView {
                     
                     if let view = view {
                         contentViews.append(view)
+                        self.addSubview(view)
                     }
                     
                 }
                 
             }
             
+            layout()
+
             // コンテンツのサイズ決定
-            self.contentSize = CGSizeMake(width, contentHeight)
-            
-            if contentsNum == doneContentsNum {
-                renderingCompleted()
-            }
+//            self.contentSize = CGSizeMake(width, infoHeight)
+//            
+//            if contentsNum == doneContentsNum {
+//                layout()
+//            }
             
         }
         
     }
     
-    func renderingCompleted(){
+    func layout(){
+        contentsHeight = 0
         for view in contentViews {
-            contentHeight += kContentsMarginV
-            view.frame.origin.y += contentHeight
-            contentHeight += view.frame.size.height
-            self.addSubview(view)
+            contentsHeight += kContentsMarginV
+            view.frame.origin.y = infoHeight + contentsHeight
+            contentsHeight += view.frame.size.height
         }
-        self.contentSize.height = contentHeight
+        self.contentSize.height = infoHeight + contentsHeight
     }
 
 }

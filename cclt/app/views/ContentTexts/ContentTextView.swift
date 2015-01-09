@@ -18,7 +18,7 @@ class ContentTextView: UIView {
         let textLabel = UILabel(frame: CGRectMake(kTextPaddingH, 0, width - kTextPaddingH*2, 0))
         textLabel.numberOfLines = 0
         textLabel.text = content.text
-        textLabel.font = UIFont.systemFontOfSize(kDefaultFontSize)
+        textLabel.font = Settings.Fonts.mediumFont
         textLabel.sizeToFit()
         self.addSubview(textLabel)
         

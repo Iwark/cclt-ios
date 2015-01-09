@@ -10,16 +10,6 @@ import UIKit
 
 class ContentHeadlineView: UIView {
     
-    let kSmallFontSize:CGFloat = 17
-    let kMediumFontSize:CGFloat = 19
-    let kLargeFontSize:CGFloat = 21
-    
-    let kRedColor = "#ff0000"
-    let kGreenColor = "#00ff00"
-    let kBlueColor = "#0000ff"
-    
-    let kTitleColor = UIColor("#232323", 1.0)
-    
     let kMarginTop:CGFloat = 5
     let kMarginH: CGFloat = 10
     let kLineMarginTop:CGFloat = 2
@@ -29,38 +19,40 @@ class ContentHeadlineView: UIView {
     init(width: CGFloat, content: ContentHeadline){
         super.init()
         
-        var fontSize = kMediumFontSize
+        var font = Settings.Fonts.headlineMediumFont
         
         switch content.fontSize {
         case .Small:
-            fontSize = kSmallFontSize
+            font = Settings.Fonts.headlineSmallFont
         case .Medium:
-            fontSize = kMediumFontSize
+            font = Settings.Fonts.headlineMediumFont
         case .Large:
-            fontSize = kLargeFontSize
+            font = Settings.Fonts.headlineLargeFont
         }
         
-        var lineColor = kRedColor
+        var lineColor = UIColor.clearColor()
         
-        switch content.color {
-        case .Red:
-            lineColor = kRedColor
-        case .Green:
-            lineColor = kGreenColor
-        case .Blue:
-            lineColor = kBlueColor
+        if let color = content.color {
+            switch color {
+            case .Red:
+                lineColor = Settings.Colors.headlineRedColor
+            case .Green:
+                lineColor = Settings.Colors.headlineGreenColor
+            case .Blue:
+                lineColor = Settings.Colors.headlineBlueColor
+            }
         }
         
         let titleLabel = UILabel(frame: CGRectMake(kMarginH, 0, width - kMarginH * 2, 0))
         titleLabel.text = content.text
         titleLabel.numberOfLines = 0
-        titleLabel.font = UIFont.boldSystemFontOfSize(fontSize)
-        titleLabel.textColor = kTitleColor
+        titleLabel.font = font
+        titleLabel.textColor = Settings.Colors.textColor
         titleLabel.sizeToFit()
         self.addSubview(titleLabel)
         
         let line = UIView(frame: CGRectMake(kMarginH, titleLabel.frame.size.height + kLineMarginTop, width - kMarginH*2, kLineHeight))
-        line.backgroundColor = UIColor(lineColor, 1.0)
+        line.backgroundColor = lineColor
         self.addSubview(line)
         
         self.frame = CGRectMake(0, kMarginTop, width, line.frame.origin.y + line.frame.size.height + kMarginBottom)

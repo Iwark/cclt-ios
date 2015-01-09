@@ -18,13 +18,8 @@ class SummaryInfoView: UIView {
     let kCategoryImgWidth:CGFloat = 30
     let kCategoryImgHeight:CGFloat = 36
     let kNameLabelHeight:CGFloat = 30
-    let kNameLabelFontSize:CGFloat = 11
     let kNameLabelPadding:CGFloat = 3
     
-    let kTitleLabelFontSize:CGFloat = 13
-    
-    let kCuratorLabelFontSize:CGFloat = 12
-    let kChocoFontSize:CGFloat = 12
     let kChocoWidth:CGFloat = 80
     
     let kFooterHeight:CGFloat = 18
@@ -36,7 +31,7 @@ class SummaryInfoView: UIView {
         self.frame = CGRectMake(0, 0, width, kInfoHeight)
         
         let bgView = UIView(frame: self.frame)
-        bgView.backgroundColor = UIColor("#ffffff", 0.7)
+        bgView.backgroundColor = Settings.Colors.infoBackgroundColor
         
         self.addSubview(bgView)
 
@@ -68,9 +63,9 @@ class SummaryInfoView: UIView {
         let nameLabel = UILabel(frame: CGRectMake(kNameLabelPadding, kInfoHeight - kNameLabelHeight - kInfoPadding, kCategoryWidth - kNameLabelPadding * 2, kNameLabelHeight))
         nameLabel.numberOfLines = 0
         nameLabel.text = category.name
-        nameLabel.textColor = kDefaultLinkColor
+        nameLabel.textColor = Settings.Colors.linkColor
         nameLabel.textAlignment = .Center
-        nameLabel.font = UIFont.systemFontOfSize(kNameLabelFontSize)
+        nameLabel.font = Settings.Fonts.minimumFont
         view.addSubview(nameLabel)
         
         return view
@@ -79,9 +74,11 @@ class SummaryInfoView: UIView {
     func createTitleLabel(text: String) -> UILabel{
         
         let label = UILabel(frame: CGRectMake(kCategoryWidth + kInfoPadding * 2, 0, self.frame.size.width - kCategoryWidth - kInfoPadding * 3, kInfoHeight - kFooterHeight))
-        label.font = UIFont.systemFontOfSize(kTitleLabelFontSize)
+        label.textColor = Settings.Colors.textColor
+        label.font = Settings.Fonts.titleFont
         label.text = text
         label.numberOfLines = 0
+        label.fitToSizeByReduction()
         
         return label
     }
@@ -90,7 +87,7 @@ class SummaryInfoView: UIView {
         
         let label = UILabel(frame: CGRectMake(kCategoryWidth + kInfoPadding * 2, kInfoHeight - kFooterHeight, self.frame.size.width - kCategoryWidth - kInfoPadding * 2 - kChocoWidth , kFooterHeight - kFooterMarginBottom))
         label.text = name
-        label.font = UIFont.systemFontOfSize(kCuratorLabelFontSize)
+        label.font = Settings.Fonts.smallFont
         
         return label
     }
@@ -99,9 +96,8 @@ class SummaryInfoView: UIView {
         
         let label = UILabel(frame: CGRectMake(self.frame.size.width - kChocoWidth, kInfoHeight - kFooterHeight, self.frame.size.width - kCategoryWidth - kInfoPadding * 3 , kFooterHeight - kFooterMarginBottom))
         label.text = "\(choco) choco"
-        label.font = UIFont.systemFontOfSize(kChocoFontSize)
-        label.textColor = kDefaultLinkColor
-        
+        label.font = Settings.Fonts.smallFont
+        label.textColor = Settings.Colors.chocoColor
         return label
     }
 

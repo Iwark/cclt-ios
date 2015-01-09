@@ -16,6 +16,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
+        JHProgressHUD.sharedHUD.backGroundColor = Settings.Colors.mainColor
+        
+        GAI.sharedInstance().trackUncaughtExceptions = true
+        GAI.sharedInstance().dispatchInterval = 20
+        GAI.sharedInstance().logger.logLevel = .Verbose
+        GAI.sharedInstance().trackerWithTrackingId("UA-54309504-1")
+        
         return true
     }
 

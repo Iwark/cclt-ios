@@ -27,7 +27,7 @@ class ContentCommodityView: UIView {
         self.titleLabel = UILabel(frame: CGRectMake(kTitleMarginH, 0, width - kTitleMarginH * 2, 0))
         self.titleLabel!.text = content.text
         self.titleLabel!.numberOfLines = 0
-        self.titleLabel!.textColor = kDefaultLinkColor
+        self.titleLabel!.textColor = Settings.Colors.linkColor
         self.titleLabel!.sizeToFit()
         self.addSubview(titleLabel!)
         
@@ -36,7 +36,7 @@ class ContentCommodityView: UIView {
         if content.imageURL != "" {
             self.imgView = UIImageView(frame: CGRectMake(kImgMarginLeft, self.titleLabel!.frame.size.height, width * kImgWidthPortion, width * kImgWidthPortion))
             self.imgView!.layer.borderWidth = kImgBorderWidth
-            self.imgView!.layer.borderColor = kDefaultLinkColor.CGColor
+            self.imgView!.layer.borderColor = Settings.Colors.linkColor.CGColor
             self.imgView!.contentMode = UIViewContentMode.ScaleAspectFill
             imgHeight = imgView!.frame.size.height
             
@@ -63,7 +63,7 @@ class ContentCommodityView: UIView {
         self.priceLabel = UILabel(frame: CGRectMake(kTitleMarginH, self.titleLabel!.frame.size.height + imgHeight, width - kTitleMarginH * 2, 0))
         self.priceLabel!.text = "¥\(content.price)"
         self.priceLabel!.numberOfLines = 0
-        self.priceLabel!.textColor = kDefaultLinkColor
+        self.priceLabel!.textColor = Settings.Colors.linkColor
         self.priceLabel!.sizeToFit()
         self.addSubview(priceLabel!)
         

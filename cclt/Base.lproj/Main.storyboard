@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="CAM-J9-YQX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="CAM-J9-YQX">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <scenes>
         <!--Item 2-->
@@ -56,19 +55,21 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="YIQ-jb-a6s" customClass="SummariesTableView" customModule="cclt">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
+                                <rect key="frame" x="0.0" y="64" width="600" height="487"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="ZGl-g8-a4f" firstAttribute="top" secondItem="YIQ-jb-a6s" secondAttribute="bottom" id="7FG-iZ-R2P"/>
                             <constraint firstItem="YIQ-jb-a6s" firstAttribute="leading" secondItem="JgU-NP-Bhc" secondAttribute="leading" id="8Ia-TC-gE6"/>
                             <constraint firstAttribute="trailing" secondItem="YIQ-jb-a6s" secondAttribute="trailing" id="DKr-8i-Atz"/>
-                            <constraint firstItem="ZGl-g8-a4f" firstAttribute="top" secondItem="YIQ-jb-a6s" secondAttribute="bottom" id="gKq-Ko-tzt"/>
-                            <constraint firstItem="YIQ-jb-a6s" firstAttribute="top" secondItem="JgU-NP-Bhc" secondAttribute="topMargin" id="qaw-8f-yXx"/>
+                            <constraint firstItem="YIQ-jb-a6s" firstAttribute="top" secondItem="vBQ-pB-epP" secondAttribute="top" id="Q4T-D8-KB8"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" top="YES"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
                     <connections>
                         <outlet property="summariesTableView" destination="YIQ-jb-a6s" id="8zE-KO-kG8"/>
                     </connections>
@@ -131,12 +132,12 @@
             </objects>
             <point key="canvasLocation" x="559" y="229.5"/>
         </scene>
-        <!--Item-->
+        <!--トピックス-->
         <scene sceneID="0XU-NM-8y2">
             <objects>
                 <navigationController id="KCM-FZ-TfV" sceneMemberID="viewController">
                     <extendedEdge key="edgesForExtendedLayout" top="YES"/>
-                    <tabBarItem key="tabBarItem" title="Item" id="Xa6-bd-1JD"/>
+                    <tabBarItem key="tabBarItem" tag="1" title="トピックス" image="topics.png" selectedImage="topics_g.png" id="Xa6-bd-1JD"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="z62-2Q-bQ7">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -164,7 +165,6 @@
                         <segue destination="KCM-FZ-TfV" kind="relationship" relationship="viewControllers" id="Ry8-bp-m1i"/>
                         <segue destination="d9x-JE-xl1" kind="relationship" relationship="viewControllers" id="Va5-pw-xdW"/>
                         <segue destination="bsk-ZV-fdg" kind="relationship" relationship="viewControllers" id="f2Z-Ke-cgf"/>
-                        <segue destination="rbG-ga-22f" kind="relationship" relationship="viewControllers" id="ErT-z2-ehe"/>
                         <segue destination="Ojg-OC-UAV" kind="relationship" relationship="viewControllers" id="FeA-BJ-Txt"/>
                     </connections>
                 </tabBarController>
@@ -172,12 +172,12 @@
             </objects>
             <point key="canvasLocation" x="-892" y="553"/>
         </scene>
-        <!--Item-->
+        <!--カテゴリ-->
         <scene sceneID="lIC-it-Gvz">
             <objects>
                 <navigationController id="d9x-JE-xl1" sceneMemberID="viewController">
                     <extendedEdge key="edgesForExtendedLayout" top="YES"/>
-                    <tabBarItem key="tabBarItem" title="Item" id="z4T-VG-Cnh"/>
+                    <tabBarItem key="tabBarItem" tag="2" title="カテゴリ" id="z4T-VG-Cnh"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="0hO-Ld-oOF">
@@ -192,12 +192,12 @@
             </objects>
             <point key="canvasLocation" x="-133" y="895.5"/>
         </scene>
-        <!--Item-->
+        <!--検索-->
         <scene sceneID="1Iz-l4-qfK">
             <objects>
                 <navigationController id="bsk-ZV-fdg" sceneMemberID="viewController">
                     <extendedEdge key="edgesForExtendedLayout" top="YES"/>
-                    <tabBarItem key="tabBarItem" title="Item" id="4f5-z3-YP4"/>
+                    <tabBarItem key="tabBarItem" tag="3" title="検索" id="4f5-z3-YP4"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="lXM-Sh-yn7">
@@ -224,22 +224,44 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y2t-1o-nwQ" customClass="SearchScrollView" customModule="cclt">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jcc-wL-6Au" customClass="TopTabBar" customModule="cclt">
+                                <rect key="frame" x="0.0" y="64" width="600" height="44"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="ZeN-1z-Dv1"/>
+                                </constraints>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Agu-ui-9eL" customClass="SearchTableView" customModule="cclt">
                                 <rect key="frame" x="0.0" y="64" width="600" height="487"/>
-                            </scrollView>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchTableViewCell" id="mXi-IF-sUN">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mXi-IF-sUN" id="FCi-jG-rTg">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="y2t-1o-nwQ" secondAttribute="bottom" id="R48-LL-odW"/>
-                            <constraint firstItem="y2t-1o-nwQ" firstAttribute="top" secondItem="oMK-Fu-43t" secondAttribute="bottom" id="XHF-Wp-ShG"/>
-                            <constraint firstItem="y2t-1o-nwQ" firstAttribute="leading" secondItem="vb7-hU-kHT" secondAttribute="leading" id="ex3-wy-eWW"/>
-                            <constraint firstAttribute="trailing" secondItem="y2t-1o-nwQ" secondAttribute="trailing" id="fhK-44-3KD"/>
+                            <constraint firstItem="jcc-wL-6Au" firstAttribute="leading" secondItem="vb7-hU-kHT" secondAttribute="leading" id="2pa-MA-LsQ"/>
+                            <constraint firstAttribute="trailing" secondItem="Agu-ui-9eL" secondAttribute="trailing" id="4Ho-rM-t2C"/>
+                            <constraint firstItem="jcc-wL-6Au" firstAttribute="top" secondItem="oMK-Fu-43t" secondAttribute="bottom" id="CTB-US-rvU"/>
+                            <constraint firstItem="UCQ-ao-Oz4" firstAttribute="top" secondItem="Agu-ui-9eL" secondAttribute="bottom" id="Pdc-jN-iE9"/>
+                            <constraint firstAttribute="trailing" secondItem="jcc-wL-6Au" secondAttribute="trailing" id="T9Y-NR-z1n"/>
+                            <constraint firstItem="Agu-ui-9eL" firstAttribute="leading" secondItem="vb7-hU-kHT" secondAttribute="leading" id="VaW-Tj-UIh"/>
+                            <constraint firstItem="Agu-ui-9eL" firstAttribute="top" secondItem="oMK-Fu-43t" secondAttribute="bottom" id="wif-LX-4Js"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <navigationItem key="navigationItem" id="D5r-gm-32A"/>
                     <connections>
-                        <outlet property="searchScrollView" destination="y2t-1o-nwQ" id="BJU-Yt-DdO"/>
+                        <outlet property="searchTableView" destination="Agu-ui-9eL" id="sxm-CU-jjt"/>
+                        <outlet property="topTabBar" destination="jcc-wL-6Au" id="LTm-z1-TAm"/>
                         <segue destination="fVL-fA-Xol" kind="show" identifier="SearchToSummaries" id="WQr-p7-6uz"/>
                     </connections>
                 </viewController>
@@ -247,12 +269,12 @@
             </objects>
             <point key="canvasLocation" x="559" y="1601"/>
         </scene>
-        <!--Item-->
+        <!--マイページ-->
         <scene sceneID="aNU-1H-3dZ">
             <objects>
                 <navigationController id="rbG-ga-22f" sceneMemberID="viewController">
                     <extendedEdge key="edgesForExtendedLayout" top="YES"/>
-                    <tabBarItem key="tabBarItem" title="Item" id="0rA-aS-wMq"/>
+                    <tabBarItem key="tabBarItem" tag="4" title="マイページ" id="0rA-aS-wMq"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="1LQ-48-Pwp">
@@ -301,12 +323,12 @@
             </objects>
             <point key="canvasLocation" x="567" y="2297"/>
         </scene>
-        <!--Item-->
+        <!--設定-->
         <scene sceneID="N5k-nL-MfH">
             <objects>
                 <navigationController id="Ojg-OC-UAV" sceneMemberID="viewController">
                     <extendedEdge key="edgesForExtendedLayout" top="YES"/>
-                    <tabBarItem key="tabBarItem" title="Item" id="sCu-Pe-OrZ"/>
+                    <tabBarItem key="tabBarItem" tag="5" title="設定" id="sCu-Pe-OrZ"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="8dz-e4-y8R">
@@ -357,6 +379,10 @@
             <point key="canvasLocation" x="567" y="3007"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="topics.png" width="30" height="30"/>
+        <image name="topics_g.png" width="30" height="30"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="kye-ba-cdu"/>
     </inferredMetricsTieBreakers>
