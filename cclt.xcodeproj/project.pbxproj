@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		972B44FB1A53A23C00A398AD /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE80878F1A2412A400B49531 /* LoginView.swift */; };
 		973DCB1E1A07335E002B15E7 /* CategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973DCB1D1A07335E002B15E7 /* CategoriesViewController.swift */; };
 		FE08671919E79127004AB167 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE08670B19E7910E004AB167 /* Alamofire.framework */; };
 		FE08671A19E79132004AB167 /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = FE08670B19E7910E004AB167 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -166,6 +167,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		972B44F41A53A1A300A398AD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FEFDDF9C1A1CA792001AC278 /* Quick.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = DA5663E81A4C8D8500193C88;
+			remoteInfo = "QuickFocused-OSXTests";
+		};
+		972B44F61A53A1A300A398AD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FEFDDF9C1A1CA792001AC278 /* Quick.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = DA9876B21A4C70EB0004AA17;
+			remoteInfo = "QuickFocused-iOSTests";
+		};
 		FE08670A19E7910E004AB167 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = FE08670519E7910E004AB167 /* Alamofire.xcodeproj */;
@@ -897,8 +912,10 @@
 			children = (
 				FEFDDFA51A1CA793001AC278 /* Quick.framework */,
 				FEFDDFA71A1CA793001AC278 /* Quick-OSXTests.xctest */,
+				972B44F51A53A1A300A398AD /* QuickFocused-OSXTests.xctest */,
 				FEFDDFA91A1CA793001AC278 /* Quick.framework */,
 				FEFDDFAB1A1CA793001AC278 /* Quick-iOSTests.xctest */,
+				972B44F71A53A1A300A398AD /* QuickFocused-iOSTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1003,6 +1020,20 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		972B44F51A53A1A300A398AD /* QuickFocused-OSXTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "QuickFocused-OSXTests.xctest";
+			remoteRef = 972B44F41A53A1A300A398AD /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		972B44F71A53A1A300A398AD /* QuickFocused-iOSTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "QuickFocused-iOSTests.xctest";
+			remoteRef = 972B44F61A53A1A300A398AD /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		FE08670B19E7910E004AB167 /* Alamofire.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -1241,6 +1272,7 @@
 				FE7C50321A198E2F00591002 /* SummariesTableView.swift in Sources */,
 				FE31BC9F1A1C3C5400A4C0D1 /* MyPageViewController.swift in Sources */,
 				FE7C502F1A198E0200591002 /* SummariesViewController.swift in Sources */,
+				972B44FB1A53A23C00A398AD /* LoginView.swift in Sources */,
 				FE497CCA1A11CF3200CB3588 /* SwiftDispatch.swift in Sources */,
 				FE17A91419FDDB9C007BFC62 /* CuratorViewModelSpec.swift in Sources */,
 				FE31BCA21A1C3C7700A4C0D1 /* SettingsViewController.swift in Sources */,
@@ -1346,7 +1378,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1363,10 +1396,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1390,7 +1424,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1401,9 +1436,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -1414,12 +1450,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = cclt/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "33a5f650-1ab4-44cf-a5cc-87ae4d61d70b";
 			};
 			name = Debug;
 		};
@@ -1427,13 +1464,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = cclt/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "33a5f650-1ab4-44cf-a5cc-87ae4d61d70b";
 			};
 			name = Release;
 		};
