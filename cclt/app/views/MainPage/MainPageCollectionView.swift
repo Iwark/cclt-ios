@@ -19,6 +19,16 @@ class MainPageCollectionView: UICollectionView {
     
     let kTapEffectSeconds = 1.0
     
+//    required init(coder aDecoder: NSCoder) {
+//        super.init(coder: aDecoder)
+//        self.layer.shadowOpacity = 0.5
+//        self.layer.shadowRadius = 2.0
+//        self.layer.shadowOffset = CGSizeMake(0.0, 0.0)
+//        self.layer.shadowPath = UIBezierPath(rect: self.bounds).CGPath
+//        self.layer.shouldRasterize = true
+//        self.layer.rasterizationScale = UIScreen.mainScreen().scale
+//    }
+    
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
         if let touch = touches.anyObject() as? UITouch {
             tappedView = touch.view

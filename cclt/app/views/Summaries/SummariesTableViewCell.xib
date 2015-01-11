@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -15,20 +16,14 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gee-0U-CUZ">
-                        <rect key="frame" x="0.0" y="0.0" width="82" height="82"/>
-                        <constraints>
-                            <constraint firstAttribute="width" secondItem="gee-0U-CUZ" secondAttribute="height" multiplier="1:1" id="0aB-FF-f6F"/>
-                        </constraints>
-                    </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="美味しいパンケーキのお店だよ。" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6F4-uG-VoS">
-                        <rect key="frame" x="90" y="8" width="234" height="44"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <rect key="frame" x="90" y="8" width="234" height="48"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="choco" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XP9-0V-dNw">
-                        <rect key="frame" x="297" y="52" width="35" height="22"/>
+                        <rect key="frame" x="297.5" y="56" width="34.5" height="22"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="22" id="DZV-A9-qha"/>
                         </constraints>
@@ -37,7 +32,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="いわーく" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="80k-T4-wu6">
-                        <rect key="frame" x="90" y="52" width="48" height="22"/>
+                        <rect key="frame" x="90" y="56" width="48" height="22"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="22" id="em1-yA-lVE"/>
                         </constraints>
@@ -45,9 +40,16 @@
                         <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gee-0U-CUZ" customClass="DefaultImageView" customModule="cclt">
+                        <rect key="frame" x="0.0" y="0.0" width="82" height="82"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="gee-0U-CUZ" secondAttribute="height" multiplier="1:1" id="0aB-FF-f6F"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 <constraints>
-                    <constraint firstAttribute="bottomMargin" secondItem="80k-T4-wu6" secondAttribute="bottom" id="2Gq-nh-dJG"/>
+                    <constraint firstAttribute="bottom" secondItem="80k-T4-wu6" secondAttribute="bottom" constant="4" id="2Gq-nh-dJG"/>
                     <constraint firstAttribute="bottom" secondItem="gee-0U-CUZ" secondAttribute="bottom" id="4fY-9q-whS"/>
                     <constraint firstItem="6F4-uG-VoS" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="AYU-a4-Mre"/>
                     <constraint firstItem="80k-T4-wu6" firstAttribute="leading" secondItem="6F4-uG-VoS" secondAttribute="leading" id="EWl-7E-8jW"/>

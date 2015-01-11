@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		973DCB1E1A07335E002B15E7 /* CategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973DCB1D1A07335E002B15E7 /* CategoriesViewController.swift */; };
+		97C7ABE41A60E879004249C6 /* ActionButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C7ABE31A60E879004249C6 /* ActionButtonsView.swift */; };
+		97C7ABF71A60EBEF004249C6 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97C7ABF61A60EBEF004249C6 /* FacebookSDK.framework */; };
+		97C7ABF81A60EC4C004249C6 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97C7ABF61A60EBEF004249C6 /* FacebookSDK.framework */; };
 		FE08671919E79127004AB167 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE08670B19E7910E004AB167 /* Alamofire.framework */; };
 		FE08671A19E79132004AB167 /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = FE08670B19E7910E004AB167 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FE17A8EE19FA2B49007BFC62 /* CcltRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE3835F719F67B7E001EFB6B /* CcltRoute.swift */; };
@@ -169,12 +172,6 @@
 		FECE9E9A1A136E8E00CAC7B6 /* SwiftRegex.swift in Sources */ = {isa = PBXBuildFile; fileRef = FECE9E981A136E8E00CAC7B6 /* SwiftRegex.swift */; };
 		FECE9E9D1A146F8700CAC7B6 /* quotation@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FECE9E9C1A146F8700CAC7B6 /* quotation@2x.png */; };
 		FECE9E9E1A146F8700CAC7B6 /* quotation@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FECE9E9C1A146F8700CAC7B6 /* quotation@2x.png */; };
-		FECE9EA41A15996800CAC7B6 /* FeaturesCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FECE9EA31A15996800CAC7B6 /* FeaturesCollectionView.swift */; };
-		FECE9EA51A15996800CAC7B6 /* FeaturesCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FECE9EA31A15996800CAC7B6 /* FeaturesCollectionView.swift */; };
-		FECE9EA81A15999300CAC7B6 /* FeaturesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FECE9EA61A15999300CAC7B6 /* FeaturesCollectionViewCell.swift */; };
-		FECE9EA91A15999300CAC7B6 /* FeaturesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FECE9EA61A15999300CAC7B6 /* FeaturesCollectionViewCell.swift */; };
-		FECE9EAA1A15999300CAC7B6 /* FeaturesCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FECE9EA71A15999300CAC7B6 /* FeaturesCollectionViewCell.xib */; };
-		FECE9EAB1A15999300CAC7B6 /* FeaturesCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FECE9EA71A15999300CAC7B6 /* FeaturesCollectionViewCell.xib */; };
 		FEE87E221A0093CD004EBAE2 /* SummaryPartialViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE87E211A0093CD004EBAE2 /* SummaryPartialViewModel.swift */; };
 		FEE87E231A0093CD004EBAE2 /* SummaryPartialViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE87E211A0093CD004EBAE2 /* SummaryPartialViewModel.swift */; };
 		FEE87E311A0093DE004EBAE2 /* SummaryPartialViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE87E301A0093DE004EBAE2 /* SummaryPartialViewModelSpec.swift */; };
@@ -407,6 +404,8 @@
 
 /* Begin PBXFileReference section */
 		973DCB1D1A07335E002B15E7 /* CategoriesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CategoriesViewController.swift; path = cclt/app/controllers/CategoriesViewController.swift; sourceTree = SOURCE_ROOT; };
+		97C7ABE31A60E879004249C6 /* ActionButtonsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionButtonsView.swift; sourceTree = "<group>"; };
+		97C7ABF61A60EBEF004249C6 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = Vendor/FacebookSDK/FacebookSDK.framework; sourceTree = SOURCE_ROOT; };
 		FE08670519E7910E004AB167 /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = Vendor/Alamofire/Alamofire.xcodeproj; sourceTree = SOURCE_ROOT; };
 		FE08670E19E7911B004AB167 /* SwiftyJSON.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SwiftyJSON.xcodeproj; path = Vendor/SwiftyJSON/SwiftyJSON.xcodeproj; sourceTree = SOURCE_ROOT; };
 		FE17A8FE19FDD1B7007BFC62 /* FeatureViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeatureViewModel.swift; sourceTree = "<group>"; };
@@ -495,7 +494,6 @@
 		FE7C50401A1AE2A200591002 /* SearchTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchTableView.swift; path = cclt/App/Views/Search/SearchTableView.swift; sourceTree = SOURCE_ROOT; };
 		FE80878F1A2412A400B49531 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginView.swift; path = cclt/App/Views/MyPage/LoginView.swift; sourceTree = SOURCE_ROOT; };
 		FE8087931A241D7A00B49531 /* Swifter.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Swifter.xcodeproj; path = Vendor/Swifter/Swifter.xcodeproj; sourceTree = SOURCE_ROOT; };
-		FE8087AC1A24291200B49531 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = Vendor/FacebookSDK/FacebookSDK.framework; sourceTree = SOURCE_ROOT; };
 		FE8087B01A24293B00B49531 /* Bridge-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Bridge-Header.h"; path = "../Bridge-Header.h"; sourceTree = "<group>"; };
 		FE9C876919F4C24B002C50BE /* Async.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Async.h; path = "Vendor/swift-async/async/Async.h"; sourceTree = SOURCE_ROOT; };
 		FE9C876A19F4C24B002C50BE /* Async.parallel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Async.parallel.swift; path = "Vendor/swift-async/async/Async.parallel.swift"; sourceTree = SOURCE_ROOT; };
@@ -531,9 +529,6 @@
 		FECE9E951A13568B00CAC7B6 /* ContentsDescriptionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContentsDescriptionView.swift; path = cclt/App/Views/Templates/ContentsDescriptionView.swift; sourceTree = SOURCE_ROOT; };
 		FECE9E981A136E8E00CAC7B6 /* SwiftRegex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftRegex.swift; sourceTree = "<group>"; };
 		FECE9E9C1A146F8700CAC7B6 /* quotation@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "quotation@2x.png"; sourceTree = "<group>"; };
-		FECE9EA31A15996800CAC7B6 /* FeaturesCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FeaturesCollectionView.swift; path = cclt/App/Views/Features/FeaturesCollectionView.swift; sourceTree = SOURCE_ROOT; };
-		FECE9EA61A15999300CAC7B6 /* FeaturesCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FeaturesCollectionViewCell.swift; path = cclt/App/Views/Features/FeaturesCollectionViewCell.swift; sourceTree = SOURCE_ROOT; };
-		FECE9EA71A15999300CAC7B6 /* FeaturesCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FeaturesCollectionViewCell.xib; path = cclt/App/Views/Features/FeaturesCollectionViewCell.xib; sourceTree = SOURCE_ROOT; };
 		FEE87E211A0093CD004EBAE2 /* SummaryPartialViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SummaryPartialViewModel.swift; path = cclt/app/ViewModels/SummaryPartialViewModel.swift; sourceTree = SOURCE_ROOT; };
 		FEE87E301A0093DE004EBAE2 /* SummaryPartialViewModelSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummaryPartialViewModelSpec.swift; sourceTree = "<group>"; };
 		FEE87E381A03380E004EBAE2 /* MainPageViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainPageViewModel.swift; sourceTree = "<group>"; };
@@ -558,6 +553,7 @@
 				FEB2967D1A5CCF97000C4A3E /* CoreData.framework in Frameworks */,
 				FEB2967B1A5CCF8C000C4A3E /* AdSupport.framework in Frameworks */,
 				FEFDDFC51A1CA881001AC278 /* SwiftyJSON.framework in Frameworks */,
+				97C7ABF71A60EBEF004249C6 /* FacebookSDK.framework in Frameworks */,
 				FE08671919E79127004AB167 /* Alamofire.framework in Frameworks */,
 				FE8087A51A241D9800B49531 /* SwifteriOS.framework in Frameworks */,
 				FEB296791A5CCF38000C4A3E /* libGoogleAnalyticsServices.a in Frameworks */,
@@ -570,6 +566,7 @@
 			files = (
 				FEFDDFC91A1CA8A2001AC278 /* Quick.framework in Frameworks */,
 				FE9C870119ECFE22002C50BE /* Nimble.framework in Frameworks */,
+				97C7ABF81A60EC4C004249C6 /* FacebookSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -701,7 +698,6 @@
 				FECE9E771A11EF0B00CAC7B6 /* ContentQuotations */,
 				FECE9E781A11EF0B00CAC7B6 /* ContentTexts */,
 				FECE9E791A11EF0B00CAC7B6 /* ContentTwitters */,
-				FECE9EA21A15993D00CAC7B6 /* Features */,
 				FE497C961A0CA09E00CB3588 /* MainPage */,
 				FE31BCA31A1C3D0200A4C0D1 /* MyPage */,
 				FE7C503F1A1AE28200591002 /* Search */,
@@ -790,8 +786,8 @@
 				FE08670E19E7911B004AB167 /* SwiftyJSON.xcodeproj */,
 				FEB2967A1A5CCF8C000C4A3E /* AdSupport.framework */,
 				FEB2967C1A5CCF97000C4A3E /* CoreData.framework */,
-				FE8087AC1A24291200B49531 /* FacebookSDK.framework */,
 				FEB2967E1A5CCFA0000C4A3E /* SystemConfiguration.framework */,
+				97C7ABF61A60EBEF004249C6 /* FacebookSDK.framework */,
 				FEB296801A5CCFAA000C4A3E /* libz.dylib */,
 				FEB2966D1A5CCF17000C4A3E /* GoogleAnalytics */,
 				FE66A49E1A5D0778002EF68B /* ImageLoader */,
@@ -897,6 +893,7 @@
 				FE66A4F41A5F9DBE002EF68B /* TopTabBarButton.swift */,
 				FE66A4EF1A5F64CE002EF68B /* TriangleView.swift */,
 				FEBEBDC11A5A17C3007A63C9 /* TutorialView.swift */,
+				97C7ABE31A60E879004249C6 /* ActionButtonsView.swift */,
 			);
 			name = Templates;
 			path = cclt/app/views/Templates;
@@ -1070,17 +1067,6 @@
 			);
 			path = SummaryContents;
 			sourceTree = "<group>";
-		};
-		FECE9EA21A15993D00CAC7B6 /* Features */ = {
-			isa = PBXGroup;
-			children = (
-				FECE9EA31A15996800CAC7B6 /* FeaturesCollectionView.swift */,
-				FECE9EA61A15999300CAC7B6 /* FeaturesCollectionViewCell.swift */,
-				FECE9EA71A15999300CAC7B6 /* FeaturesCollectionViewCell.xib */,
-			);
-			name = Features;
-			path = cclt/app/views/Features;
-			sourceTree = SOURCE_ROOT;
 		};
 		FEF09B491A09D06E00FE9CFE /* Assets */ = {
 			isa = PBXGroup;
@@ -1400,7 +1386,6 @@
 				FE66A4E51A5E4AA0002EF68B /* search@2x.png in Resources */,
 				FECE9E9D1A146F8700CAC7B6 /* quotation@2x.png in Resources */,
 				FE7C50371A198E7E00591002 /* SummariesTableViewCell.xib in Resources */,
-				FECE9EAA1A15999300CAC7B6 /* FeaturesCollectionViewCell.xib in Resources */,
 				FEF09B551A09D06E00FE9CFE /* Default-Portrait@2x.png in Resources */,
 				FE66A4E11A5E4AA0002EF68B /* category@2x.png in Resources */,
 				FE3F358419E616CD005A2166 /* Images.xcassets in Resources */,
@@ -1431,7 +1416,6 @@
 				FE31BCB01A1C4FB100A4C0D1 /* SettingsTableViewCell.xib in Resources */,
 				FE7C50381A198E7E00591002 /* SummariesTableViewCell.xib in Resources */,
 				FE497CC51A11CD2500CB3588 /* btn_back_off@2x.png in Resources */,
-				FECE9EAB1A15999300CAC7B6 /* FeaturesCollectionViewCell.xib in Resources */,
 				FE7C50231A15D72400591002 /* CategoriesTableViewCell.xib in Resources */,
 				FECE9E9E1A146F8700CAC7B6 /* quotation@2x.png in Resources */,
 				FE497CC71A11CD2500CB3588 /* btn_back_on@2x.png in Resources */,
@@ -1453,9 +1437,9 @@
 				FE38362219F8F99F001EFB6B /* PickupViewModel.swift in Sources */,
 				FE7C50411A1AE2A200591002 /* SearchTableView.swift in Sources */,
 				FE66A4F21A5F7709002EF68B /* SearchViewModel.swift in Sources */,
+				97C7ABE41A60E879004249C6 /* ActionButtonsView.swift in Sources */,
 				FE38361319F8E35E001EFB6B /* Summary.swift in Sources */,
 				FE497CBB1A11A30F00CB3588 /* SummaryDescriptionView.swift in Sources */,
-				FECE9EA41A15996800CAC7B6 /* FeaturesCollectionView.swift in Sources */,
 				FE66A4F51A5F9DBE002EF68B /* TopTabBarButton.swift in Sources */,
 				FE497CBF1A11A67100CB3588 /* BackBarButtonItem.swift in Sources */,
 				FE66A4EE1A5F6358002EF68B /* TopTabBar.swift in Sources */,
@@ -1494,7 +1478,6 @@
 				FE31BC9B1A1AF4BC00A4C0D1 /* TagViewModel.swift in Sources */,
 				FE7C503D1A1AE08800591002 /* SearchViewController.swift in Sources */,
 				FECE9E7B1A11EF3E00CAC7B6 /* ContentCommodityView.swift in Sources */,
-				FECE9EA81A15999300CAC7B6 /* FeaturesCollectionViewCell.swift in Sources */,
 				FECE9E931A11F00700CAC7B6 /* ContentTwitterView.swift in Sources */,
 				FEF09B5D1A0B0C6200FE9CFE /* AppViewController.swift in Sources */,
 				FE66A4A71A5D0778002EF68B /* UIImageView+ImageLoader.swift in Sources */,
@@ -1536,7 +1519,6 @@
 				FECE9E821A11EF6E00CAC7B6 /* ContentHeadlineView.swift in Sources */,
 				FE17A90019FDD1B8007BFC62 /* FeatureViewModel.swift in Sources */,
 				FEB2966C1A5B8D14000C4A3E /* DefaultUIKits.swift in Sources */,
-				FECE9EA91A15999300CAC7B6 /* FeaturesCollectionViewCell.swift in Sources */,
 				FECE9E881A11EFA600CAC7B6 /* ContentLinkView.swift in Sources */,
 				FE7C503B1A19F0A700591002 /* SummaryInfoView.swift in Sources */,
 				FE7C50361A198E7E00591002 /* SummariesTableViewCell.swift in Sources */,
@@ -1559,7 +1541,6 @@
 				FE497CA51A0CA75700CB3588 /* SummaryPartialView.swift in Sources */,
 				FE4E6F8B1A5A3A1800AA1CAE /* SwiftLabelFitToSize.swift in Sources */,
 				FEE87E311A0093DE004EBAE2 /* SummaryPartialViewModelSpec.swift in Sources */,
-				FECE9EA51A15996800CAC7B6 /* FeaturesCollectionView.swift in Sources */,
 				FE38361019F8E35E001EFB6B /* Curator.swift in Sources */,
 				FE38361A19F8F67A001EFB6B /* CategoryViewModel.swift in Sources */,
 				FE31BC9C1A1AF4BC00A4C0D1 /* TagViewModel.swift in Sources */,
@@ -1741,31 +1722,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: KOHEI IWASAKI (QKH875J54R)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					/Users/koheiiwasaki/Documents/FacebookSDK,
-					"$(PROJECT_DIR)/Vendor/FacebookSDK",
-				);
-				INFOPLIST_FILE = cclt/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Vendor/GoogleAnalytics",
-				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "5b6678ce-c3ae-4607-94f4-d439247f8ed2";
-				SWIFT_OBJC_BRIDGING_HEADER = "Bridge-Header.h";
-			};
-			name = Debug;
-		};
-		FE3F359819E616CD005A2166 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
@@ -1782,7 +1738,32 @@
 					"$(PROJECT_DIR)/Vendor/GoogleAnalytics",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "5b6678ce-c3ae-4607-94f4-d439247f8ed2";
+				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Bridge-Header.h";
+			};
+			name = Debug;
+		};
+		FE3F359819E616CD005A2166 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/koheiiwasaki/Documents/FacebookSDK,
+					"$(PROJECT_DIR)/Vendor/FacebookSDK",
+				);
+				INFOPLIST_FILE = cclt/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Vendor/GoogleAnalytics",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Bridge-Header.h";
 			};
 			name = Release;
@@ -1796,6 +1777,7 @@
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 					"$(PROJECT_DIR)/Vendor/Quick/Externals/Nimble/build/Debug-iphoneos",
+					"$(PROJECT_DIR)/Vendor/FacebookSDK",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -1817,6 +1799,7 @@
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 					"$(PROJECT_DIR)/Vendor/Quick/Externals/Nimble/build/Debug-iphoneos",
+					"$(PROJECT_DIR)/Vendor/FacebookSDK",
 				);
 				INFOPLIST_FILE = ccltTests/Base.lproj/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";

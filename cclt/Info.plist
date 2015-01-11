@@ -28,6 +28,7 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>cclt</string>
+				<string>fb796698183695352</string>
 			</array>
 		</dict>
 	</array>
@@ -47,6 +48,10 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+	<key>FacebookAppID</key>
+	<string>796698183695352</string>
+	<key>FacebookDisplayName</key>
+	<string>Chocolat</string>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

@@ -51,13 +51,10 @@ class SummaryInfoView: UIView {
     
     func createCategoryView(category: Category) -> UIView {
         
-        let view = UIImageView(frame: CGRectMake(0, kInfoPadding, kCategoryWidth, kInfoHeight))
+        let view = UIView(frame: CGRectMake(0, kInfoPadding, kCategoryWidth, kInfoHeight))
         
-        let imgView = UIImageView(frame: CGRectMake((kCategoryWidth-kCategoryImgWidth)/2, kCategoryImgMarginTop, kCategoryImgWidth, kCategoryImgHeight))
-        
-        SwiftImageLoader.sharedLoader.imageForUrl(category.iconURL, completionHandler: { (image, url) -> () in
-            imgView.image = image
-        })
+        let imgView = DefaultImageView(frame: CGRectMake((kCategoryWidth-kCategoryImgWidth)/2, kCategoryImgMarginTop, kCategoryImgWidth, kCategoryImgHeight))
+        imgView.loadImage(category.iconURL){}
         view.addSubview(imgView)
         
         let nameLabel = UILabel(frame: CGRectMake(kNameLabelPadding, kInfoHeight - kNameLabelHeight - kInfoPadding, kCategoryWidth - kNameLabelPadding * 2, kNameLabelHeight))

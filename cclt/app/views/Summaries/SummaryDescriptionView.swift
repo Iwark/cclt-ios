@@ -8,8 +8,13 @@
 
 import UIKit
 
-class SummaryDescriptionView: UIScrollView {
+protocol SummaryDescriptionViewDelegate:class {
+    func tapped(summaryID:Int)
+}
 
+class SummaryDescriptionView: UIScrollView, SummariesTableViewDelegate {
+
+    weak var summaryDescriptionViewDelegate:SummaryDescriptionViewDelegate?
     let summary: Summary?
     
     let kDescPaddingH:CGFloat    = 10.0
@@ -17,6 +22,8 @@ class SummaryDescriptionView: UIScrollView {
     let kContentsMarginV:CGFloat = 10.0
     
     var contentViews:[UIView] = []
+    let relatedSummariesView = SummariesTableView(frame: CGRectZero)
+    
     var infoHeight:CGFloat = 0
     var contentsHeight:CGFloat = 0
     
@@ -24,6 +31,16 @@ class SummaryDescriptionView: UIScrollView {
         super.init()
         self.summary = summary
         self.backgroundColor = Settings.Colors.backgroundColor
+        
+        // 関連記事
+        var summaries = [Summary]()
+        for json in summary.related_summaries {
+            summaries.append(Summary(json: json))
+        }
+        relatedSummariesView.summaries = summaries
+        relatedSummariesView.reloadData()
+        relatedSummariesView.scrollEnabled = false
+        relatedSummariesView.summariesTableViewDelegate = self
     }
     
     required init(coder aDecoder: NSCoder) {
@@ -40,20 +57,9 @@ class SummaryDescriptionView: UIScrollView {
             
             let width = self.frame.size.width
             
-            
             // メイン画像
             let mainImgView = DefaultImageView(frame: CGRectMake(0, 0, width, width))
-            
-            if let imageUrl = NSURL(string: summary.image_url) {
-                mainImgView.startLoading()
-                mainImgView.load(imageUrl, placeholder: nil){
-                    [unowned mainImgView] (url, image, error) in
-                    if let image = image {
-                        mainImgView.image = image
-                        mainImgView.stopLoading()
-                    }
-                }
-            }
+            mainImgView.loadImage(summary.image_url){}
             self.addSubview(mainImgView)
             
             infoHeight += mainImgView.frame.size.height
@@ -119,14 +125,21 @@ class SummaryDescriptionView: UIScrollView {
                 
             }
             
+            
+            
+            let headline = ContentHeadlineView(width: self.frame.size.width, content: ContentHeadline(title:"関連記事"))
+            headline.frame.size.height -= 10.0
+            contentViews.append(headline)
+            self.addSubview(headline)
+            
+            relatedSummariesView.frame = CGRectMake(kDescPaddingH, 0, self.frame.size.width - kDescPaddingH * 2, 85 * 3)
+            relatedSummariesView.layer.borderColor = Settings.Colors.borderLightColor
+            relatedSummariesView.layer.borderWidth = 1.0
+            relatedSummariesView.layer.cornerRadius = 4.0
+            contentViews.append(relatedSummariesView)
+            self.addSubview(relatedSummariesView)
+            
             layout()
-
-            // コンテンツのサイズ決定
-//            self.contentSize = CGSizeMake(width, infoHeight)
-//            
-//            if contentsNum == doneContentsNum {
-//                layout()
-//            }
             
         }
         
@@ -139,7 +152,16 @@ class SummaryDescriptionView: UIScrollView {
             view.frame.origin.y = infoHeight + contentsHeight
             contentsHeight += view.frame.size.height
         }
+        
         self.contentSize.height = infoHeight + contentsHeight
+    }
+    
+    func tapped(summaryID: Int) {
+        self.summaryDescriptionViewDelegate?.tapped(summaryID)
+    }
+    
+    func loadMore() {
+        
     }
 
 }

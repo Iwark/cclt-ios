@@ -10,7 +10,7 @@ import UIKit
 
 class CategoriesTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var imgView: UIImageView!
+    @IBOutlet weak var imgView: DefaultImageView!
     @IBOutlet weak var titleLabel: UILabel!
     
     var categoryID: Int?

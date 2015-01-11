@@ -10,7 +10,7 @@ import UIKit
 
 class SummariesTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var imgView: UIImageView!
+    @IBOutlet weak var imgView: DefaultImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var writerLabel: UILabel!
     @IBOutlet weak var chocoLabel: UILabel!

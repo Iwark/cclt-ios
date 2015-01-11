@@ -10,10 +10,10 @@ import UIKit
 
 class ContentTwitterView: UIView {
 
-    let profileImgView:UIImageView?
+    let profileImgView:DefaultImageView?
     let nameLabel:UILabel?
     let textView:UIView?
-    let imgView:UIImageView?
+    let imgView:DefaultImageView?
     
     let kProfileSize:CGFloat = 48
     let kProfileMarginH:CGFloat = 10
@@ -22,15 +22,9 @@ class ContentTwitterView: UIView {
     init(width: CGFloat, content: ContentTwitter, completion:()->()){
         super.init()
         
-        self.profileImgView = UIImageView(frame: CGRectMake(kProfileMarginH, 0, kProfileSize, kProfileSize))
+        self.profileImgView = DefaultImageView(frame: CGRectMake(kProfileMarginH, 0, kProfileSize, kProfileSize))
         self.addSubview(profileImgView!)
-        
-        SwiftImageLoader.sharedLoader.imageForUrl(content.profileImageURL, completionHandler:{
-            [unowned self] (image: UIImage?, url: String) in
-            if let image = image {
-                self.profileImgView!.image = image
-            }
-        })
+        self.profileImgView!.loadImage(content.profileImageURL){}
         
         self.nameLabel = UILabel(frame: CGRectMake(kProfileSize + kProfileMarginH * 2, 0, width - kProfileSize - kProfileMarginH * 2, kProfileSize))
         self.nameLabel!.text = content.userName
@@ -44,22 +38,25 @@ class ContentTwitterView: UIView {
         
         if content.imageURL != "" {
             
-            self.imgView = UIImageView(frame: CGRectMake(0, self.textView!.frame.origin.y + self.textView!.frame.size.height + kImgMarginTop, width, width))
+            self.imgView = DefaultImageView(frame: CGRectMake(0, self.textView!.frame.origin.y + self.textView!.frame.size.height + kImgMarginTop, width, width))
             self.imgView!.contentMode = UIViewContentMode.ScaleAspectFill
             
-            SwiftImageLoader.sharedLoader.imageForUrl(content.imageURL, completionHandler:{
-                [unowned self] (image: UIImage?, url: String) in
-                if let image = image {
-                    self.imgView!.image = image
-                    let oldHeight = self.imgView!.frame.size.height
-                    let newHeight = (self.imgView!.frame.size.width / image.size.width) * image.size.height
-                    self.imgView!.frame.size.height = newHeight
-                    self.frame.size.height += (newHeight - oldHeight)
-                } else {
-                    // TODO: 画像が見つからなかった時のデフォルト画像があればここで表示する。
+            if let imageUrl = NSURL(string: content.imageURL) {
+                
+                self.imgView!.startLoading()
+                self.imgView!.load(imageUrl, placeholder: nil){
+                    [unowned self] (url, image, error) in
+                    if let image = image {
+                        self.imgView!.image = image
+                        let oldHeight = self.imgView!.frame.size.height
+                        let newHeight = (self.imgView!.frame.size.width / image.size.width) * image.size.height
+                        self.imgView!.frame.size.height = newHeight
+                        self.frame.size.height += (newHeight - oldHeight)
+                    }
+                    self.imgView!.stopLoading()
+                    completion()
                 }
-                completion()
-            })
+            }
             self.addSubview(imgView!)
             
             self.frame = CGRectMake(0, 0, width, self.imgView!.frame.origin.y + self.imgView!.frame.size.height)

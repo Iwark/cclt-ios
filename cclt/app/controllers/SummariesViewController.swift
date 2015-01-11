@@ -13,6 +13,16 @@ SummariesTableViewDelegate {
 
     @IBOutlet weak var summariesTableView: SummariesTableView!
 
+    var loadingMore  = false
+    
+    enum Category {
+        case Feature
+        case Category
+    }
+    var categoryID:Int    = 0
+    var featureID:Int     = 0
+    var searchWord:String?
+    var searchPage:Int    = 1
     var summaries:[Summary] = []
     
     override func viewDidLoad() {
@@ -20,6 +30,7 @@ SummariesTableViewDelegate {
 
         summariesTableView.summariesTableViewDelegate = self
         summariesTableView.summaries = summaries
+        summariesTableView.autoLoadMore = true
         summariesTableView.reloadData()
         
     }
@@ -42,4 +53,49 @@ SummariesTableViewDelegate {
         }
     }
     
+    // 追加読み込み
+    func loadMore() {
+        if loadingMore { return }
+        
+        loadingMore = true
+
+        if let searchWord = searchWord {
+            searchPage++
+            SearchViewModel.searchSummaries(searchWord, page: searchPage) {
+                [unowned self](summaries, error) -> () in
+                if let error = error {
+                    println("search error: \(error)")
+                } else if let summaries = summaries {
+                    if summaries.count > 0 {
+                        self.summaries.extend(summaries)
+                        self.summariesTableView.summaries = self.summaries
+                    } else {
+                        self.summariesTableView.loadingFinished = true
+                    }
+                    self.summariesTableView.reloadData()
+                }
+                self.loadingMore = false
+            }
+            return
+        }
+        
+        var lastSummaryID = summaries.last!.id
+        
+        SummaryViewModel.fetchSummaries(categoryID: categoryID, featureID: featureID, lastSummaryID: lastSummaryID, completionHandler:{
+            [unowned self](summaries, error) -> () in
+            
+            if let summaries = summaries {
+                if summaries.count > 0 {
+                    self.summaries.extend(summaries)
+                    self.summariesTableView.summaries = self.summaries
+                } else {
+                    self.summariesTableView.loadingFinished = true
+                }
+                self.summariesTableView.reloadData()
+            }
+            self.loadingMore = false
+            
+        })
+        
+    }
 }

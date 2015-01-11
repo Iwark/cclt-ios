@@ -105,7 +105,7 @@ UISearchBarDelegate, SearchTableViewDelegate, TopTabBarDelegate {
     
     func searchWord(word: String) {
         _paramSearchText = word
-        
+        shutdownKeyword()
         startLoading()
         SearchViewModel.searchSummaries(word, page: 1) {
             [unowned self](summaries, error) -> () in
@@ -134,6 +134,7 @@ UISearchBarDelegate, SearchTableViewDelegate, TopTabBarDelegate {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         let vc = segue.destinationViewController as SummariesViewController
+        vc.searchWord = _paramSearchText
         vc.summaries = _paramSummaries
         vc.navTitle = _paramSearchText
         vc.screenName = "SearchResult_\(_paramSearchText)"

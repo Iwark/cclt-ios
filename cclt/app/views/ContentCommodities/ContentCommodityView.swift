@@ -11,7 +11,7 @@ import UIKit
 class ContentCommodityView: UIView {
     
     let titleLabel:UILabel?
-    let imgView:UIImageView?
+    let imgView:DefaultImageView?
     let priceLabel:UILabel?
     let descriptionView:ContentsDescriptionView?
     
@@ -34,30 +34,36 @@ class ContentCommodityView: UIView {
         var imgHeight:CGFloat = 0
         
         if content.imageURL != "" {
-            self.imgView = UIImageView(frame: CGRectMake(kImgMarginLeft, self.titleLabel!.frame.size.height, width * kImgWidthPortion, width * kImgWidthPortion))
+            self.imgView = DefaultImageView(frame: CGRectMake(kImgMarginLeft, self.titleLabel!.frame.size.height, width * kImgWidthPortion, width * kImgWidthPortion))
             self.imgView!.layer.borderWidth = kImgBorderWidth
             self.imgView!.layer.borderColor = Settings.Colors.linkColor.CGColor
             self.imgView!.contentMode = UIViewContentMode.ScaleAspectFill
             imgHeight = imgView!.frame.size.height
             
-            SwiftImageLoader.sharedLoader.imageForUrl(content.imageURL, completionHandler:{
-                [unowned self] (image: UIImage?, url: String) in
-                if let image = image {
-                    self.imgView!.image = image
-                    let oldHeight = self.imgView!.frame.size.height
-                    let newHeight = (self.imgView!.frame.size.width / image.size.width) * image.size.height
-                    self.imgView!.frame.size.height = newHeight
-                    self.frame.size.height += (newHeight - oldHeight)
-                    self.priceLabel!.frame.origin.y += (newHeight - oldHeight)
-                    self.descriptionView!.frame.origin.y += (newHeight - oldHeight)
-                } else {
-                    // TODO: 画像が見つからなかった時のデフォルト画像があればここで表示する。
+            if let imageUrl = NSURL(string: content.imageURL) {
+                
+                self.imgView!.startLoading()
+                self.imgView!.load(imageUrl, placeholder: nil){
+                    [unowned self] (url, image, error) in
+                    
+                    if let image = image {
+                        self.imgView!.image = image
+                        let oldHeight = self.imgView!.frame.size.height
+                        let newHeight = (self.imgView!.frame.size.width / image.size.width) * image.size.height
+                        self.imgView!.frame.size.height = newHeight
+                        self.frame.size.height += (newHeight - oldHeight)
+                        self.priceLabel!.frame.origin.y += (newHeight - oldHeight)
+                        self.descriptionView!.frame.origin.y += (newHeight - oldHeight)
+                        
+                        self.imgView!.stopLoading()
+                        
+                    }
+                    completion()
+                    
                 }
-                completion()
-            })
+            }
+            
             self.addSubview(imgView!)
-            
-            
         }
         
         self.priceLabel = UILabel(frame: CGRectMake(kTitleMarginH, self.titleLabel!.frame.size.height + imgHeight, width - kTitleMarginH * 2, 0))

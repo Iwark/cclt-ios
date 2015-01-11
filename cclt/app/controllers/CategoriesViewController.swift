@@ -14,6 +14,8 @@ class CategoriesViewController: AppViewController, CategoriesTableViewDelegate {
     
     let kSegueID = "CategoriesToSummaries"
     var paramSummaries:[Summary] = []
+    var paramCategoryID = 0
+    var paramFeatureID = 0
     var _tappedName = ""
     
     override func viewDidLoad() {
@@ -50,6 +52,7 @@ class CategoriesViewController: AppViewController, CategoriesTableViewDelegate {
             
             if let summaries = summaries {
                 
+                self.paramCategoryID = categoryID
                 self.paramSummaries = summaries
                 self.performSegueWithIdentifier(self.kSegueID, sender: self)
                 
@@ -66,6 +69,7 @@ class CategoriesViewController: AppViewController, CategoriesTableViewDelegate {
             
             if let summaries = summaries {
                 
+                self.paramFeatureID = featureID
                 self.paramSummaries = summaries
                 self.performSegueWithIdentifier(self.kSegueID, sender: self)
                 
@@ -78,8 +82,10 @@ class CategoriesViewController: AppViewController, CategoriesTableViewDelegate {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         let vc = segue.destinationViewController as SummariesViewController
-        vc.summaries = self.paramSummaries
-        vc.navTitle = _tappedName
+        vc.categoryID = self.paramCategoryID
+        vc.featureID  = self.paramFeatureID
+        vc.summaries  = self.paramSummaries
+        vc.navTitle   = _tappedName
         vc.screenName = "Category_\(_tappedName)"
         
     }

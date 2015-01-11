@@ -122,6 +122,12 @@ class ContentHeadline {
             self.fontSize = .Medium
         }
     }
+    
+    init(title:String) {
+        self.id = 0
+        self.text = title
+        self.fontSize = .Medium
+    }
 }
 
 // MARK: - Link

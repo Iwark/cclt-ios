@@ -22,6 +22,7 @@ class Summary {
     let description: String
     let source: String
     let contents: [JSON]
+    let related_summaries: [JSON]
     
     private struct Static {
         static var all:[Summary] = []
@@ -45,6 +46,7 @@ class Summary {
         self.description = json["description"].stringValue
         self.source = json["source"].stringValue
         self.contents = json["summary_contents"].arrayValue
+        self.related_summaries = json["related_summaries"].arrayValue
     }
     
     class func merge(summaries:[Summary]){
