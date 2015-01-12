@@ -20,7 +20,7 @@ UITableViewDataSource, UITableViewDelegate {
     let kCellID = "SettingsTableViewCell"
     let kCellNib = UINib(nibName: "SettingsTableViewCell", bundle: nil)
     
-    let kHeaderHeight:CGFloat = 60
+    let kHeaderHeight:CGFloat = 44
     let kRowHeight:CGFloat = 52
     
     enum Section1:Int {
@@ -28,6 +28,12 @@ UITableViewDataSource, UITableViewDelegate {
         case Facebook
         case Twitter
         case Web
+    }
+    
+    enum Section2:Int {
+        case Privacy = 0
+        case Inquiry
+        case Version
     }
     
     required init(coder aDecoder: NSCoder) {
@@ -38,7 +44,6 @@ UITableViewDataSource, UITableViewDelegate {
         self.dataSource = self
         
         self.registerNib(kCellNib, forCellReuseIdentifier: kCellID)
-        
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -46,12 +51,15 @@ UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        if section == 0 {
+            return 4
+        } else {
+            return 3
+        }
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCellWithIdentifier(kCellID, forIndexPath: indexPath) as SettingsTableViewCell
-        
         if indexPath.section == 0 {
             
             if let row = Section1(rawValue: indexPath.row) {
@@ -64,6 +72,17 @@ UITableViewDataSource, UITableViewDelegate {
                     cell.label.text = "ショコラTwitterページ"
                 case .Web:
                     cell.label.text = "ショコラWebサイト"
+                }
+            }
+        } else {
+            if let row = Section2(rawValue: indexPath.row) {
+                switch(row) {
+                case .Privacy:
+                    cell.label.text = "プライバシー"
+                case .Inquiry:
+                    cell.label.text = "お問い合わせ"
+                case .Version:
+                    cell.label.text = "バージョン情報"
                 }
             }
         }

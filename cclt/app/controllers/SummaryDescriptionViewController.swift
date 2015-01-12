@@ -35,6 +35,8 @@ class SummaryDescriptionViewController: AppViewController, SummaryDescriptionVie
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        SummaryViewModel.sendImpression(self.summary!.id)
+        
         if let sdv = self.summaryDescriptionView {
             sdv.frame = self.view.frame
             sdv.frame.size.height = self.view.frame.height// - 120

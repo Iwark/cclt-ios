@@ -24,6 +24,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         GAI.sharedInstance().logger.logLevel = .Verbose
         GAI.sharedInstance().trackerWithTrackingId("UA-54309504-1")
         
+        let ud = NSUserDefaults.standardUserDefaults()
+        if let uuid = ud.stringForKey("uuid"){
+            Curator.myUUID = uuid
+        } else {
+            let uuid = NSUUID().UUIDString
+            Curator.myUUID = uuid
+            ud.setObject(uuid, forKey: "uuid")
+            ud.synchronize()
+        }
+        
         return true
     }
 

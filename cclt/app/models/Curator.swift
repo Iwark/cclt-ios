@@ -18,11 +18,17 @@ class Curator {
     
     private struct Static {
         static var all:[Curator] = []
+        static var myUUID:String = ""
     }
     
     class var all:[Curator] {
         get { return Static.all }
         set { Static.all = newValue }
+    }
+    
+    class var myUUID:String {
+        get { return Static.myUUID }
+        set { Static.myUUID = newValue }
     }
     
     required internal init(json:JSON){

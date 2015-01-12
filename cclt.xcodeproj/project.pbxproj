@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		973DCB1E1A07335E002B15E7 /* CategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973DCB1D1A07335E002B15E7 /* CategoriesViewController.swift */; };
+		97BB37861A63F3040037A38C /* SwiftRateApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97BB37851A63F3040037A38C /* SwiftRateApp.swift */; };
 		97C7ABE41A60E879004249C6 /* ActionButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C7ABE31A60E879004249C6 /* ActionButtonsView.swift */; };
 		97C7ABF71A60EBEF004249C6 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97C7ABF61A60EBEF004249C6 /* FacebookSDK.framework */; };
 		97C7ABF81A60EC4C004249C6 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97C7ABF61A60EBEF004249C6 /* FacebookSDK.framework */; };
@@ -192,6 +193,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		97BB37891A63F3050037A38C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FE08670519E7910E004AB167 /* Alamofire.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4DD67C0B1A5C55C900ED2280;
+			remoteInfo = "Alamofire OSX";
+		};
 		FE08670A19E7910E004AB167 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = FE08670519E7910E004AB167 /* Alamofire.xcodeproj */;
@@ -404,6 +412,7 @@
 
 /* Begin PBXFileReference section */
 		973DCB1D1A07335E002B15E7 /* CategoriesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CategoriesViewController.swift; path = cclt/app/controllers/CategoriesViewController.swift; sourceTree = SOURCE_ROOT; };
+		97BB37851A63F3040037A38C /* SwiftRateApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftRateApp.swift; sourceTree = "<group>"; };
 		97C7ABE31A60E879004249C6 /* ActionButtonsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionButtonsView.swift; sourceTree = "<group>"; };
 		97C7ABF61A60EBEF004249C6 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = Vendor/FacebookSDK/FacebookSDK.framework; sourceTree = SOURCE_ROOT; };
 		FE08670519E7910E004AB167 /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = Vendor/Alamofire/Alamofire.xcodeproj; sourceTree = SOURCE_ROOT; };
@@ -577,6 +586,7 @@
 			isa = PBXGroup;
 			children = (
 				FE08670B19E7910E004AB167 /* Alamofire.framework */,
+				97BB378A1A63F3050037A38C /* Alamofire.framework */,
 				FE08670D19E7910E004AB167 /* AlamofireTests.xctest */,
 			);
 			name = Products;
@@ -864,6 +874,7 @@
 				FE497CAC1A10C0FB00CB3588 /* SwiftImageWithColor.swift */,
 				FE497CB31A10C11200CB3588 /* RegexLiteral.swift */,
 				FE497CC81A11CF3200CB3588 /* SwiftDispatch.swift */,
+				97BB37851A63F3040037A38C /* SwiftRateApp.swift */,
 				FECE9E981A136E8E00CAC7B6 /* SwiftRegex.swift */,
 				FE4E6F781A5A341300AA1CAE /* SwiftLabelFitToSize.swift */,
 			);
@@ -1222,6 +1233,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		97BB378A1A63F3050037A38C /* Alamofire.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Alamofire.framework;
+			remoteRef = 97BB37891A63F3050037A38C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		FE08670B19E7910E004AB167 /* Alamofire.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -1445,6 +1463,7 @@
 				FE66A4EE1A5F6358002EF68B /* TopTabBar.swift in Sources */,
 				FE38360D19F8E35E001EFB6B /* Category.swift in Sources */,
 				FE7C503A1A19F0A700591002 /* SummaryInfoView.swift in Sources */,
+				97BB37861A63F3040037A38C /* SwiftRateApp.swift in Sources */,
 				FE7C50351A198E7E00591002 /* SummariesTableViewCell.swift in Sources */,
 				FE497CC91A11CF3200CB3588 /* SwiftDispatch.swift in Sources */,
 				FECE9E8D1A11EFCB00CAC7B6 /* ContenQuotationView.swift in Sources */,

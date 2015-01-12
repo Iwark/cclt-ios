@@ -90,4 +90,19 @@ extension SummaryViewModel {
             }
         }
     }
+    
+    /**
+    Send Impression to API Server.
+    
+    :param: id The ID of summary.
+    
+    */
+    class func sendImpression(id: Int) {
+        let uuid = Curator.myUUID
+        Alamofire.request(CcltRoute.SendImpression(id, uuid)).response {
+            (request, response, data, error) in
+            println(response)
+            return
+        }
+    }
 }
