@@ -32,7 +32,6 @@
 		FE31BC9E1A1C3C5400A4C0D1 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE31BC9D1A1C3C5400A4C0D1 /* MyPageViewController.swift */; };
 		FE31BCA11A1C3C7700A4C0D1 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE31BCA01A1C3C7700A4C0D1 /* SettingsViewController.swift */; };
 		FE31BCA61A1C3D4F00A4C0D1 /* SettingsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE31BCA51A1C3D4F00A4C0D1 /* SettingsTableView.swift */; };
-		FE31BCA71A1C3D4F00A4C0D1 /* SettingsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE31BCA51A1C3D4F00A4C0D1 /* SettingsTableView.swift */; };
 		FE31BCA91A1C3D6400A4C0D1 /* MyPageScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE31BCA81A1C3D6400A4C0D1 /* MyPageScrollView.swift */; };
 		FE31BCAA1A1C3D6400A4C0D1 /* MyPageScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE31BCA81A1C3D6400A4C0D1 /* MyPageScrollView.swift */; };
 		FE31BCAD1A1C4FB100A4C0D1 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE31BCAB1A1C4FB100A4C0D1 /* SettingsTableViewCell.swift */; };
@@ -40,6 +39,7 @@
 		FE31BCAF1A1C4FB100A4C0D1 /* SettingsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE31BCAC1A1C4FB100A4C0D1 /* SettingsTableViewCell.xib */; };
 		FE31BCB01A1C4FB100A4C0D1 /* SettingsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE31BCAC1A1C4FB100A4C0D1 /* SettingsTableViewCell.xib */; };
 		FE348B0C1A5FDC0200907FC4 /* loading@2x.gif in Resources */ = {isa = PBXBuildFile; fileRef = FE348B0B1A5FDC0200907FC4 /* loading@2x.gif */; };
+		FE348B131A64A29A00907FC4 /* MailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE348B121A64A29A00907FC4 /* MailViewController.swift */; };
 		FE3835F819F67B7E001EFB6B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE3835E719F67B7E001EFB6B /* AppDelegate.swift */; };
 		FE3835F919F67B7E001EFB6B /* MainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE3835E919F67B7E001EFB6B /* MainPageViewController.swift */; };
 		FE38360319F67B7E001EFB6B /* CcltRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE3835F719F67B7E001EFB6B /* CcltRoute.swift */; };
@@ -194,13 +194,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		97BB37891A63F3050037A38C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = FE08670519E7910E004AB167 /* Alamofire.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 4DD67C0B1A5C55C900ED2280;
-			remoteInfo = "Alamofire OSX";
-		};
 		FE08670A19E7910E004AB167 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = FE08670519E7910E004AB167 /* Alamofire.xcodeproj */;
@@ -435,6 +428,7 @@
 		FE31BCAB1A1C4FB100A4C0D1 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsTableViewCell.swift; path = cclt/App/Views/Settings/SettingsTableViewCell.swift; sourceTree = SOURCE_ROOT; };
 		FE31BCAC1A1C4FB100A4C0D1 /* SettingsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SettingsTableViewCell.xib; path = cclt/App/Views/Settings/SettingsTableViewCell.xib; sourceTree = SOURCE_ROOT; };
 		FE348B0B1A5FDC0200907FC4 /* loading@2x.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "loading@2x.gif"; sourceTree = "<group>"; };
+		FE348B121A64A29A00907FC4 /* MailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MailViewController.swift; sourceTree = "<group>"; };
 		FE3835E719F67B7E001EFB6B /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FE3835E919F67B7E001EFB6B /* MainPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainPageViewController.swift; sourceTree = "<group>"; };
 		FE3835F719F67B7E001EFB6B /* CcltRoute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CcltRoute.swift; sourceTree = "<group>"; };
@@ -589,7 +583,6 @@
 			isa = PBXGroup;
 			children = (
 				FE08670B19E7910E004AB167 /* Alamofire.framework */,
-				97BB378A1A63F3050037A38C /* Alamofire.framework */,
 				FE08670D19E7910E004AB167 /* AlamofireTests.xctest */,
 			);
 			name = Products;
@@ -687,6 +680,7 @@
 			children = (
 				FEF09B5C1A0B0C6200FE9CFE /* AppViewController.swift */,
 				973DCB1D1A07335E002B15E7 /* CategoriesViewController.swift */,
+				FE348B121A64A29A00907FC4 /* MailViewController.swift */,
 				FE3835E919F67B7E001EFB6B /* MainPageViewController.swift */,
 				FE31BC9D1A1C3C5400A4C0D1 /* MyPageViewController.swift */,
 				FE7C503C1A1AE08800591002 /* SearchViewController.swift */,
@@ -1237,13 +1231,6 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		97BB378A1A63F3050037A38C /* Alamofire.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Alamofire.framework;
-			remoteRef = 97BB37891A63F3050037A38C /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		FE08670B19E7910E004AB167 /* Alamofire.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -1492,6 +1479,7 @@
 				FE38361C19F8F74D001EFB6B /* Pickup.swift in Sources */,
 				FE497CAF1A10C0FB00CB3588 /* SwiftImageLoader.swift in Sources */,
 				FE38360619F8E31E001EFB6B /* SummaryViewModel.swift in Sources */,
+				FE348B131A64A29A00907FC4 /* MailViewController.swift in Sources */,
 				FE497C9D1A0CA09E00CB3588 /* SummaryPartialViewCell.swift in Sources */,
 				FE17A90219FDD5E7007BFC62 /* CuratorViewModel.swift in Sources */,
 				FECE9E8A1A11EFBD00CAC7B6 /* ContentMovieView.swift in Sources */,
@@ -1532,7 +1520,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				FECE9E941A11F00700CAC7B6 /* ContentTwitterView.swift in Sources */,
-				FE31BCA71A1C3D4F00A4C0D1 /* SettingsTableView.swift in Sources */,
 				FE9C877119F4E35E002C50BE /* Async.series.swift in Sources */,
 				FE17A91019FDD76D007BFC62 /* SummaryViewModelSpec.swift in Sources */,
 				FE17A91219FDD83A007BFC62 /* PickupViewModelSpec.swift in Sources */,

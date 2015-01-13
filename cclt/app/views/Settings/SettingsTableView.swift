@@ -7,13 +7,17 @@
 //
 
 import UIKit
+import MessageUI
 
 protocol SettingsTableViewDelegate:class {
     func push(vc: UIViewController)
+    func open(vc: UIViewController)
+    func startLoading()
+    
 }
 
 class SettingsTableView: UITableView,
-UITableViewDataSource, UITableViewDelegate {
+UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate {
     
     weak var settingsTableViewDelegate:SettingsTableViewDelegate?
 
@@ -110,6 +114,41 @@ UITableViewDataSource, UITableViewDelegate {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
+        if indexPath.section == 0 {
+            
+            if let row = Section1(rawValue: indexPath.row) {
+                switch(row) {
+                case .Review:
+                    return
+                case .Facebook:
+                    UIApplication.sharedApplication().openURL(NSURL(string: "https://www.facebook.com/cclt.jp")!)
+                case .Twitter:
+                    UIApplication.sharedApplication().openURL(NSURL(string: "https://twitter.com/chocolat_cclt")!)
+                case .Web:
+                    UIApplication.sharedApplication().openURL(NSURL(string: "http://cclt.jp")!)
+                }
+            }
+        } else {
+            if let row = Section2(rawValue: indexPath.row) {
+                switch(row) {
+                case .Privacy:
+                    UIApplication.sharedApplication().openURL(NSURL(string: "http://cclt.jp/rules/privacy")!)
+                case .Inquiry:
+                    self.settingsTableViewDelegate?.startLoading()
+                    let mvc = MailViewController()
+                    mvc.mailComposeDelegate = self
+                    self.settingsTableViewDelegate?.open(mvc)
+                case .Version:
+                    return
+                }
+            }
+        }
+        
+        
+    }
+    
+    func mailComposeController(controller: MFMailComposeViewController!, didFinishWithResult result: MFMailComposeResult, error: NSError!) {
+        controller.dismissViewControllerAnimated(true, completion: nil)
     }
     
 }

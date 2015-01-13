@@ -34,4 +34,12 @@ SettingsTableViewDelegate {
         self.navController?.pushViewController(vc, animated: true)
     }
     
+    func open(vc: UIViewController) {
+        self.presentViewController(vc, animated: true, completion: nil)
+    }
+    
+    func startLoading() {
+        super.startLoading()
+    }
+    
 }
