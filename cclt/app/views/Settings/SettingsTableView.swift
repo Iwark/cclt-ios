@@ -65,24 +65,27 @@ UITableViewDataSource, UITableViewDelegate {
             if let row = Section1(rawValue: indexPath.row) {
                 switch(row) {
                 case .Review:
-                    cell.label.text = "レビューを書く"
+                    cell.leftLabel.text = "レビューを書く"
                 case .Facebook:
-                    cell.label.text = "ショコラFacebookページ"
+                    cell.leftLabel.text = "ショコラFacebookページ"
                 case .Twitter:
-                    cell.label.text = "ショコラTwitterページ"
+                    cell.leftLabel.text = "ショコラTwitterページ"
                 case .Web:
-                    cell.label.text = "ショコラWebサイト"
+                    cell.leftLabel.text = "ショコラWebサイト"
                 }
             }
         } else {
             if let row = Section2(rawValue: indexPath.row) {
                 switch(row) {
                 case .Privacy:
-                    cell.label.text = "プライバシー"
+                    cell.leftLabel.text = "プライバシー"
                 case .Inquiry:
-                    cell.label.text = "お問い合わせ"
+                    cell.leftLabel.text = "お問い合わせ"
                 case .Version:
-                    cell.label.text = "バージョン情報"
+                    cell.leftLabel.text = "バージョン情報"
+                    if let version = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString") as? String {
+                        cell.rightLabel.text = version
+                    }
                 }
             }
         }

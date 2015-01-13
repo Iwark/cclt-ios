@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
@@ -15,21 +16,31 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lbx-6X-Cfb">
-                        <rect key="frame" x="8" y="8" width="304" height="27"/>
+                        <rect key="frame" x="8" y="8" width="42" height="27"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="　" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fmw-pB-zgt">
+                        <rect key="frame" x="287" y="8" width="17" height="27"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" red="0.5725490196078431" green="0.88235294117647056" blue="0.7686274509803922" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="Lbx-6X-Cfb" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="5FU-5z-ljx"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="Lbx-6X-Cfb" secondAttribute="trailing" id="VHU-to-gAv"/>
+                    <constraint firstItem="Fmw-pB-zgt" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" constant="-8" id="Bbw-Iq-5ma"/>
+                    <constraint firstItem="Fmw-pB-zgt" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Lbx-6X-Cfb" secondAttribute="trailing" id="Dbk-Pw-P92"/>
                     <constraint firstItem="Lbx-6X-Cfb" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="dM0-F3-TfS"/>
                     <constraint firstAttribute="bottomMargin" secondItem="Lbx-6X-Cfb" secondAttribute="bottom" id="mbJ-Wg-Qg8"/>
+                    <constraint firstItem="Fmw-pB-zgt" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="syv-P3-Gkt"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="Fmw-pB-zgt" secondAttribute="bottom" id="wO4-Nq-IiQ"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="label" destination="Lbx-6X-Cfb" id="Rjg-o4-jid"/>
+                <outlet property="leftLabel" destination="Lbx-6X-Cfb" id="X2M-Dt-fy0"/>
+                <outlet property="rightLabel" destination="Fmw-pB-zgt" id="Bao-bi-vkj"/>
             </connections>
             <point key="canvasLocation" x="414" y="262"/>
         </tableViewCell>

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9720742A1A649A9600029C5D /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 972074291A649A9600029C5D /* MessageUI.framework */; };
 		973DCB1E1A07335E002B15E7 /* CategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973DCB1D1A07335E002B15E7 /* CategoriesViewController.swift */; };
 		97BB37861A63F3040037A38C /* SwiftRateApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97BB37851A63F3040037A38C /* SwiftRateApp.swift */; };
 		97C7ABE41A60E879004249C6 /* ActionButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C7ABE31A60E879004249C6 /* ActionButtonsView.swift */; };
@@ -411,6 +412,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		972074291A649A9600029C5D /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		973DCB1D1A07335E002B15E7 /* CategoriesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CategoriesViewController.swift; path = cclt/app/controllers/CategoriesViewController.swift; sourceTree = SOURCE_ROOT; };
 		97BB37851A63F3040037A38C /* SwiftRateApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftRateApp.swift; sourceTree = "<group>"; };
 		97C7ABE31A60E879004249C6 /* ActionButtonsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionButtonsView.swift; sourceTree = "<group>"; };
@@ -557,6 +559,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9720742A1A649A9600029C5D /* MessageUI.framework in Frameworks */,
 				FEB296811A5CCFAB000C4A3E /* libz.dylib in Frameworks */,
 				FEB2967F1A5CCFA0000C4A3E /* SystemConfiguration.framework in Frameworks */,
 				FEB2967D1A5CCF97000C4A3E /* CoreData.framework in Frameworks */,
@@ -796,8 +799,9 @@
 				FE08670E19E7911B004AB167 /* SwiftyJSON.xcodeproj */,
 				FEB2967A1A5CCF8C000C4A3E /* AdSupport.framework */,
 				FEB2967C1A5CCF97000C4A3E /* CoreData.framework */,
-				FEB2967E1A5CCFA0000C4A3E /* SystemConfiguration.framework */,
 				97C7ABF61A60EBEF004249C6 /* FacebookSDK.framework */,
+				972074291A649A9600029C5D /* MessageUI.framework */,
+				FEB2967E1A5CCFA0000C4A3E /* SystemConfiguration.framework */,
 				FEB296801A5CCFAA000C4A3E /* libz.dylib */,
 				FEB2966D1A5CCF17000C4A3E /* GoogleAnalytics */,
 				FE66A49E1A5D0778002EF68B /* ImageLoader */,
