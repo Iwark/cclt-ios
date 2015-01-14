@@ -12,8 +12,8 @@ import UIKit
 /// 記事ページの制御を行うコントローラ
 class SummaryDescriptionViewController: AppViewController, SummaryDescriptionViewDelegate {
     
-    var summary: Summary?
-    var summaryDescriptionView: SummaryDescriptionView?
+    var summary: Summary!
+    var summaryDescriptionView: SummaryDescriptionView!
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -47,6 +47,10 @@ class SummaryDescriptionViewController: AppViewController, SummaryDescriptionVie
 //            self.view.addSubview(actionButtonsView)
             
         }
+    }
+    
+    override func statusBarSizeFix(amount: CGFloat) {
+        self.summaryDescriptionView.frame.origin.y += amount
     }
     
     func tapped(summaryID: Int) {

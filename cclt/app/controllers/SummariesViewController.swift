@@ -27,7 +27,7 @@ SummariesTableViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         summariesTableView.summariesTableViewDelegate = self
         summariesTableView.summaries = summaries
         summariesTableView.autoLoadMore = true
@@ -56,7 +56,6 @@ SummariesTableViewDelegate {
     // 追加読み込み
     func loadMore() {
         if loadingMore { return }
-        
         loadingMore = true
 
         if let searchWord = searchWord {
@@ -80,6 +79,7 @@ SummariesTableViewDelegate {
         }
         
         var lastSummaryID = summaries.last!.id
+        println("\(summaries.last!.title), \(lastSummaryID)")
         
         SummaryViewModel.fetchSummaries(categoryID: categoryID, featureID: featureID, lastSummaryID: lastSummaryID, completionHandler:{
             [unowned self](summaries, error) -> () in

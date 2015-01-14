@@ -10,7 +10,7 @@ import Foundation
 import SwiftyJSON
 import Alamofire
 
-let kDefaultFetchSummariesNum = 10
+let kDefaultFetchSummariesNum = 15
 
 class SummaryViewModel {
     
@@ -101,7 +101,6 @@ extension SummaryViewModel {
         let uuid = Curator.myUUID
         Alamofire.request(CcltRoute.SendImpression(id, uuid)).response {
             (request, response, data, error) in
-            println(response)
             return
         }
     }

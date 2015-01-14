@@ -14,67 +14,59 @@ class ContentImageView: UIView {
     let descriptionView:ContentsDescriptionView!
     
     let kImgMarginLeft:CGFloat = 10
+    let imgShadowLength:CGFloat = 40.0
+    let imgShadowRadius:CGFloat = 15.0
     
     init(width: CGFloat, content: ContentImage, completion:()->()){
         super.init()
         
         self.imgView = DefaultImageView(frame: CGRectMake(kImgMarginLeft, 0, width - kImgMarginLeft * 2, width))
-        
+        self.imgView.contentMode = UIViewContentMode.Redraw
+        self.imgView.clipsToBounds = true
         self.descriptionView = ContentsDescriptionView(width: width, description: content.text)
-        self.descriptionView.frame.origin.y += self.imgView!.frame.size.height
+        self.descriptionView.frame.origin.y += self.imgView.frame.size.height
         
-        if let imageUrl = NSURL(string: content.image_url) {
-            
-            self.imgView.startLoading()
-            self.imgView.load(imageUrl, placeholder: nil){
-                [unowned self] (url, image, error) in
-                
-                if let image = image {
-                    self.imgView.image = image
-                    let oldWidth = self.imgView.frame.size.width
-                    let oldHeight = self.imgView.frame.size.height
-                    let imgPortion = image.size.height / image.size.width
-                    var newHeight = self.imgView.frame.size.width * imgPortion
-                    
-                    if newHeight > self.imgView.frame.size.width {
-                        self.imgView.frame.size.height = self.imgView.frame.size.width
-                        self.imgView.frame.size.width = self.imgView.frame.size.width / imgPortion
-                    } else {
-                        self.imgView.frame.size.height = newHeight
-                    }
-                    
-                    self.frame.origin.x += (oldWidth - self.imgView.frame.size.width) / 2
-                    
-                    self.frame.size.height += (self.imgView.frame.size.height - oldHeight)
+        self.imgView.loadImage(content.image_url, completion: {
+            [unowned self] () in
+            if let image = self.imgView.image {
+                let aspectRatio = image.size.width / image.size.height
+                let oldHeight = self.imgView.frame.size.height
+                let newHeight = self.imgView.frame.size.width / aspectRatio
+                println("aspectRatio: \(aspectRatio)")
+                println("newHeight: \(newHeight)")
+                if newHeight > oldHeight {
+                    println("addingShadow")
+                    self.addShadowToImageView()
+                } else {
+                    self.imgView.frame.size.height = newHeight
+                    self.frame.size.height += (newHeight - oldHeight)
                     self.descriptionView.frame.origin.y += (newHeight - oldHeight)
-                    
-                    self.imgView.stopLoading()
-                    
                 }
-                completion()
-                
             }
-        }
-
-//        SwiftImageLoader.sharedLoader.imageForUrl(content.image_url, completionHandler:{
-//            [unowned self] (image: UIImage?, url: String) in
-//            if let image = image {
-//                self.imgView!.image = image
-//                let oldHeight = self.imgView!.frame.size.height
-//                let newHeight = (self.imgView!.frame.size.width / image.size.width) * image.size.height
-//                self.imgView!.frame.size.height = newHeight
-//                self.frame.size.height += (newHeight - oldHeight)
-//                self.descriptionView!.frame.origin.y += (newHeight - oldHeight)
-//            } else {
-//                // TODO: 画像が見つからなかった時のデフォルト画像があればここで表示する。
-//            }
-//            completion()
-//        })
+            completion()
+        })
+        
         self.addSubview(imgView)
         self.addSubview(descriptionView)
         
         self.frame = CGRectMake(0, 0, width, self.descriptionView.frame.origin.y + self.descriptionView.frame.size.height)
         
+    }
+
+    /**
+    Add shadow to the bottom of the large image.
+    */
+    func addShadowToImageView(){
+        let subLayer = CALayer()
+        subLayer.frame = self.imgView.bounds
+        self.imgView.layer.addSublayer(subLayer)
+        subLayer.masksToBounds = true
+        let path = UIBezierPath(rect: CGRectMake(-10, subLayer.bounds.size.height-imgShadowLength, subLayer.bounds.size.width+20, imgShadowLength*2))
+        subLayer.shadowOffset = CGSizeMake(2.5, 2.5)
+        subLayer.shadowColor = UIColor.whiteColor().CGColor
+        subLayer.shadowOpacity = 0.8
+        subLayer.shadowRadius = imgShadowRadius
+        subLayer.shadowPath = path.CGPath
     }
     
     override init(frame: CGRect) {

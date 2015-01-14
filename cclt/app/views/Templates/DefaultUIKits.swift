@@ -54,17 +54,18 @@ class DefaultImageView: UIImageView {
     }
     
     func stopLoading() {
+        indicator.stopAnimating()
         indicator.removeFromSuperview()
     }
     
-    func loadImage(url:String, completion:()->()){
+    func loadImage(url:String, indicator:Bool = true, completion:()->()){
         if let imageURL = NSURL(string: url) {
-            self.startLoading()
+            if indicator { self.startLoading() }
             self.load(imageURL, placeholder: nil){
                 [unowned self] (url, image, error) in
                 if let image = image {
-//                    self.image = image
-                    self.stopLoading()
+                    self.image = image
+                    if indicator { self.stopLoading() }
                 }
                 completion()
             }

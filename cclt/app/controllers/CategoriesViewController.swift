@@ -53,6 +53,7 @@ class CategoriesViewController: AppViewController, CategoriesTableViewDelegate {
             if let summaries = summaries {
                 
                 self.paramCategoryID = categoryID
+                self.paramFeatureID = 0
                 self.paramSummaries = summaries
                 self.performSegueWithIdentifier(self.kSegueID, sender: self)
                 
@@ -69,6 +70,7 @@ class CategoriesViewController: AppViewController, CategoriesTableViewDelegate {
             
             if let summaries = summaries {
                 
+                self.paramCategoryID = 0
                 self.paramFeatureID = featureID
                 self.paramSummaries = summaries
                 self.performSegueWithIdentifier(self.kSegueID, sender: self)

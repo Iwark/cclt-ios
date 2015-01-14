@@ -69,7 +69,7 @@ UITableViewDataSource, UITableViewDelegate {
             cell.titleLabel.text = summary.title
             cell.writerLabel.text = summary.curator.name
             cell.chocoLabel.text = "\(summary.choco) choco"
-            cell.imgView.loadImage(summary.icon_url){}
+            cell.imgView.loadImage(summary.icon_url, indicator:true){}
         } else {
             cell.imgView.image = nil
             cell.titleLabel.text = ""
@@ -104,8 +104,7 @@ UITableViewDataSource, UITableViewDelegate {
     
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
 
-        if indexPath.row >= summaries.count - displayCellIndexToLoadMore {
-            
+        if indexPath.row >= summaries.count - displayCellIndexToLoadMore && !self.loadingFinished {
             self.summariesTableViewDelegate?.loadMore()
         }
         

@@ -113,7 +113,7 @@ class SummaryPartialView: UIView {
             imgFrame.size.height -= kPadding * 2
             let imgView = DefaultImageView(frame: imgFrame)
             if let url = url {
-                imgView.loadImage(url.absoluteString!){}
+                imgView.loadImage(url.absoluteString!, indicator: true){}
             }
             self.addSubview(imgView)
         }

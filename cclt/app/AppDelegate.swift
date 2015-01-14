@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Crashlytics
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -21,8 +22,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         GAI.sharedInstance().trackUncaughtExceptions = true
         GAI.sharedInstance().dispatchInterval = 20
-        GAI.sharedInstance().logger.logLevel = .Verbose
+//        GAI.sharedInstance().logger.logLevel = .Verbose
         GAI.sharedInstance().trackerWithTrackingId("UA-54309504-1")
+        
+        Crashlytics.startWithAPIKey("184c92204dfc2b88b464d450001bf6579be5c4f6")
         
         let ud = NSUserDefaults.standardUserDefaults()
         if let uuid = ud.stringForKey("uuid"){

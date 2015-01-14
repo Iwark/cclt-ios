@@ -8,23 +8,42 @@
 
 import UIKit
 
-class ContentTwitterView: UIView {
+class ContentTwitterView: UIView, UIWebViewDelegate {
 
     let profileImgView:DefaultImageView?
     let nameLabel:UILabel?
     let textView:UIView?
     let imgView:DefaultImageView?
+    let webView:UIWebView?
     
     let kProfileSize:CGFloat = 48
     let kProfileMarginH:CGFloat = 10
     let kImgMarginTop:CGFloat = 10
     
+    var completion:(()->())?
+    
     init(width: CGFloat, content: ContentTwitter, completion:()->()){
         super.init()
         
+        self.completion = completion
+        
+        if content.html != "" {
+            if let url = NSURL(string: CcltRoute.baseURLString + "content_twitters/\(content.id).html"){
+                let webView = UIWebView(frame: CGRectMake(0, 0, width, 300))
+                webView.backgroundColor = UIColor.clearColor()
+                webView.opaque = false
+                let request = NSURLRequest(URL: url, cachePolicy: .UseProtocolCachePolicy, timeoutInterval: 60)
+                webView.loadRequest(request)
+                webView.delegate = self
+                self.addSubview(webView)
+                self.frame = webView.frame
+                return
+            }
+        }
+        
         self.profileImgView = DefaultImageView(frame: CGRectMake(kProfileMarginH, 0, kProfileSize, kProfileSize))
         self.addSubview(profileImgView!)
-        self.profileImgView!.loadImage(content.profileImageURL){}
+        self.profileImgView!.loadImage(content.profileImageURL, indicator: true){}
         
         self.nameLabel = UILabel(frame: CGRectMake(kProfileSize + kProfileMarginH * 2, 0, width - kProfileSize - kProfileMarginH * 2, kProfileSize))
         self.nameLabel!.text = content.userName
@@ -71,6 +90,26 @@ class ContentTwitterView: UIView {
         
         
         
+    }
+    
+//    func webViewDidFinishLoad(webView: UIWebView) {
+//        println("finished loading webView")
+//    }
+    
+    func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+        let urlStr = request.URL.absoluteString!
+        println(urlStr)
+        if urlStr.hasPrefix("api-cclt://") {
+            if let completion = self.completion {
+                webView.sizeToFit()
+                self.frame.size = webView.frame.size
+                completion()
+            }
+            self.completion = nil
+            return false
+        }
+        
+        return true
     }
     
     override init(frame: CGRect) {

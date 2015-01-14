@@ -159,6 +159,7 @@ class ContentTwitter {
     let profileImageURL: String
     let imageURL: String
     let statusID: String
+    let html: String
     
     required internal init(_ json:JSON){
         self.id = json["id"].intValue
@@ -168,6 +169,7 @@ class ContentTwitter {
         self.profileImageURL = json["profile_image_url"].stringValue
         self.imageURL = json["image_url"].stringValue
         self.statusID = json["status_id"].stringValue
+        self.html = json["html"].stringValue
     }
     
 }

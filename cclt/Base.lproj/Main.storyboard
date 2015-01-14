@@ -137,7 +137,7 @@
             <objects>
                 <navigationController id="KCM-FZ-TfV" sceneMemberID="viewController">
                     <extendedEdge key="edgesForExtendedLayout" top="YES"/>
-                    <tabBarItem key="tabBarItem" tag="1" title="トピックス" image="topics.png" selectedImage="topics_g.png" id="Xa6-bd-1JD"/>
+                    <tabBarItem key="tabBarItem" tag="1" title="トピックス" image="topics.png" id="Xa6-bd-1JD"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="z62-2Q-bQ7">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -177,7 +177,7 @@
             <objects>
                 <navigationController id="d9x-JE-xl1" sceneMemberID="viewController">
                     <extendedEdge key="edgesForExtendedLayout" top="YES"/>
-                    <tabBarItem key="tabBarItem" tag="2" title="カテゴリ" id="z4T-VG-Cnh"/>
+                    <tabBarItem key="tabBarItem" tag="2" title="カテゴリ" image="category.png" id="z4T-VG-Cnh"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="0hO-Ld-oOF">
@@ -192,12 +192,12 @@
             </objects>
             <point key="canvasLocation" x="-133" y="895.5"/>
         </scene>
-        <!--検索-->
+        <!--さがす-->
         <scene sceneID="1Iz-l4-qfK">
             <objects>
                 <navigationController id="bsk-ZV-fdg" sceneMemberID="viewController">
                     <extendedEdge key="edgesForExtendedLayout" top="YES"/>
-                    <tabBarItem key="tabBarItem" tag="3" title="検索" id="4f5-z3-YP4"/>
+                    <tabBarItem key="tabBarItem" tag="3" title="さがす" image="search.png" id="4f5-z3-YP4"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="lXM-Sh-yn7">
@@ -274,7 +274,7 @@
             <objects>
                 <navigationController id="rbG-ga-22f" sceneMemberID="viewController">
                     <extendedEdge key="edgesForExtendedLayout" top="YES"/>
-                    <tabBarItem key="tabBarItem" tag="4" title="マイページ" id="0rA-aS-wMq"/>
+                    <tabBarItem key="tabBarItem" tag="4" title="マイページ" image="mypage.png" id="0rA-aS-wMq"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="1LQ-48-Pwp">
@@ -328,7 +328,7 @@
             <objects>
                 <navigationController id="Ojg-OC-UAV" sceneMemberID="viewController">
                     <extendedEdge key="edgesForExtendedLayout" top="YES"/>
-                    <tabBarItem key="tabBarItem" tag="5" title="設定" id="sCu-Pe-OrZ"/>
+                    <tabBarItem key="tabBarItem" tag="5" title="設定" image="setting.png" id="sCu-Pe-OrZ"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="8dz-e4-y8R">
@@ -380,8 +380,11 @@
         </scene>
     </scenes>
     <resources>
+        <image name="category.png" width="30" height="30"/>
+        <image name="mypage.png" width="30" height="30"/>
+        <image name="search.png" width="30" height="30"/>
+        <image name="setting.png" width="30" height="30"/>
         <image name="topics.png" width="30" height="30"/>
-        <image name="topics_g.png" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="kye-ba-cdu"/>

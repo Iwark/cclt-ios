@@ -50,14 +50,20 @@ UITableViewDataSource, UITableViewDelegate {
             cell.categoryID = nil
             cell.featureID = feature.id
             cell.titleLabel.text = feature.title
-            cell.imgView.loadImage(feature.icon_url){}
+            SwiftImageLoader.sharedLoader.imageForUrl(feature.icon_url, completionHandler: {
+                [unowned cell] (image, url) in
+                cell.imgView.image = image
+            })
             
         }else if Category.all.count > indexPath.row - Feature.all.count {
             let category = Category.all[indexPath.row - Feature.all.count]
             cell.categoryID = category.id
             cell.featureID = nil
             cell.titleLabel.text = category.name
-            cell.imgView.loadImage(category.iconURL){}
+            SwiftImageLoader.sharedLoader.imageForUrl(category.iconURL, completionHandler: {
+                [unowned cell] (image, url) in
+                cell.imgView.image = image
+            })
         }
         return cell
         

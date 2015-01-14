@@ -17,6 +17,7 @@ class AppViewController: UIViewController, BackBarButtonItemDelegate {
     var _appLoadStartTime:NSDate!
 
     var screenName:String?
+    var adjustingStatusBarSizeToView:Bool = false
     
     var navTitle:String? {
         get { return self.navigationItem.title }
@@ -97,8 +98,23 @@ class AppViewController: UIViewController, BackBarButtonItemDelegate {
         self.navigationController?.popViewControllerAnimated(true)
     }
     
+    /**
+    adjust view size w/ Status bar size.
+    */
     override func viewWillAppear(animated: Bool) {
         self.navBarColor = kNavBarColor
+        if((UIApplication.sharedApplication().statusBarFrame.size.height > 20) ^ adjustingStatusBarSizeToView){
+            if adjustingStatusBarSizeToView {
+                statusBarSizeFix(20.0)
+            } else {
+                statusBarSizeFix(-20.0)
+            }
+            adjustingStatusBarSizeToView = !adjustingStatusBarSizeToView
+        }
+    }
+    
+    func statusBarSizeFix(amount:CGFloat){
+        
     }
     
     override func viewDidAppear(animated: Bool) {

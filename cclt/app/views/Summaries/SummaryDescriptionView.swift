@@ -59,7 +59,7 @@ class SummaryDescriptionView: UIScrollView, SummariesTableViewDelegate {
             
             // メイン画像
             let mainImgView = DefaultImageView(frame: CGRectMake(0, 0, width, width))
-            mainImgView.loadImage(summary.image_url){}
+            mainImgView.loadImage(summary.image_url, indicator: true){}
             self.addSubview(mainImgView)
             
             infoHeight += mainImgView.frame.size.height
