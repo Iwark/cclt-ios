@@ -7,7 +7,9 @@
 //
 
 import UIKit
+import Fabric
 import Crashlytics
+import TwitterKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -25,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        GAI.sharedInstance().logger.logLevel = .Verbose
         GAI.sharedInstance().trackerWithTrackingId("UA-54309504-1")
         
-        Crashlytics.startWithAPIKey("184c92204dfc2b88b464d450001bf6579be5c4f6")
+        Fabric.with([Crashlytics(), Twitter()])
         
         let ud = NSUserDefaults.standardUserDefaults()
         if let uuid = ud.stringForKey("uuid"){
@@ -36,6 +38,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             ud.setObject(uuid, forKey: "uuid")
             ud.synchronize()
         }
+        
+        TWTRTweetView.appearance().primaryTextColor = Settings.Colors.textColor
+        TWTRTweetView.appearance().backgroundColor  = Settings.Colors.twitterBackgroundColor
+        TWTRTweetView.appearance().linkTextColor    = Settings.Colors.linkColor
         
         return true
     }

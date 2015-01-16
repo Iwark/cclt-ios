@@ -50,34 +50,6 @@ class AppViewController: UIViewController, BackBarButtonItemDelegate {
         
         UINavigationBar.appearance().titleTextAttributes = ["NSForegroundColorAttributeName": UIColor.whiteColor()]
         
-        if let tabBarItems = UITabBar.appearance().items {
-            for item in tabBarItems as [UITabBarItem] {
-                var imgName = ""
-                switch item.tag {
-                case 1:
-                    imgName = "topics"
-                case 2:
-                    imgName = "category"
-                case 3:
-                    imgName = "search"
-                case 4:
-                    imgName = "mypage"
-                case 5:
-                    imgName = "setting"
-                default:
-                    break
-                }
-                if item.image == nil {
-                    let image = UIImage(named: imgName)?.imageWithRenderingMode(.AlwaysOriginal)
-                    let selectedImage = UIImage(named: imgName + "_g")?.imageWithRenderingMode(.AlwaysOriginal)
-                    item.image = image
-                    item.selectedImage = selectedImage
-                } else {
-                    break
-                }
-            }
-        }
-        
         if let navController = self.navigationController? {
             
             if navController.viewControllers.count > 1 {

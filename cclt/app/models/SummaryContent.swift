@@ -52,7 +52,7 @@ class ContentText {
             self.style = .Normal
         }
         
-        if let fontSize = FontSize(rawValue: json["fontSize"].stringValue){
+        if let fontSize = FontSize(rawValue: json["font_size"].stringValue){
             self.fontSize = fontSize
         } else {
             self.fontSize = .Medium
@@ -67,11 +67,13 @@ class ContentImage {
     let image_url: String
     let text: String
     let source: String
+    let displaySource: String
     required internal init(_ json:JSON){
         self.id = json["id"].intValue
         self.image_url = json["image_url"].stringValue
         self.text = json["text"].stringValue
         self.source = json["source"].stringValue
+        self.displaySource = json["display_source"].stringValue
     }
 }
 
@@ -81,10 +83,12 @@ class ContentQuotation {
     let id: Int
     let text: String
     let url: String
+    let displaySource: String
     required internal init(_ json:JSON){
         self.id = json["id"].intValue
         self.text = json["text"].stringValue
         self.url = json["url"].stringValue
+        self.displaySource = json["display_source"].stringValue
     }
 }
 
@@ -139,6 +143,7 @@ class ContentLink {
     let text: String
     let image_url: String
     let source: String
+    let displaySource: String
     required internal init(_ json:JSON){
         self.id = json["id"].intValue
         self.title = json["title"].stringValue
@@ -146,6 +151,7 @@ class ContentLink {
         self.text = json["text"].stringValue
         self.image_url = json["image_url"].stringValue
         self.source = json["source"].stringValue
+        self.displaySource = json["display_source"].stringValue
     }
 }
 
@@ -184,6 +190,7 @@ class ContentCommodity {
     let price: Int
     let imageURL:String
     let source:String
+    let displaySource: String
     
     required internal init(_ json:JSON){
         self.id = json["id"].intValue
@@ -193,6 +200,7 @@ class ContentCommodity {
         self.price = json["price"].intValue
         self.imageURL = json["image_url"].stringValue
         self.source = json["source"].stringValue
+        self.displaySource = json["display_source"].stringValue
     }
 }
 

@@ -10,9 +10,10 @@ import UIKit
 
 protocol SummaryDescriptionViewDelegate:class {
     func tapped(summaryID:Int)
+    func linkTapped(url: NSURL)
 }
 
-class SummaryDescriptionView: UIScrollView, SummariesTableViewDelegate {
+class SummaryDescriptionView: UIScrollView, SummariesTableViewDelegate, SummaryContentsViewDelegate {
 
     weak var summaryDescriptionViewDelegate:SummaryDescriptionViewDelegate?
     let summary: Summary?
@@ -25,6 +26,8 @@ class SummaryDescriptionView: UIScrollView, SummariesTableViewDelegate {
     let relatedSummariesView = SummariesTableView(frame: CGRectZero)
     
     var infoHeight:CGFloat = 0
+    let sourceLabelHeight:CGFloat = 20.0
+    
     var contentsHeight:CGFloat = 0
     
     init(summary: Summary) {
@@ -69,6 +72,16 @@ class SummaryDescriptionView: UIScrollView, SummariesTableViewDelegate {
             infoView.frame.origin.y = mainImgView.frame.size.height - infoView.frame.size.height
             self.addSubview(infoView)
             
+            // 画像のソース
+            let sourceLabel = DefaultTextLabel(frame: CGRectMake(kDescPaddingH, infoView.frame.origin.y - sourceLabelHeight, width - kDescPaddingH * 2, sourceLabelHeight))
+            sourceLabel.text = "出典 " + summary.displaySource
+            sourceLabel.font = Settings.Fonts.minimumFont
+            sourceLabel.textColor = Settings.Colors.linkColor
+            sourceLabel.addTapGesture(self, action: "sourceTapped")
+            sourceLabel.sizeToFit()
+            sourceLabel.frame.origin.x = width - sourceLabel.frame.size.width - kDescPaddingH
+            self.addSubview(sourceLabel)
+            
             // 冒頭文
             let descLabel = UILabel(frame: CGRectMake(kDescPaddingH, infoHeight+kDescPaddingV, width - kDescPaddingH * 2, 0))
             descLabel.numberOfLines = 0
@@ -90,7 +103,7 @@ class SummaryDescriptionView: UIScrollView, SummariesTableViewDelegate {
                 
                 if let content_type = ContentType(rawValue: content["content_type"].stringValue){
                     
-                    var view:UIView?
+                    var view:SummaryContentsView?
                     
                     switch content_type{
                     case .Commodity:
@@ -117,6 +130,7 @@ class SummaryDescriptionView: UIScrollView, SummariesTableViewDelegate {
                     }
                     
                     if let view = view {
+                        view.summaryContentsViewDelegate = self
                         contentViews.append(view)
                         self.addSubview(view)
                     }
@@ -158,6 +172,16 @@ class SummaryDescriptionView: UIScrollView, SummariesTableViewDelegate {
     
     func tapped(summaryID: Int) {
         self.summaryDescriptionViewDelegate?.tapped(summaryID)
+    }
+    
+    func sourceTapped() {
+        if let url = NSURL(string: summary!.source){
+            linkTapped(url)
+        }
+    }
+    
+    func linkTapped(url: NSURL) {
+        self.summaryDescriptionViewDelegate?.linkTapped(url)
     }
     
     func loadMore() {

@@ -16,6 +16,44 @@ enum Settings {
     
     // フォント
     enum Fonts {
+        
+        enum TextSizes:CGFloat {
+            case Small = 12.0
+            case Medium = 14.0
+            case Large = 15.0
+        }
+        static func textFont(size:ContentText.FontSize, style:ContentText.Style) -> UIFont {
+            var fontSize:CGFloat = 14.0
+            switch size {
+            case .Small:
+                fontSize = 12.0
+            case .Medium:
+                break
+            case .Large:
+                fontSize = 17.0
+            }
+            
+            var fontStyle = UIFontDescriptorSymbolicTraits()
+
+//            var matrix = CGAffineTransformMake(1, 0, CGFloat(tanf(Float(M_PI) * 15 / 180)), 1, 0, 0)
+
+            switch style {
+            case .Normal:
+                break
+            case .Bold:
+                fontStyle = UIFontDescriptorSymbolicTraits.TraitBold
+            case .Italic:
+                fontStyle = UIFontDescriptorSymbolicTraits.TraitItalic
+            case .BoldItalic:
+                fontStyle = UIFontDescriptorSymbolicTraits.TraitBold | UIFontDescriptorSymbolicTraits.TraitItalic
+            }
+            
+            let label = UILabel()
+            let fontDescriptor = label.font.fontDescriptor().fontDescriptorWithSymbolicTraits(fontStyle)
+//            label.font.fontDescriptor().fontDescripto
+            return UIFont(descriptor: fontDescriptor, size: fontSize)
+        }
+        
         static let minimumFont = UIFont.systemFontOfSize(11.0)
         static let smallFont   = UIFont.systemFontOfSize(12.0)
         static let mediumFont  = UIFont.systemFontOfSize(14.0)
@@ -45,7 +83,8 @@ enum Settings {
         static let curatorColor = UIColor("#999999", 1.0)  // キュレーター
         static let chocoColor = UIColor("#41b796", 1.0)  // チョコ
         
-        static let linkColor = UIColor("#41b796", 1.0)  // リンク（chocoと一緒）
+        static let linkColor = UIColor("#41b796", 1.0)       // リンク（chocoと一緒）
+        static let sourceLinkColor = UIColor("#464646", 1.0) // 引用リンク
         static let quotationColor = UIColor("#464646", 1.0)  // 引用文
         
         static let infoBackgroundColor = UIColor("#effbff", 0.75)  // 導入背景
@@ -55,6 +94,9 @@ enum Settings {
         static let headlineBlueColor = UIColor("#0000ff", 1.0)
         
         static let twitterColor = UIColor("#55acee", 1.0)
+        
+        static let twitterBackgroundColor = UIColor("#fafafa", 0.60)
+        
     }
     
 }

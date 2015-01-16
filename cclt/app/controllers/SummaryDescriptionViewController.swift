@@ -25,7 +25,7 @@ class SummaryDescriptionViewController: AppViewController, SummaryDescriptionVie
         self.summary = summary
         self.screenName = "Summary_\(summary.id)_\(summary.title)"
         self.summaryDescriptionView = SummaryDescriptionView(summary: summary)
-        self.summaryDescriptionView!.summaryDescriptionViewDelegate = self
+        self.summaryDescriptionView.summaryDescriptionViewDelegate = self
     }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
@@ -62,6 +62,32 @@ class SummaryDescriptionViewController: AppViewController, SummaryDescriptionVie
                 self.navController?.pushViewController(svc, animated: true)
             }
             self.stopLoading()
+        }
+    }
+    
+    func linkTapped(url: NSURL) {
+        let urlStr = url.absoluteString!
+        if let matched = urlStr.match(/"http:\\/\\/cclt\\.jp\\/summaries\\/(\\d.+)\\z"/){
+            
+            if matched.count > 0 {
+                if let summaryID = matched[1].toInt(){
+                    if summaryID > 0{
+                        self.startLoading()
+                        let summary = SummaryViewModel.find(summaryID) {
+                            [unowned self] (summary, error) in
+                            if let summary = summary {
+                                let svc = SummaryDescriptionViewController(summary: summary)
+                                self.navController?.pushViewController(svc, animated: true)
+                            }
+                            self.stopLoading()
+                        }
+                    }
+                }
+            }
+            
+        } else {
+            let wvc = WebViewController(url: url)
+            self.navigationController?.pushViewController(wvc, animated: true)
         }
     }
     

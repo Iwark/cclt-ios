@@ -8,6 +8,7 @@
 
 import UIKit
 import SwifteriOS
+import TwitterKit
 
 class MyPageViewController: AppViewController {
    
@@ -22,6 +23,13 @@ class MyPageViewController: AppViewController {
             println(curatorID)
         
         } else {
+            
+            let logInButton = TWTRLogInButton(logInCompletion: {
+                (session:TWTRSession!, error: NSError!) in
+                // play with Twitter session
+            })
+            logInButton.center = self.view.center
+            self.view.addSubview(logInButton)
             
             // なければLoginModalViewの表示
             let loginView = LoginView(frame: self.view.frame)
