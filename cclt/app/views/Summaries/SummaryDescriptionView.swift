@@ -185,7 +185,7 @@ class SummaryDescriptionView: UIScrollView, SummariesTableViewDelegate, SummaryC
     }
     
     func loadMore() {
-        
+
     }
 
 }

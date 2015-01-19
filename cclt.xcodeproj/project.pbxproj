@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		9720742A1A649A9600029C5D /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 972074291A649A9600029C5D /* MessageUI.framework */; };
+		972074311A6A5D5000029C5D /* LikeShareToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972074301A6A5D5000029C5D /* LikeShareToolbar.swift */; };
+		972074491A6A5EE300029C5D /* btn_fav_off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 972074451A6A5EE300029C5D /* btn_fav_off@2x.png */; };
+		9720744A1A6A5EE300029C5D /* btn_fav_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 972074461A6A5EE300029C5D /* btn_fav_on@2x.png */; };
+		9720744B1A6A5EE300029C5D /* btn_share_off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 972074471A6A5EE300029C5D /* btn_share_off@2x.png */; };
+		9720744C1A6A5EE300029C5D /* btn_share_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 972074481A6A5EE300029C5D /* btn_share_on@2x.png */; };
+		972074821A6BAD5500029C5D /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 972074811A6BAD5500029C5D /* Social.framework */; };
 		973DCB1E1A07335E002B15E7 /* CategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973DCB1D1A07335E002B15E7 /* CategoriesViewController.swift */; };
 		97BB37861A63F3040037A38C /* SwiftRateApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97BB37851A63F3040037A38C /* SwiftRateApp.swift */; };
 		97C7ABE41A60E879004249C6 /* ActionButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C7ABE31A60E879004249C6 /* ActionButtonsView.swift */; };
@@ -409,6 +415,12 @@
 
 /* Begin PBXFileReference section */
 		972074291A649A9600029C5D /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		972074301A6A5D5000029C5D /* LikeShareToolbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikeShareToolbar.swift; sourceTree = "<group>"; };
+		972074451A6A5EE300029C5D /* btn_fav_off@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_fav_off@2x.png"; sourceTree = "<group>"; };
+		972074461A6A5EE300029C5D /* btn_fav_on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_fav_on@2x.png"; sourceTree = "<group>"; };
+		972074471A6A5EE300029C5D /* btn_share_off@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_share_off@2x.png"; sourceTree = "<group>"; };
+		972074481A6A5EE300029C5D /* btn_share_on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_share_on@2x.png"; sourceTree = "<group>"; };
+		972074811A6BAD5500029C5D /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		973DCB1D1A07335E002B15E7 /* CategoriesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CategoriesViewController.swift; path = cclt/app/controllers/CategoriesViewController.swift; sourceTree = SOURCE_ROOT; };
 		97BB37851A63F3040037A38C /* SwiftRateApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftRateApp.swift; sourceTree = "<group>"; };
 		97C7ABE31A60E879004249C6 /* ActionButtonsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionButtonsView.swift; sourceTree = "<group>"; };
@@ -557,6 +569,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				972074821A6BAD5500029C5D /* Social.framework in Frameworks */,
 				FEB34DCA1A65FFE600EEDDE1 /* SwifteriOS.framework in Frameworks */,
 				FE6939D11A6646940076AD9A /* Alamofire.framework in Frameworks */,
 				FE6939D51A6646C70076AD9A /* SwiftyJSON.framework in Frameworks */,
@@ -589,6 +602,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		972074441A6A5EE300029C5D /* LikeShare */ = {
+			isa = PBXGroup;
+			children = (
+				972074451A6A5EE300029C5D /* btn_fav_off@2x.png */,
+				972074461A6A5EE300029C5D /* btn_fav_on@2x.png */,
+				972074471A6A5EE300029C5D /* btn_share_off@2x.png */,
+				972074481A6A5EE300029C5D /* btn_share_on@2x.png */,
+			);
+			path = LikeShare;
+			sourceTree = "<group>";
+		};
 		FE08670619E7910E004AB167 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -802,6 +826,7 @@
 				FEEBCA2B1A677E50002044F1 /* Fabric.framework */,
 				97C7ABF61A60EBEF004249C6 /* FacebookSDK.framework */,
 				972074291A649A9600029C5D /* MessageUI.framework */,
+				972074811A6BAD5500029C5D /* Social.framework */,
 				FEB2967E1A5CCFA0000C4A3E /* SystemConfiguration.framework */,
 				FEEBCA2E1A677EE4002044F1 /* TwitterKit.framework */,
 				FEEBCA2F1A677EE4002044F1 /* TwitterKitResources.bundle */,
@@ -911,6 +936,7 @@
 				FE66A4EF1A5F64CE002EF68B /* TriangleView.swift */,
 				FEBEBDC11A5A17C3007A63C9 /* TutorialView.swift */,
 				97C7ABE31A60E879004249C6 /* ActionButtonsView.swift */,
+				972074301A6A5D5000029C5D /* LikeShareToolbar.swift */,
 			);
 			name = Templates;
 			path = cclt/app/views/Templates;
@@ -1046,10 +1072,11 @@
 			isa = PBXGroup;
 			children = (
 				FE348B0A1A5FDC0200907FC4 /* Common */,
-				FE66A4D61A5E4AA0002EF68B /* TabBar */,
+				972074441A6A5EE300029C5D /* LikeShare */,
 				FE497CC11A11CD2500CB3588 /* Navigation */,
 				FEF09B4B1A09D06E00FE9CFE /* Splash */,
 				FECE9E9B1A146F8700CAC7B6 /* SummaryContents */,
+				FE66A4D61A5E4AA0002EF68B /* TabBar */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -1351,10 +1378,12 @@
 			files = (
 				FEF09B581A09D06E00FE9CFE /* Default@2x.png in Resources */,
 				FE3F358219E616CD005A2166 /* Main.storyboard in Resources */,
+				9720744A1A6A5EE300029C5D /* btn_fav_on@2x.png in Resources */,
 				FEEBCA321A677EE4002044F1 /* TwitterKitResources.bundle in Resources */,
 				FE3F358719E616CD005A2166 /* LaunchScreen.xib in Resources */,
 				FE348B0C1A5FDC0200907FC4 /* loading@2x.gif in Resources */,
 				FE66A4E51A5E4AA0002EF68B /* search@2x.png in Resources */,
+				972074491A6A5EE300029C5D /* btn_fav_off@2x.png in Resources */,
 				FECE9E9D1A146F8700CAC7B6 /* quotation@2x.png in Resources */,
 				FE7C50371A198E7E00591002 /* SummariesTableViewCell.xib in Resources */,
 				FEF09B551A09D06E00FE9CFE /* Default-Portrait@2x.png in Resources */,
@@ -1363,11 +1392,13 @@
 				FEF09B561A09D06E00FE9CFE /* Default-Portrait@2x~ipad.png in Resources */,
 				FE66A4D21A5E49B7002EF68B /* InfoPlist.strings in Resources */,
 				FE66A4EA1A5E4AA0002EF68B /* topics@2x.png in Resources */,
+				9720744B1A6A5EE300029C5D /* btn_share_off@2x.png in Resources */,
 				FE66A4E71A5E4AA0002EF68B /* setting@2x.png in Resources */,
 				FE66A4A61A5D0778002EF68B /* Info.plist in Resources */,
 				FE7C50221A15D72400591002 /* CategoriesTableViewCell.xib in Resources */,
 				FE497CC41A11CD2500CB3588 /* btn_back_off@2x.png in Resources */,
 				FE66A4E31A5E4AA0002EF68B /* mypage@2x.png in Resources */,
+				9720744C1A6A5EE300029C5D /* btn_share_on@2x.png in Resources */,
 				FE497C9E1A0CA09E00CB3588 /* SummaryPartialViewCell.xib in Resources */,
 				FE31BCAF1A1C4FB100A4C0D1 /* SettingsTableViewCell.xib in Resources */,
 				FE497CC61A11CD2500CB3588 /* btn_back_on@2x.png in Resources */,
@@ -1419,6 +1450,7 @@
 				FEEBCA461A679F95002044F1 /* ContentTwitterView.swift in Sources */,
 				FE31BCA61A1C3D4F00A4C0D1 /* SettingsTableView.swift in Sources */,
 				FE38361919F8F67A001EFB6B /* CategoryViewModel.swift in Sources */,
+				972074311A6A5D5000029C5D /* LikeShareToolbar.swift in Sources */,
 				FE7C502E1A198E0200591002 /* SummariesViewController.swift in Sources */,
 				FEEBCA4A1A67A038002044F1 /* SummaryContentsView.swift in Sources */,
 				FEEBCA481A679FC2002044F1 /* ContentQuotationView.swift in Sources */,

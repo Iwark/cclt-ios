@@ -8,6 +8,9 @@
 
 import UIKit
 
+let iOS7 = floor(NSFoundationVersionNumber) <= floor(NSFoundationVersionNumber_iOS_7_1)
+let iOS8 = floor(NSFoundationVersionNumber) > floor(NSFoundationVersionNumber_iOS_7_1)
+
 enum Settings {
     
     static let maxHistorySearchWords = 30
