@@ -10,11 +10,11 @@ import UIKit
 
 class ContentHeadlineView: SummaryContentsView {
     
-    let kMarginTop:CGFloat = 5
+    let kMarginTop:CGFloat = 15.0
     let kMarginH: CGFloat = 10
     let kLineMarginTop:CGFloat = 2
     let kLineHeight:CGFloat = 2
-    let kMarginBottom:CGFloat = 10
+    let kMarginBottom:CGFloat = 5
 
     init(width: CGFloat, content: ContentHeadline){
         super.init()
@@ -43,7 +43,7 @@ class ContentHeadlineView: SummaryContentsView {
             }
         }
         
-        let titleLabel = UILabel(frame: CGRectMake(kMarginH, 0, width - kMarginH * 2, 0))
+        let titleLabel = UILabel(frame: CGRectMake(kMarginH, kMarginTop, width - kMarginH * 2, 0))
         titleLabel.text = content.text
         titleLabel.numberOfLines = 0
         titleLabel.font = font
@@ -51,11 +51,11 @@ class ContentHeadlineView: SummaryContentsView {
         titleLabel.sizeToFit()
         self.addSubview(titleLabel)
         
-        let line = UIView(frame: CGRectMake(kMarginH, titleLabel.frame.size.height + kLineMarginTop, width - kMarginH*2, kLineHeight))
+        let line = UIView(frame: CGRectMake(kMarginH, titleLabel.frame.size.height + kLineMarginTop + kMarginTop, width - kMarginH*2, kLineHeight))
         line.backgroundColor = lineColor
         self.addSubview(line)
         
-        self.frame = CGRectMake(0, kMarginTop, width, line.frame.origin.y + line.frame.size.height + kMarginBottom)
+        self.frame = CGRectMake(0, 0, width, line.frame.origin.y + line.frame.size.height + kMarginBottom)
         
     }
     

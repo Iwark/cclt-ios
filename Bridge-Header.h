@@ -10,6 +10,7 @@
 #define cclt_Bridge_Header_h
 
 #import <FacebookSDK/FacebookSDK.h>
+#import <Partytrack/Partytrack.h>
 #import "GAI.h"
 #import "GAIDictionaryBuilder.h"
 #import "GAIFields.h"

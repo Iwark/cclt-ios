@@ -102,9 +102,9 @@ class ContentHeadline {
     }
     
     enum Color:String {
-        case Red = "#f00"
-        case Green = "#0f0"
-        case Blue = "#00f"
+        case Red = "red"
+        case Green = "green"
+        case Blue = "blue"
     }
     
     let id: Int
@@ -130,7 +130,7 @@ class ContentHeadline {
     init(title:String) {
         self.id = 0
         self.text = title
-        self.fontSize = .Medium
+        self.fontSize = .Small
     }
 }
 

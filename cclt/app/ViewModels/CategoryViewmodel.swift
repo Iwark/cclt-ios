@@ -58,7 +58,6 @@ extension CategoryViewModel {
                 return category
             }
         }
-        println("category not found on local.")
         return nil
     }
     

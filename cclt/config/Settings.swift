@@ -14,11 +14,33 @@ let iOS8 = floor(NSFoundationVersionNumber) > floor(NSFoundationVersionNumber_iO
 enum Settings {
     
     static let maxHistorySearchWords = 30
-    
     static let loadingGif = UIImage(named: "loading")
+    static let twitterAccount = "chocolat_cclt"
+    
+    static let partytrackAppID:Int32 = 4423
+    static let partytrackAppKey = "f0337712425d5476a6243d2268675c59"
+    
+    // チュートリアル
+    enum Tutorials:Int {
+        case SwipeToNext = 1
+        case BackToTop   = 2
+        
+        func isFinished() -> Bool {
+            let ud = NSUserDefaults.standardUserDefaults()
+            return ud.boolForKey("Tutorial\(self.rawValue)")
+        }
+        
+        func finish() {
+            let ud = NSUserDefaults.standardUserDefaults()
+            ud.setBool(true, forKey: "Tutorial\(self.rawValue)")
+            ud.synchronize()
+        }
+    }
     
     // フォント
     enum Fonts {
+        
+        static let tabFont = UIFont(name:"HelveticaNeue-Bold", size:10.0)
         
         enum TextSizes:CGFloat {
             case Small = 12.0
@@ -53,7 +75,6 @@ enum Settings {
             
             let label = UILabel()
             let fontDescriptor = label.font.fontDescriptor().fontDescriptorWithSymbolicTraits(fontStyle)
-//            label.font.fontDescriptor().fontDescripto
             return UIFont(descriptor: fontDescriptor, size: fontSize)
         }
         
@@ -66,9 +87,9 @@ enum Settings {
         static let titleSmallFont   = UIFont.boldSystemFontOfSize(13.0)
         static let titleFont        = UIFont.boldSystemFontOfSize(14.0)
         
-        static let headlineSmallFont  = UIFont.boldSystemFontOfSize(17.0)
-        static let headlineMediumFont = UIFont.boldSystemFontOfSize(19.0)
-        static let headlineLargeFont  = UIFont.boldSystemFontOfSize(21.0)
+        static let headlineSmallFont  = UIFont.boldSystemFontOfSize(16.0)
+        static let headlineMediumFont = UIFont.boldSystemFontOfSize(18.0)
+        static let headlineLargeFont  = UIFont.boldSystemFontOfSize(20.0)
         
         enum IPad {
             static let navTitleFont = UIFont.boldSystemFontOfSize(22.0)
@@ -82,7 +103,15 @@ enum Settings {
         static let borderLightColor = UIColor("#d4d4d4", 1.0).CGColor  // 薄い線
         static let textColor = UIColor("#333333", 1.0)  // デフォルト文字色
         static let tappedColor = UIColor("#cdcdcd", 0.8)  // タップ後の反転色
+        
+        static let tutorialGrayColor      = UIColor("#000000", 0.5)
+        static let tutorialLightGrayColor = UIColor("#000000", 0.1)
 
+        static let tabBackgroundColor    = UIColor("#effef8", 1.0)
+        static let tabTintColor          = UIColor("#40a981", 1.0)
+        static let tabTitleColor         = UIColor("#626363", 1.0)
+        static let selectedTabTitleColor = UIColor("#40a981", 1.0)
+        
         static let curatorColor = UIColor("#999999", 1.0)  // キュレーター
         static let chocoColor = UIColor("#41b796", 1.0)  // チョコ
         
@@ -93,7 +122,7 @@ enum Settings {
         static let infoBackgroundColor = UIColor("#effbff", 0.75)  // 導入背景
         
         static let headlineRedColor = UIColor("#ff0000", 1.0)
-        static let headlineGreenColor = UIColor("#00ff00", 1.0)
+        static let headlineGreenColor = UIColor("#92e1c4", 1.0)
         static let headlineBlueColor = UIColor("#0000ff", 1.0)
         
         static let twitterColor = UIColor("#55acee", 1.0)

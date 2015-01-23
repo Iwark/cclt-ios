@@ -23,7 +23,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="choco" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XP9-0V-dNw">
-                        <rect key="frame" x="297.5" y="56" width="34.5" height="22"/>
+                        <rect key="frame" x="297" y="56" width="35" height="22"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="22" id="DZV-A9-qha"/>
                         </constraints>

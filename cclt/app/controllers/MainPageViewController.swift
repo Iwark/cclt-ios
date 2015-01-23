@@ -7,17 +7,21 @@
 //
 
 import UIKit
-//import Haneke
 
 class MainPageViewController: AppViewController,
-UICollectionViewDataSource, UICollectionViewDelegate, MainPageCollectionViewDelegate {
+MainPageCollectionViewDelegate, BackTopBarButtonItemDelegate, TutorialViewDelegate {
     
     @IBOutlet weak var mainPageCollectionView: MainPageCollectionView!
-    let kCellID = "SummaryPartialViewCell"
-    let kCellNib = UINib(nibName: "SummaryPartialViewCell", bundle: nil)
+    var backToTopButton:BackTopBarButtonItem!
+    var tutorialView:TutorialView!
     
-    let kInitialLoadNum = 3  // 最初に読み込むページの数
+    // 最初に読み込むページの数
+    let initialLoadNum = 3
     
+    // 矢印の表示時間
+    let tutorialViewShowTime = 0.4
+    
+    // 現在のページ
     var _page = 0
     var page:Int {
         get { return _page }
@@ -27,20 +31,25 @@ UICollectionViewDataSource, UICollectionViewDelegate, MainPageCollectionViewDele
             self.trackScreen()
         }
     }
-    
-    var _pages:[MainPageViewModel] = []
 
-    var _isAddingPage = false  // 次のページを読み込み中かどうか
-    var _isToAddPage  = false  // 次のページの読み込み予約
+    // 読み込み状態
+    var isAddingPage = false
+    var isToAddPage  = false
+    
+    // チュートリアルの状態
+    var isShowingTutorial = false
+    var swipeToNextTutorialFinished = Settings.Tutorials.SwipeToNext.isFinished()
+    var backToTopTutorialFinished = Settings.Tutorials.BackToTop.isFinished()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        mainPageCollectionView.delegate = self
-        mainPageCollectionView.mainPageCollectionViewDelegate = self
-        mainPageCollectionView.dataSource = self
+        backToTopButton = BackTopBarButtonItem(delegate: self)
         
-        mainPageCollectionView.registerNib(kCellNib, forCellWithReuseIdentifier: kCellID)
+        tutorialView = TutorialView(frame: self.view.frame)
+        tutorialView.delegate = self
+        
+        mainPageCollectionView.mainPageCollectionViewDelegate = self
         
         // カテゴリ取得後、ページを読み込む
         startLoading()
@@ -49,17 +58,28 @@ UICollectionViewDataSource, UICollectionViewDelegate, MainPageCollectionViewDele
                 println("category fetch error:\(error)")
             } else {
                 var tasks:[((NSError?) -> ()) -> ()] = []
-                for i in 0..<self.kInitialLoadNum {
+                for i in 0..<self.initialLoadNum-1 {
                     tasks.append(self.addPage)
                 }
                 Async.series(tasks, completionHandler: {
                     [unowned self] (error) -> () in
                     
-                    if let error = error {
-                        println("error:\(error)")
-                    }else{
-                        self.mainPageCollectionView.reloadData()
+                    self.mainPageCollectionView.reloadData()
+                    if !self.swipeToNextTutorialFinished {
+                        SwiftDispatch.after(0.2, block: { () -> () in
+                            self.mainPageCollectionView.scrollToItemAtIndexPath(NSIndexPath(forItem: 1, inSection: 0), atScrollPosition: .None, animated: true)
+                        })
+                        SwiftDispatch.after(0.5, block: { () -> () in
+                            self.swipeToNextTutorialFinished = true
+                            Settings.Tutorials.SwipeToNext.finish()
+                            self.mainPageCollectionView.scrollToItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0), atScrollPosition: .None, animated: false)
+                        })
+                        
                     }
+                    self.addPage({
+                        [unowned self] (error) -> () in
+                        self.mainPageCollectionView.reloadData()
+                    })
                     
                     let interval = self.stopLoading()
 //                    self.trackTiming(loadTime: interval, name: "MainPage First Loading")
@@ -75,103 +95,122 @@ UICollectionViewDataSource, UICollectionViewDelegate, MainPageCollectionViewDele
         self.screenName = "Topix_page_\(self.page + 1)"
     }
     
-    // 1度に2ページ分Fetchするようにすれば高速化の余地あり
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+    }
+    
+    // TODO: 1度に2ページ分Fetchするようにすれば高速化の余地あり
     func addPage(callback:(NSError?) ->()){
         
-        if _isAddingPage {
-            _isToAddPage = true
+        if self.isAddingPage {
+            self.isToAddPage = true
             return
         }
+        self.isAddingPage = true
 
-        _isAddingPage = true
         startLoading(onlyTiming: true)
         
         let frame = CGRectMake(0, 0, self.mainPageCollectionView.frame.size.width, self.mainPageCollectionView.frame.size.height - 64)
         let partialView = SummaryPartialView(frame: CGRectMake(0, 0, frame.size.width, frame.size.height))
         let mainPage = MainPageViewModel(view: partialView)
         
-        var lastSummaryID = 0
-        if _pages.count > 0 {
-            let lastPage = _pages[_pages.count - 1]
-            if let summaryID = lastPage.partials[lastPage.partials.count-1].summary?.id {
-                lastSummaryID = summaryID
-                println("lastSummaryID:\(lastSummaryID)")
-            }
-        }
-        
-        mainPage.setSummaries(lastSummaryID, callback: {
-            [unowned self] (error:NSError?) -> () in
-            self._isAddingPage = false
-            // エラーがあったら再度取得を試みる
-            // TODO: 1秒ぐらい待つべき
-            if let error = error {
+        mainPage.setSummaries(MainPage.lastSummaryID) {
+            [unowned self] in
+            self.isAddingPage = false
+            if self.isToAddPage {
+                self.isToAddPage = false
                 self.addPage(callback)
-            }else{
-                self._pages.append(mainPage)
-                if self._isToAddPage {
-                    self._isToAddPage = false
-                    self.addPage(callback)
-                }
-                callback(nil)
-                let interval = self.stopLoading()
-                self.trackTiming(loadTime: interval, name: "AddingPage")
             }
-        })
-    }
-    
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        return 1
-    }
-    
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return _pages.count
-    }
-    
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        
-        var cell = collectionView.dequeueReusableCellWithReuseIdentifier(kCellID, forIndexPath: indexPath) as SummaryPartialViewCell
-        
-        let frame = mainPageCollectionView.frame
-        
-        for sv in cell.view.subviews {
-            sv.removeFromSuperview()
+            callback(nil)
         }
+    }
+    
+    // ページ遷移
+    func pageTo(page: Int) {
         
-        let page = indexPath.row
+        if self.page == page { return }
         
-        if _pages.count > page {
-            
-            let mainPage = _pages[page]
-            for (idx, partial) in enumerate(mainPage.partials) {
-                cell.view.addSubview(partial.view)
-            }
-            
+        let prevPage = self.page
+        self.page = page
+        
+        // TOPへ戻るボタンの表示
+        if self.page >= 2 {
+            self.navigationItem.leftBarButtonItem = backToTopButton
         } else {
-            println("error")
+            self.navigationItem.leftBarButtonItem = nil
         }
         
-        return cell
+        // 新しいページのローディング
+        if MainPage.pages.count < page + self.initialLoadNum {
+            self.addPage({
+                [unowned self] (error) -> () in
+                self.mainPageCollectionView.reloadData()
+            })
+        }
     }
     
-    func scrollViewDidScroll(scrollView: UIScrollView) {
-        if let view = self.mainPageCollectionView.tappedView {
-            if view.tag > 0 {
-                view.backgroundColor = UIColor.clearColor()
+    // スクロール開始時
+    func scrollBegan() {
+        // チュートリアルの矢印を表示
+        if tutorialView.superview == nil {
+            if self.page == 0 && tutorialView.leftArrow.superview != nil {
+                tutorialView.leftArrow.removeFromSuperview()
             }
-        }
-        let pageWidth = scrollView.frame.size.width
-        let fractionalPage = Float(scrollView.contentOffset.x / pageWidth)
-        let page = lroundf(fractionalPage)
-        if self.page != page {
-            
-            self.page = page
-            if _pages.count < page + kInitialLoadNum {
-                self.addPage({
-                    [unowned self] (error) -> () in
-                    self.mainPageCollectionView.reloadData()
-                })
+            if self.page > 0 && tutorialView.leftArrow.superview == nil {
+                tutorialView.addSubview(tutorialView.leftArrow)
             }
+            self.view.addSubview(tutorialView)
+            SwiftDispatch.after(tutorialViewShowTime, block: {
+                [unowned self] in
+                if !self.isShowingTutorial {
+                    self.tutorialView.removeFromSuperview()
+                }
+            })
         }
+    }
+    
+    // スクロール終了時
+    func scrollEnded() {
+        if self.page == 2 && !backToTopTutorialFinished {
+            showBackToTopTutorial()
+        }
+    }
+    
+    // 「右へスワイプ」
+    func showSwipeToNextTutorial(){
+        let img = UIImage(named: "swipetonext_tutorial")!
+        let tutorial = UIImageView(frame: CGRectMake(0, 0, img.size.width, img.size.height))
+        tutorial.center = tutorialView.center
+        tutorial.image = img
+        tutorialView.addSubview(tutorial)
+        tutorialView.backgroundColor = Settings.Colors.tutorialGrayColor
+        tutorialView.hideArrows()
+    }
+    
+    // TOPへ戻るチュートリアルの表示
+    func showBackToTopTutorial(){
+        let img = UIImage(named: "backtop_tutorial")!
+        let tutorial = UIImageView(frame: CGRectMake(10.0, 66.0, img.size.width, img.size.height))
+        tutorial.image = img
+        tutorialView.addSubview(tutorial)
+        tutorialView.backgroundColor = Settings.Colors.tutorialGrayColor
+        tutorialView.hideArrows()
+        self.isShowingTutorial = true
+    }
+    
+    // チュートリアルの消去(TutorialViewDelegate)
+    func hideTutorial(){
+        if self.isShowingTutorial {
+            self.backToTopTutorialFinished = true
+            Settings.Tutorials.BackToTop.finish()
+        }
+        for v in tutorialView.subviews as [UIView] {
+            v.removeFromSuperview()
+        }
+        tutorialView.showArrows()
+        tutorialView.backgroundColor = Settings.Colors.tutorialLightGrayColor
+        tutorialView.removeFromSuperview()
+        self.isShowingTutorial = false
     }
     
     /// 記事がタップされた時の処理(delegate from MainPageCollectionView)
@@ -184,13 +223,12 @@ UICollectionViewDataSource, UICollectionViewDelegate, MainPageCollectionViewDele
         }
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout:UICollectionViewLayout, sizeForItemAtIndexPath indexPath:NSIndexPath) -> CGSize {
-        
-        let width = mainPageCollectionView.frame.size.width
-        let height = mainPageCollectionView.frame.size.height - mainPageCollectionView.contentInset.top
-        
-        return CGSizeMake(width, height)
-        
+    // TOPへ戻る
+    func backToTop() {
+        self.mainPageCollectionView.scrollToItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0), atScrollPosition: UICollectionViewScrollPosition.allZeros, animated: true)
+        if tutorialView.superview != nil {
+            hideTutorial()
+        }
     }
     
     override func didReceiveMemoryWarning() {

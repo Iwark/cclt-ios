@@ -26,6 +26,21 @@ class MailViewController: MFMailComposeViewController {
         self.setMessageBody(contents, isHTML: false)
     }
     
+    init(text:String){
+        super.init()
+        
+        self.setToRecipients(["info@cclt.jp"])
+        self.setSubject("お問い合わせ")
+        
+        let version = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString")! as String
+        let contents = "■ お問い合わせ内容を記入してください。\n\n" +
+            "\n\n■ 端末情報\n（変更せずに送信してください。）\n" +
+            "Device: \(UIDevice.currentDevice().model) \(UIDevice.currentDevice().systemVersion)\n" +
+            "Version: \(version)\n" + "----------\n\(text)\n----------"
+        
+        self.setMessageBody(contents, isHTML: false)
+    }
+    
     override func viewWillAppear(animated: Bool) {
         JHProgressHUD.sharedHUD.hide()
     }

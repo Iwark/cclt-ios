@@ -63,6 +63,8 @@ UITableViewDataSource, UITableViewDelegate {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCellWithIdentifier(kCellID, forIndexPath: indexPath) as SummariesTableViewCell
         
+        cell.imgView.image = nil
+        
         if summaries.count > indexPath.row {
             let summary = summaries[indexPath.row]
             cell.summaryID = summary.id

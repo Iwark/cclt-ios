@@ -105,8 +105,9 @@ class AppViewController: UIViewController, BackBarButtonItemDelegate {
     /**
     Send load time to Google Analytics
     */
-    func trackTiming(category:String = "Network", loadTime:NSNumber, name:String = "fetch", label:String? = nil){
-        let build = GAIDictionaryBuilder.createTimingWithCategory(category, interval: loadTime, name: name, label: label).build()
+    func trackTiming(category:String = "Network", loadTime:NSTimeInterval, name:String = "fetch", label:String? = nil){
+        let interval = NSNumber(integer: Int(loadTime*1000))
+        let build = GAIDictionaryBuilder.createTimingWithCategory(category, interval: interval, name: name, label: label).build()
         GAI.sharedInstance().defaultTracker.send(build)
     }
     

@@ -29,6 +29,7 @@ enum CcltRoute: URLRequestConvertible {
     case GetSummary(Int)
     case GetSummaries(Int, Int, Int, Int)
     case SendImpression(Int, String)
+    case SendShare(Int, String, String)
     case GetPopularTags()
     case SearchSummaries(String, Int)
     case GetPickupSummaries()
@@ -59,6 +60,8 @@ enum CcltRoute: URLRequestConvertible {
             return(.GET, "summaries")
         case .SendImpression(let id, let uuid):
             return(.GET, "summaries/\(id)/imp")
+        case .SendShare(let id, let provider, let uuid):
+            return(.GET, "summaries/\(id)/share")
         case .GetPopularTags():
             return(.GET, "summaries/popular_tags")
         case .SearchSummaries(let q, let page):
@@ -87,6 +90,9 @@ enum CcltRoute: URLRequestConvertible {
             return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: params).0
         case .SendImpression(let id, let uuid):
             let params = ["uuid": uuid]
+            return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: params).0
+        case .SendShare(let id, let provider, let uuid):
+            let params = ["uuid": uuid, "provider": provider]
             return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: params).0
 //            case .CreateUser(let parameters):
 //                return Alamofire.ParameterEncoding.JSON.encode(mutableURLRequest, parameters: parameters).0

@@ -36,26 +36,33 @@ class MainPageViewModel {
         }
     }
     
-    func setSummaries(lastSummaryID:Int, callback:(NSError?)->()) {
-        SummaryViewModel.fetchSummaries(lastSummaryID:lastSummaryID, num: self.partials.count,
-            { [unowned self] (summaries, error) -> () in
-                if let summaries = summaries {
-                    for (idx, partial) in enumerate(self.partials) {
-                        if(summaries.count > idx){
-                            partial.summary = summaries[idx]
-                            partial.setPositionType()
-                            partial.view.render(partial)
-                        }else{
-                            println("summaries.count must not be less or equal than idx")
-                        }
+    func setSummaries(lastSummaryID:Int, callback:()->()) {
+        
+        
+        SummaryViewModel.fetchSummaries(lastSummaryID:lastSummaryID, num: self.partials.count) {
+            (summaries, error) in
+            
+            if let summaries = summaries {
+                for (idx, partial) in enumerate(self.partials) {
+                    if(summaries.count > idx){
+                        partial.summary = summaries[idx]
+                        partial.setPositionType()
+                        partial.view.render(partial)
+                    }else{
+                        println("summaries.count must not be less or equal than idx")
                     }
-                    println("added new page. summaries:\(summaries)")
-                    callback(nil)
-                }else{
-                    println("get summaries failed...:\(error)")
-                    callback(error)
                 }
-        })
+                MainPage.pages.append(self)
+                callback()
+            }else{
+                println("get summaries failed...:\(error)")
+                
+                // 再取得
+                SwiftDispatch.after(0.5, block: {
+                    self.setSummaries(lastSummaryID, callback: callback)
+                })
+            }
+        }
     }
     
     func validateViews(views:[SummaryPartialView]) -> Bool {

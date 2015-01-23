@@ -16,19 +16,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
         
-        JHProgressHUD.sharedHUD.backGroundColor = Settings.Colors.mainColor
+        self.setupThirdpartyLibraries()
         
-        GAI.sharedInstance().trackUncaughtExceptions = true
-        GAI.sharedInstance().dispatchInterval = 20
-//        GAI.sharedInstance().logger.logLevel = .Verbose
-        GAI.sharedInstance().trackerWithTrackingId("UA-54309504-1")
+        self.setCuratorID()
         
-        Fabric.with([Crashlytics(), Twitter()])
+        self.setUIKitAppearance()
         
+        return true
+    }
+    
+    /**
+    set curator id to Curator model.
+    */
+    func setCuratorID(){
         let ud = NSUserDefaults.standardUserDefaults()
         if let uuid = ud.stringForKey("uuid"){
             Curator.myUUID = uuid
@@ -38,12 +40,54 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             ud.setObject(uuid, forKey: "uuid")
             ud.synchronize()
         }
+    }
+    
+    /**
+    setup thirdparty libraries
+    */
+    func setupThirdpartyLibraries(){
+        // PartyTrack
+        Partytrack.sharedInstance().startWithAppID(Settings.partytrackAppID, andKey: Settings.partytrackAppKey)
         
+        // JHProgressHUD
+        JHProgressHUD.sharedHUD.backGroundColor = Settings.Colors.mainColor
+        
+        // GoogleAnalytics
+        GAI.sharedInstance().trackUncaughtExceptions = true
+        GAI.sharedInstance().dispatchInterval = 20
+//        GAI.sharedInstance().logger.logLevel = .Verbose
+        GAI.sharedInstance().trackerWithTrackingId("UA-54309504-1")
+        
+        // Fabric
+        Fabric.with([Crashlytics(), Twitter()])
+        
+        // Twitter Tweet View
         TWTRTweetView.appearance().primaryTextColor = Settings.Colors.textColor
         TWTRTweetView.appearance().backgroundColor  = Settings.Colors.twitterBackgroundColor
         TWTRTweetView.appearance().linkTextColor    = Settings.Colors.linkColor
         
-        return true
+    }
+    
+    /**
+    set UI Appearence.
+    */
+    func setUIKitAppearance(){
+        
+        // show status bar.
+        UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: UIStatusBarAnimation.Slide)
+        
+        // set UITabBar
+        UITabBarItem.appearance().setTitlePositionAdjustment(UIOffsetMake(0, -2))
+        UITabBar.appearance().barTintColor = Settings.Colors.tabBackgroundColor
+        UITabBar.appearance().tintColor = Settings.Colors.tabTintColor
+        UITabBarItem.appearance().setTitleTextAttributes([
+            NSForegroundColorAttributeName: Settings.Colors.tabTitleColor,
+            NSFontAttributeName: Settings.Fonts.tabFont!
+        ], forState: .Normal)
+        UITabBarItem.appearance().setTitleTextAttributes([
+            NSForegroundColorAttributeName: Settings.Colors.selectedTabTitleColor,
+            NSFontAttributeName: Settings.Fonts.tabFont!
+            ], forState: .Selected)
     }
 
     func applicationWillResignActive(application: UIApplication) {

@@ -129,6 +129,7 @@ class SummaryDescriptionViewController: AppViewController, SummaryDescriptionVie
                 action in
                     self.lineShare()
                 })
+            alertController.addAction(UIAlertAction(title: "キャンセル", style: .Cancel, handler: nil))
             
             //For ipad And Univarsal Device
             alertController.popoverPresentationController?.sourceView = summaryDescriptionView
@@ -140,7 +141,6 @@ class SummaryDescriptionViewController: AppViewController, SummaryDescriptionVie
     }
     
     func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int) {
-        println(buttonIndex)
         switch buttonIndex {
         case 0:
             facebookShare()
@@ -154,7 +154,34 @@ class SummaryDescriptionViewController: AppViewController, SummaryDescriptionVie
     }
     
     func facebookShare(){
-        
+        if SLComposeViewController.isAvailableForServiceType(SLServiceTypeFacebook) {
+            var controller = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
+            
+            let link = "http://cclt.jp/summaries/\(self.summary.id)"
+            let url = NSURL(string: link)
+            controller.addURL(url)
+            
+            let title = self.summary.title
+            controller.setInitialText(title)
+            
+            controller.completionHandler = {
+                result in
+                if result == .Done {
+                    SummaryViewModel.sendShare(self.summary.id, provider: "facebook")
+                    let alert = UIAlertView(title: "", message: "記事をシェアしました。", delegate: nil, cancelButtonTitle: nil)
+                    alert.show()
+                    SwiftDispatch.after(1.0) {
+                        alert.dismissWithClickedButtonIndex(0, animated: false)
+                    }
+                    
+                }
+            }
+            
+            presentViewController(controller, animated: true, completion: {})
+        } else {
+            let alert = UIAlertView(title: "Facebookアカウントが登録されていません", message: "端末の「設定」アプリからFacebookアカウントを追加してください。", delegate: nil, cancelButtonTitle: "OK")
+            alert.show()
+        }
     }
     
     func twitterShare(){
@@ -165,22 +192,53 @@ class SummaryDescriptionViewController: AppViewController, SummaryDescriptionVie
             let url = NSURL(string: link)
             controller.addURL(url)
             
-            let title: String = self.summary.title
+            let title = self.summary.title + " @\(Settings.twitterAccount)"
             controller.setInitialText(title)
             
             controller.completionHandler = {
                 result in
                 if result == .Done {
+                    SummaryViewModel.sendShare(self.summary.id, provider: "twitter")
+                    let alert = UIAlertView(title: "", message: "記事をシェアしました。", delegate: nil, cancelButtonTitle: nil)
+                    alert.show()
+                    SwiftDispatch.after(1.0) {
+                        alert.dismissWithClickedButtonIndex(0, animated: false)
+                    }
                     
                 }
             }
             
             presentViewController(controller, animated: true, completion: {})
+        } else {
+            let alert = UIAlertView(title: "Twitterアカウントが登録されていません", message: "端末の「設定」アプリからTwitterアカウントを追加してください。", delegate: nil, cancelButtonTitle: "OK")
+            alert.show()
         }
     }
     
     func lineShare(){
         
+        let link = "http://cclt.jp/summaries/\(self.summary.id)"
+        let title = self.summary.title
+        let text = "\(title) − \(link)"
+        
+        let escaped = CFURLCreateStringByAddingPercentEscapes(nil, text, nil, "!*'();:@&=+$,/?%#[]", CFStringBuiltInEncodings.UTF8.rawValue)
+        
+        let url = NSURL(string: "line://msg/text/\(escaped)")
+        
+        if let url = url{
+            
+            if UIApplication.sharedApplication().canOpenURL(url) {
+                
+                SummaryViewModel.sendShare(self.summary.id, provider: "line")
+                UIApplication.sharedApplication().openURL(url)
+                
+            } else {
+                
+                let alert = UIAlertView(title: "記事のシェアに失敗しました", message: "LINEのアプリが端末にインストールされているかご確認ください。", delegate: nil, cancelButtonTitle: "OK")
+                alert.show()
+                
+            }
+        }
     }
     
 }

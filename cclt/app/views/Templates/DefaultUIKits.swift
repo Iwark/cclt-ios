@@ -35,8 +35,7 @@ class DefaultTextLabel: UILabel {
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
         let color = self.backgroundColor
         self.backgroundColor = Settings.Colors.tappedColor
-        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(Double(NSEC_PER_SEC) * 0.2))
-        dispatch_after(delayTime, dispatch_get_main_queue()) {
+        SwiftDispatch.after(0.2){
             () in
             self.backgroundColor = color
         }

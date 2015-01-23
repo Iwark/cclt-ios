@@ -15,8 +15,8 @@ protocol SummaryContentsViewDelegate:class {
 
 class SummaryContentsView: UIView {
     
-    let sourceLabelHeight:CGFloat = 20.0
-    let sourceLabelTopMargin:CGFloat = 2.0
+    let sourceLabelHeight:CGFloat = 18.0
+    let sourceLabelTopMargin:CGFloat = 3.0
 
     weak var summaryContentsViewDelegate:SummaryContentsViewDelegate?
     

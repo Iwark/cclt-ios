@@ -13,7 +13,8 @@ class Category {
     let id: Int
     let name: String
     let iconURL: String
-    
+    let rankingSummaries: [JSON]
+
     private struct Static {
         static var all:[Category] = []
     }
@@ -27,6 +28,7 @@ class Category {
         self.id = json["id"].intValue
         self.name = json["name"].stringValue
         self.iconURL = json["icon_url"].stringValue
+        self.rankingSummaries = json["ranking_summaries"].arrayValue
     }
 
 }

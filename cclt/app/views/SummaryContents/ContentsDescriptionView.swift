@@ -22,14 +22,14 @@ class ContentsDescriptionView: UIView {
         
         if countElements(description) < 2 { return }
         
-        let textLabel = UILabel(frame: CGRectMake(kTextMarginLeft, 0, width - kTextMarginLeft - kTextMarginRight, 0))
+        let textLabel = UILabel(frame: CGRectMake(kTextMarginLeft, kMarginTop, width - kTextMarginLeft - kTextMarginRight, 0))
         textLabel.numberOfLines = 0
         textLabel.text = description
         textLabel.font = Settings.Fonts.mediumFont
         textLabel.sizeToFit()
         self.addSubview(textLabel)
         
-        let lineView = UIView(frame: CGRectMake(kLineMarginLeft, 0, kLineWidth, textLabel.frame.size.height))
+        let lineView = UIView(frame: CGRectMake(kLineMarginLeft, kMarginTop, kLineWidth, textLabel.frame.size.height))
         lineView.backgroundColor = Settings.Colors.chocoColor
         self.addSubview(lineView)
         
@@ -37,13 +37,13 @@ class ContentsDescriptionView: UIView {
             
             lineView.backgroundColor = Settings.Colors.twitterColor
             
-            let twlineView = UIView(frame: CGRectMake(kLineMarginLeft, textLabel.frame.size.height - kLineWidth, width - kTextMarginLeft - kTextMarginRight, kLineWidth))
+            let twlineView = UIView(frame: CGRectMake(kLineMarginLeft, textLabel.frame.size.height - kLineWidth + kMarginTop, width - kTextMarginLeft - kTextMarginRight, kLineWidth))
             twlineView.backgroundColor = Settings.Colors.twitterColor
             self.addSubview(twlineView)
             
         }
 
-        self.frame = CGRectMake(0, kMarginTop, width, textLabel.frame.size.height + kMarginBottom)
+        self.frame = CGRectMake(0, 0, width, textLabel.frame.size.height + kMarginBottom)
         
     }
     

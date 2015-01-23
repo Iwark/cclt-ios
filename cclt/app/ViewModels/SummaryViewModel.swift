@@ -29,7 +29,7 @@ extension SummaryViewModel {
     class func fetchSummaries(categoryID:Int=0, featureID:Int=0, lastSummaryID:Int=0, num:Int=kDefaultFetchSummariesNum, completionHandler: ([Summary]?, NSError?) -> ()) {
         
         Alamofire.request(CcltRoute.GetSummaries(categoryID, featureID, lastSummaryID, num)).response {
-            (request, response, data, error) in
+            [completionHandler] (request, response, data, error) in
             
             if response == nil || response!.statusCode != 200 || error != nil {
                 completionHandler(nil, error)
@@ -100,6 +100,20 @@ extension SummaryViewModel {
     class func sendImpression(id: Int) {
         let uuid = Curator.myUUID
         Alamofire.request(CcltRoute.SendImpression(id, uuid)).response {
+            (request, response, data, error) in
+            return
+        }
+    }
+    
+    /**
+    Send Impression to API Server.
+    
+    :param: id The ID of summary.
+    
+    */
+    class func sendShare(id: Int, provider: String) {
+        let uuid = Curator.myUUID
+        Alamofire.request(CcltRoute.SendShare(id, provider, uuid)).response {
             (request, response, data, error) in
             return
         }

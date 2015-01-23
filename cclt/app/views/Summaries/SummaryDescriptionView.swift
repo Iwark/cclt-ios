@@ -16,14 +16,14 @@ protocol SummaryDescriptionViewDelegate:class {
 class SummaryDescriptionView: UIScrollView, SummariesTableViewDelegate, SummaryContentsViewDelegate {
 
     weak var summaryDescriptionViewDelegate:SummaryDescriptionViewDelegate?
+    let relatedSummariesView:SummariesTableView!
+    let rankingSummariesView:SummariesTableView!
     let summary: Summary?
     
-    let kDescPaddingH:CGFloat    = 10.0
-    let kDescPaddingV:CGFloat    = 5.0
-    let kContentsMarginV:CGFloat = 10.0
-    
-    var contentViews:[UIView] = []
-    let relatedSummariesView = SummariesTableView(frame: CGRectZero)
+    let kDescPaddingH:CGFloat         = 10.0
+    let kDescPaddingV:CGFloat         = 5.0
+    let kContentsMarginV:CGFloat      = 10.0
+    let contentsPaddingBottom:CGFloat = 20.0
     
     var infoHeight:CGFloat = 0
     let sourceLabelHeight:CGFloat = 20.0
@@ -36,14 +36,27 @@ class SummaryDescriptionView: UIScrollView, SummariesTableViewDelegate, SummaryC
         self.backgroundColor = Settings.Colors.backgroundColor
         
         // 関連記事
-        var summaries = [Summary]()
+        var relatedSummaries = [Summary]()
         for json in summary.related_summaries {
-            summaries.append(Summary(json: json))
+            relatedSummaries.append(Summary(json: json))
         }
-        relatedSummariesView.summaries = summaries
+        relatedSummariesView = SummariesTableView(frame: CGRectZero)
+        relatedSummariesView.summaries = relatedSummaries
         relatedSummariesView.reloadData()
         relatedSummariesView.scrollEnabled = false
         relatedSummariesView.summariesTableViewDelegate = self
+        
+        // カテゴリランキング
+        var rankingSummaries = [Summary]()
+        for json in summary.category!.rankingSummaries {
+            rankingSummaries.append(Summary(json: json))
+        }
+        rankingSummariesView = SummariesTableView(frame: CGRectZero)
+        rankingSummariesView.summaries = rankingSummaries
+        rankingSummariesView.reloadData()
+        rankingSummariesView.scrollEnabled = false
+        rankingSummariesView.summariesTableViewDelegate = self
+        
     }
     
     required init(coder aDecoder: NSCoder) {
@@ -73,14 +86,16 @@ class SummaryDescriptionView: UIScrollView, SummariesTableViewDelegate, SummaryC
             self.addSubview(infoView)
             
             // 画像のソース
-            let sourceLabel = DefaultTextLabel(frame: CGRectMake(kDescPaddingH, infoView.frame.origin.y - sourceLabelHeight, width - kDescPaddingH * 2, sourceLabelHeight))
-            sourceLabel.text = "出典 " + summary.displaySource
-            sourceLabel.font = Settings.Fonts.minimumFont
-            sourceLabel.textColor = Settings.Colors.linkColor
-            sourceLabel.addTapGesture(self, action: "sourceTapped")
-            sourceLabel.sizeToFit()
-            sourceLabel.frame.origin.x = width - sourceLabel.frame.size.width - kDescPaddingH
-            self.addSubview(sourceLabel)
+            if summary.displaySource != "" {
+                let sourceLabel = DefaultTextLabel(frame: CGRectMake(kDescPaddingH, infoView.frame.origin.y - sourceLabelHeight, width - kDescPaddingH * 2, sourceLabelHeight))
+                sourceLabel.text = "出典: " + summary.displaySource
+                sourceLabel.font = Settings.Fonts.minimumFont
+                sourceLabel.textColor = Settings.Colors.linkColor
+                sourceLabel.addTapGesture(self, action: "sourceTapped")
+                sourceLabel.sizeToFit()
+                sourceLabel.frame.origin.x = width - sourceLabel.frame.size.width - kDescPaddingH
+                self.addSubview(sourceLabel)
+            }
             
             // 冒頭文
             let descLabel = UILabel(frame: CGRectMake(kDescPaddingH, infoHeight+kDescPaddingV, width - kDescPaddingH * 2, 0))
@@ -131,7 +146,7 @@ class SummaryDescriptionView: UIScrollView, SummariesTableViewDelegate, SummaryC
                     
                     if let view = view {
                         view.summaryContentsViewDelegate = self
-                        contentViews.append(view)
+                        view.tag = 1
                         self.addSubview(view)
                     }
                     
@@ -139,19 +154,38 @@ class SummaryDescriptionView: UIScrollView, SummariesTableViewDelegate, SummaryC
                 
             }
             
-            
-            
-            let headline = ContentHeadlineView(width: self.frame.size.width, content: ContentHeadline(title:"関連記事"))
-            headline.frame.size.height -= 10.0
-            contentViews.append(headline)
-            self.addSubview(headline)
+            let relatedline = ContentHeadlineView(width: self.frame.size.width, content: ContentHeadline(title:"■ 関連記事"))
+            relatedline.frame.size.height -= 10.0
+            relatedline.tag = 1
+            self.addSubview(relatedline)
             
             relatedSummariesView.frame = CGRectMake(kDescPaddingH, 0, self.frame.size.width - kDescPaddingH * 2, 85 * 3)
             relatedSummariesView.layer.borderColor = Settings.Colors.borderLightColor
             relatedSummariesView.layer.borderWidth = 1.0
             relatedSummariesView.layer.cornerRadius = 4.0
-            contentViews.append(relatedSummariesView)
+            relatedSummariesView.tag = 1
             self.addSubview(relatedSummariesView)
+            
+            let curatorline = ContentHeadlineView(width: self.frame.size.width, content: ContentHeadline(title:"■ キュレータ紹介"))
+            curatorline.frame.size.height -= 10.0
+            curatorline.tag = 1
+            self.addSubview(curatorline)
+            
+            let curatorView = CuratorView(frame: CGRectMake(kDescPaddingH, 0, self.frame.size.width - kDescPaddingH * 2, 0), curator: self.summary!.curator)
+            curatorView.tag = 1
+            self.addSubview(curatorView)
+            
+            let rankingline = ContentHeadlineView(width: self.frame.size.width, content: ContentHeadline(title:"■ デイリーランキング（\(summary.category!.name)）"))
+            rankingline.frame.size.height -= 10.0
+            rankingline.tag = 1
+            self.addSubview(rankingline)
+            
+            rankingSummariesView.frame = CGRectMake(kDescPaddingH, 0, self.frame.size.width - kDescPaddingH * 2, 85 * 3)
+            rankingSummariesView.layer.borderColor = Settings.Colors.borderLightColor
+            rankingSummariesView.layer.borderWidth = 1.0
+            rankingSummariesView.layer.cornerRadius = 4.0
+            rankingSummariesView.tag = 1
+            self.addSubview(rankingSummariesView)
             
             layout()
             
@@ -161,13 +195,14 @@ class SummaryDescriptionView: UIScrollView, SummariesTableViewDelegate, SummaryC
     
     func layout(){
         contentsHeight = 0
-        for view in contentViews {
+        for v in self.subviews as [UIView] {
+            if v.tag != 1 { continue }
             contentsHeight += kContentsMarginV
-            view.frame.origin.y = infoHeight + contentsHeight
-            contentsHeight += view.frame.size.height
+            v.frame.origin.y = infoHeight + contentsHeight
+            contentsHeight += v.frame.size.height
         }
         
-        self.contentSize.height = infoHeight + contentsHeight
+        self.contentSize.height = infoHeight + contentsHeight + contentsPaddingBottom
     }
     
     func tapped(summaryID: Int) {
