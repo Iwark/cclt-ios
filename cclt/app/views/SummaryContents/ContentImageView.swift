@@ -44,20 +44,23 @@ class ContentImageView: SummaryContentsView {
         }
         
         self.imgView.loadImage(content.image_url, completion: {
-            [unowned self] () in
-            if let image = self.imgView.image {
+            [weak self] () in
+            
+            if self == nil { return }
+            
+            if let image = self!.imgView.image {
                 let aspectRatio = image.size.width / image.size.height
-                let oldHeight = self.imgView.frame.size.height
-                let newHeight = self.imgView.frame.size.width / aspectRatio
+                let oldHeight = self!.imgView.frame.size.height
+                let newHeight = self!.imgView.frame.size.width / aspectRatio
                 if newHeight > oldHeight {
-                    self.addShadowToImageView()
+                    self!.addShadowToImageView()
                 } else {
-                    self.imgView.frame.size.height = newHeight
-                    self.frame.size.height += (newHeight - oldHeight)
-                    if self.sourceLabel != nil {
-                        self.sourceLabel.frame.origin.y += (newHeight - oldHeight)
+                    self!.imgView.frame.size.height = newHeight
+                    self!.frame.size.height += (newHeight - oldHeight)
+                    if self!.sourceLabel != nil {
+                        self!.sourceLabel.frame.origin.y += (newHeight - oldHeight)
                     }
-                    self.descriptionView.frame.origin.y += (newHeight - oldHeight)
+                    self!.descriptionView.frame.origin.y += (newHeight - oldHeight)
                 }
             }
             completion()

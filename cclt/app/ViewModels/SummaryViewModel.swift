@@ -29,7 +29,7 @@ extension SummaryViewModel {
     class func fetchSummaries(categoryID:Int=0, featureID:Int=0, lastSummaryID:Int=0, num:Int=kDefaultFetchSummariesNum, completionHandler: ([Summary]?, NSError?) -> ()) {
         
         Alamofire.request(CcltRoute.GetSummaries(categoryID, featureID, lastSummaryID, num)).response {
-            [completionHandler] (request, response, data, error) in
+            (request, response, data, error) in
             
             if response == nil || response!.statusCode != 200 || error != nil {
                 completionHandler(nil, error)

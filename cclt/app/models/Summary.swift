@@ -12,6 +12,7 @@ import SwiftyJSON
 class Summary {
     let id: Int
     let title: String
+    let shortTitle: String
     let choco: Int
     let approved_at: String
     let image_url: String
@@ -24,6 +25,7 @@ class Summary {
     let contents: [JSON]
     let related_summaries: [JSON]
     let displaySource: String
+    let displayTitle: String
     
     private struct Static {
         static var all:[Summary] = []
@@ -37,6 +39,7 @@ class Summary {
     required internal init(json:JSON){
         self.id = json["id"].intValue
         self.title = json["title"].stringValue
+        self.shortTitle = json["short_title"].stringValue
         self.choco = json["choco"].intValue
         self.approved_at = json["approved_at"].stringValue
         self.image_url = json["image_url"].stringValue
@@ -49,6 +52,7 @@ class Summary {
         self.contents = json["summary_contents"].arrayValue
         self.related_summaries = json["related_summaries"].arrayValue
         self.displaySource = json["display_source"].stringValue
+        self.displayTitle = (self.shortTitle != "") ? self.shortTitle : self.title
     }
     
     class func merge(summaries:[Summary]){

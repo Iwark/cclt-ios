@@ -54,21 +54,23 @@ class ContentLinkView: SummaryContentsView {
                 
                 self.imgView!.startLoading()
                 self.imgView!.load(imageUrl, placeholder: nil){
-                    [unowned self] (url, image, error) in
+                    [weak self] (url, image, error) in
+                    
+                    if self == nil { return }
                     
                     if let image = image {
-                        self.imgView!.image = image
-                        let oldHeight = self.imgView!.frame.size.height
-                        let newHeight = (self.imgView!.frame.size.width / image.size.width) * image.size.height
-                        self.imgView!.frame.size.height = newHeight
-                        if self.sourceLabel != nil{
-                            self.sourceLabel!.frame.origin.y += (newHeight - oldHeight)
+                        self!.imgView!.image = image
+                        let oldHeight = self!.imgView!.frame.size.height
+                        let newHeight = (self!.imgView!.frame.size.width / image.size.width) * image.size.height
+                        self!.imgView!.frame.size.height = newHeight
+                        if self!.sourceLabel != nil{
+                            self!.sourceLabel!.frame.origin.y += (newHeight - oldHeight)
                         }
-                        self.frame.size.height += (newHeight - oldHeight)
-                        self.titleLabel.frame.origin.y += (newHeight - oldHeight)
-                        self.descriptionView!.frame.origin.y += (newHeight - oldHeight)
+                        self!.frame.size.height += (newHeight - oldHeight)
+                        self!.titleLabel.frame.origin.y += (newHeight - oldHeight)
+                        self!.descriptionView!.frame.origin.y += (newHeight - oldHeight)
                         
-                        self.imgView!.stopLoading()
+                        self!.imgView!.stopLoading()
                         
                     }
                     completion()

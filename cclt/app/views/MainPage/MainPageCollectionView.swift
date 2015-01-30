@@ -25,6 +25,8 @@ UICollectionViewDataSource, UICollectionViewDelegate {
     let cellNib = UINib(nibName: "SummaryPartialViewCell", bundle: nil)
     let tapEffectSeconds = 1.0
     
+    var firstLoading = true
+    
     required init(coder aDecoder: NSCoder) {
         super.init(coder:aDecoder)
         
@@ -41,7 +43,7 @@ UICollectionViewDataSource, UICollectionViewDelegate {
     
     // ページ数
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if !Settings.Tutorials.SwipeToNext.isFinished(){
+        if firstLoading {
             return MainPage.pages.count + 1
         }
         return MainPage.pages.count
@@ -63,8 +65,8 @@ UICollectionViewDataSource, UICollectionViewDelegate {
         let page = indexPath.row
         if MainPage.pages.count > page {
             
-            var mainPage:MainPageViewModel!
-            if !Settings.Tutorials.SwipeToNext.isFinished() {
+            var mainPage:MainPage!
+            if firstLoading {
                 if page == 0 {
                     return cell
                 } else {
@@ -74,8 +76,9 @@ UICollectionViewDataSource, UICollectionViewDelegate {
                 mainPage = MainPage.pages[page]
             }
             
-            for (idx, partial) in enumerate(mainPage.partials) {
-                cell.view.addSubview(partial.view)
+            for partial in mainPage.partials {
+                let partialView = SummaryPartialView(partial: partial)
+                cell.view.addSubview(partialView)
             }
         }
         return cell
@@ -111,7 +114,7 @@ UICollectionViewDataSource, UICollectionViewDelegate {
                 // タップ時のエフェクト
                 touch.view.backgroundColor = Settings.Colors.tappedColor
                 SwiftDispatch.after(tapEffectSeconds, block: {
-                    [unowned self] in
+                    () in
                     self.tappedView!.backgroundColor = UIColor.clearColor()
                 })
             }

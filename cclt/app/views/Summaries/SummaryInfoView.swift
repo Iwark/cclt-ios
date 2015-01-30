@@ -56,8 +56,10 @@ class SummaryInfoView: UIView {
         let imgView = DefaultImageView(frame: CGRectMake((kCategoryWidth-kCategoryImgWidth)/2, kCategoryImgMarginTop, kCategoryImgWidth, kCategoryImgHeight))
 //        imgView.loadImage(category.iconURL){}
         SwiftImageLoader.sharedLoader.imageForUrl(category.iconURL, completionHandler: {
-            [unowned imgView] (image, url) in
-            imgView.image = image
+            [weak imgView] (image, url) in
+            if let imgView = imgView {
+                imgView.image = image
+            }
         })
         view.addSubview(imgView)
         

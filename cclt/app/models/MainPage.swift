@@ -10,11 +10,13 @@ import Foundation
 
 class MainPage {
     
+    var partials = [SummaryPartial]()
+    
     private struct Static {
-        static var pages:[MainPageViewModel] = []
+        static var pages:[MainPage] = []
     }
     
-    class var pages:[MainPageViewModel] {
+    class var pages:[MainPage] {
         get { return Static.pages }
         set { Static.pages = newValue }
     }
@@ -23,11 +25,13 @@ class MainPage {
         if pages.count > 0 {
             let lastPage = pages[MainPage.pages.count - 1]
             if lastPage.partials.count > 0 {
-                if let summaryID = lastPage.partials[lastPage.partials.count-1].summary?.id {
-                    return summaryID
-                }
+                return lastPage.partials[lastPage.partials.count-1].summaryID
             }
         }
         return 0
+    }
+    
+    init() {
+        Static.pages.append(self)
     }
 }

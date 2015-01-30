@@ -10,9 +10,11 @@ import UIKit
 
 let iOS7 = floor(NSFoundationVersionNumber) <= floor(NSFoundationVersionNumber_iOS_7_1)
 let iOS8 = floor(NSFoundationVersionNumber) > floor(NSFoundationVersionNumber_iOS_7_1)
+let iPad = UIDevice.currentDevice().userInterfaceIdiom == .Pad
 
 enum Settings {
     
+    static let appWidth = UIScreen.mainScreen().applicationFrame.size.width
     static let maxHistorySearchWords = 30
     static let loadingGif = UIImage(named: "loading")
     static let twitterAccount = "chocolat_cclt"

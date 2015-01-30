@@ -63,12 +63,13 @@ class SummaryDescriptionViewController: AppViewController, SummaryDescriptionVie
     func tapped(summaryID: Int) {
         self.startLoading()
         let summary = SummaryViewModel.find(summaryID) {
-            [unowned self] (summary, error) in
+            [weak self] (summary, error) in
+            if self == nil { return }
             if let summary = summary {
                 let svc = SummaryDescriptionViewController(summary: summary)
-                self.navController?.pushViewController(svc, animated: true)
+                self!.navController?.pushViewController(svc, animated: true)
             }
-            self.stopLoading()
+            self!.stopLoading()
         }
     }
     
@@ -81,12 +82,13 @@ class SummaryDescriptionViewController: AppViewController, SummaryDescriptionVie
                     if summaryID > 0{
                         self.startLoading()
                         let summary = SummaryViewModel.find(summaryID) {
-                            [unowned self] (summary, error) in
+                            [weak self] (summary, error) in
+                            if self == nil { return }
                             if let summary = summary {
                                 let svc = SummaryDescriptionViewController(summary: summary)
-                                self.navController?.pushViewController(svc, animated: true)
+                                self!.navController?.pushViewController(svc, animated: true)
                             }
-                            self.stopLoading()
+                            self!.stopLoading()
                         }
                     }
                 }

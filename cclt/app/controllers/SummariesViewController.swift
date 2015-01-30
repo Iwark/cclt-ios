@@ -58,44 +58,36 @@ SummariesTableViewDelegate {
         if loadingMore { return }
         loadingMore = true
 
-        if let searchWord = searchWord {
-            searchPage++
-            SearchViewModel.searchSummaries(searchWord, page: searchPage) {
-                [unowned self](summaries, error) -> () in
-                if let error = error {
-                    println("search error: \(error)")
-                } else if let summaries = summaries {
-                    if summaries.count > 0 {
-                        self.summaries.extend(summaries)
-                        self.summariesTableView.summaries = self.summaries
-                    } else {
-                        self.summariesTableView.loadingFinished = true
-                    }
-                    self.summariesTableView.reloadData()
-                }
-                self.loadingMore = false
-            }
-            return
-        }
-        
-        var lastSummaryID = summaries.last!.id
-        println("\(summaries.last!.title), \(lastSummaryID)")
-        
-        SummaryViewModel.fetchSummaries(categoryID: categoryID, featureID: featureID, lastSummaryID: lastSummaryID, completionHandler:{
-            [unowned self](summaries, error) -> () in
+        let completion = {
+            [weak self] (summaries:[Summary]?, error:NSError?) -> Void in
+            
+            if self == nil { return }
             
             if let summaries = summaries {
                 if summaries.count > 0 {
-                    self.summaries.extend(summaries)
-                    self.summariesTableView.summaries = self.summaries
+                    self!.summaries.extend(summaries)
+                    self!.summariesTableView.summaries = self!.summaries
+                    self!.summariesTableView.beginUpdates()
+                    var indexPaths = [AnyObject]()
+                    for i in 0..<summaries.count {
+                        indexPaths.append(NSIndexPath(forRow: self!.summaries.count-summaries.count+i, inSection: 0))
+                    }
+                    self!.summariesTableView.insertRowsAtIndexPaths(indexPaths, withRowAnimation: UITableViewRowAnimation.Automatic)
+                    self!.summariesTableView.endUpdates()
                 } else {
-                    self.summariesTableView.loadingFinished = true
+                    self!.summariesTableView.loadingFinished = true
+                    self!.summariesTableView.deleteRowsAtIndexPaths([NSIndexPath(forRow: self!.summaries.count-summaries.count, inSection: 0)], withRowAnimation: .Automatic)
                 }
-                self.summariesTableView.reloadData()
             }
-            self.loadingMore = false
-            
-        })
+            self!.loadingMore = false
+        }
         
+        if let searchWord = searchWord {
+            searchPage++
+            SearchViewModel.searchSummaries(searchWord, page: searchPage, completionHandler: completion)
+        } else {
+            let lastSummaryID = summaries.last!.id
+            SummaryViewModel.fetchSummaries(categoryID: categoryID, featureID: featureID, lastSummaryID: lastSummaryID, completionHandler:completion)
+        }
     }
 }

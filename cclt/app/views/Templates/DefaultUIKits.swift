@@ -77,10 +77,11 @@ class DefaultImageView: UIImageView {
         if let imageURL = NSURL(string: url) {
             if indicator { self.startLoading() }
             self.load(imageURL, placeholder: nil){
-                [unowned self] (url, image, error) in
+                [weak self] (url, image, error) in
+                if self == nil { return }
                 if let image = image {
-                    self.image = image
-                    if indicator { self.stopLoading() }
+                    self!.image = image
+                    if indicator { self!.stopLoading() }
                 }
                 completion()
             }

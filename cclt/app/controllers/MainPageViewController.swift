@@ -38,7 +38,6 @@ MainPageCollectionViewDelegate, BackTopBarButtonItemDelegate, TutorialViewDelega
     
     // チュートリアルの状態
     var isShowingTutorial = false
-    var swipeToNextTutorialFinished = Settings.Tutorials.SwipeToNext.isFinished()
     var backToTopTutorialFinished = Settings.Tutorials.BackToTop.isFinished()
     
     override func viewDidLoad() {
@@ -65,20 +64,13 @@ MainPageCollectionViewDelegate, BackTopBarButtonItemDelegate, TutorialViewDelega
                     [unowned self] (error) -> () in
                     
                     self.mainPageCollectionView.reloadData()
-                    if !self.swipeToNextTutorialFinished {
-                        SwiftDispatch.after(0.2, block: { () -> () in
-                            self.mainPageCollectionView.scrollToItemAtIndexPath(NSIndexPath(forItem: 1, inSection: 0), atScrollPosition: .None, animated: true)
-                        })
-                        SwiftDispatch.after(0.5, block: { () -> () in
-                            self.swipeToNextTutorialFinished = true
-                            Settings.Tutorials.SwipeToNext.finish()
-                            self.mainPageCollectionView.scrollToItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0), atScrollPosition: .None, animated: false)
-                        })
-                        
-                    }
+                    SwiftDispatch.after(0.2, block: { () -> () in
+                        self.mainPageCollectionView.firstLoading = false
+                        self.mainPageCollectionView.deleteItemsAtIndexPaths([NSIndexPath(forItem: 0, inSection: 0)])
+                    })
                     self.addPage({
                         [unowned self] (error) -> () in
-                        self.mainPageCollectionView.reloadData()
+                        self.mainPageCollectionView.insertItemsAtIndexPaths([NSIndexPath(forItem: MainPage.pages.count - 1, inSection: 0)])
                     })
                     
                     let interval = self.stopLoading()
@@ -111,17 +103,27 @@ MainPageCollectionViewDelegate, BackTopBarButtonItemDelegate, TutorialViewDelega
         startLoading(onlyTiming: true)
         
         let frame = CGRectMake(0, 0, self.mainPageCollectionView.frame.size.width, self.mainPageCollectionView.frame.size.height - 64)
-        let partialView = SummaryPartialView(frame: CGRectMake(0, 0, frame.size.width, frame.size.height))
-        let mainPage = MainPageViewModel(view: partialView)
+        let partialViewModel = SummaryPartialViewModel(frame: frame)
         
-        mainPage.setSummaries(MainPage.lastSummaryID) {
-            [unowned self] in
-            self.isAddingPage = false
-            if self.isToAddPage {
-                self.isToAddPage = false
-                self.addPage(callback)
+        let now = NSDate()
+
+        let divided = partialViewModel.divideToUnit()
+        
+        if let divided = divided {
+            
+            println("time took: \(NSDate().timeIntervalSinceDate(now))")
+            
+            MainPageViewModel.addMainPage(MainPage.lastSummaryID, partials: divided) {
+                [unowned self] in
+                self.isAddingPage = false
+                if self.isToAddPage {
+                    self.isToAddPage = false
+                    self.addPage(callback)
+                }
+                callback(nil)
             }
-            callback(nil)
+        } else {
+            println("serious error: dividing failed.")
         }
     }
     
@@ -144,7 +146,7 @@ MainPageCollectionViewDelegate, BackTopBarButtonItemDelegate, TutorialViewDelega
         if MainPage.pages.count < page + self.initialLoadNum {
             self.addPage({
                 [unowned self] (error) -> () in
-                self.mainPageCollectionView.reloadData()
+                self.mainPageCollectionView.insertItemsAtIndexPaths([NSIndexPath(forItem: MainPage.pages.count - 1, inSection: 0)])
             })
         }
     }

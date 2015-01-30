@@ -73,15 +73,16 @@ class ContentTwitterView: SummaryContentsView, TWTRTweetViewDelegate {
                 
                 self.imgView!.startLoading()
                 self.imgView!.load(imageUrl, placeholder: nil){
-                    [unowned self] (url, image, error) in
+                    [weak self] (url, image, error) in
+                    if self == nil { return }
                     if let image = image {
-                        self.imgView!.image = image
-                        let oldHeight = self.imgView!.frame.size.height
-                        let newHeight = (self.imgView!.frame.size.width / image.size.width) * image.size.height
-                        self.imgView!.frame.size.height = newHeight
-                        self.frame.size.height += (newHeight - oldHeight)
+                        self!.imgView!.image = image
+                        let oldHeight = self!.imgView!.frame.size.height
+                        let newHeight = (self!.imgView!.frame.size.width / image.size.width) * image.size.height
+                        self!.imgView!.frame.size.height = newHeight
+                        self!.frame.size.height += (newHeight - oldHeight)
                     }
-                    self.imgView!.stopLoading()
+                    self!.imgView!.stopLoading()
                     completion()
                 }
             }
